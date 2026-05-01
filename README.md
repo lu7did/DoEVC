@@ -1,5 +1,5 @@
-# Proyecto 1
 
+# Proyecto UADER-PI-B 230/24 DoE-VC
 ## Simulador de deuda técnica extendido con Monte Carlo, optimización y persistencia
 
 El sistema debe permitir simular sprint a sprint la evolución de:
