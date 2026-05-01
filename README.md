@@ -1,882 +1,823 @@
-\documentclass[11pt,a4paper]{article}
+# Proyecto 1
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[spanish]{babel}
-\usepackage{amsmath,amssymb}
-\usepackage{geometry}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{hyperref}
-\usepackage{xcolor}
-\usepackage{enumitem}
+## Simulador de deuda técnica extendido con Monte Carlo, optimización y persistencia
 
-\geometry{margin=2.5cm}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue,
-    citecolor=blue
-}
+El sistema debe permitir simular sprint a sprint la evolución de:
 
-\title{DoE para Vibe Coding: Backlog Scrum y Diseño Experimental para un Simulador de Deuda T\'ecnica}
-\author{Propuesta de especificaci\'on para proyecto de investigaci\'on}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-
-\section{Proyecto 1}
-
-\subsection{Simulador de deuda t\'ecnica extendido con Monte Carlo, optimizaci\'on y persistencia}
-
-El sistema debe permitir simular sprint a sprint la evoluci\'on de:
-
-\begin{equation}
-B_k, D_k, V_k, u_k, N_k, R_k, \nu_k
-\end{equation}
+$$B_k, D_k, V_k, u_k, N_k, R_k, \nu_k$$
 
 donde:
 
-\begin{itemize}[leftmargin=*]
-    \item $B_k$: backlog funcional remanente.
-    \item $D_k$: deuda t\'ecnica remanente.
-    \item $V_k$: velocidad efectiva del sprint.
-    \item $u_k$: fracci\'on del sprint dedicada a remediaci\'on.
-    \item $N_k$: funcionalidad nueva entregada.
-    \item $R_k$: deuda remediada.
-    \item $\nu_k$: valor econ\'omico generado.
-\end{itemize}
+-   $B_k$: backlog funcional remanente.
 
-\section{\'Epicas del backlog}
+-   $D_k$: deuda técnica remanente.
 
-\subsection{\'Epica A --- N\'ucleo determin\'istico del modelo}
+-   $V_k$: velocidad efectiva del sprint.
 
-Implementar el modelo b\'asico de evoluci\'on sprint a sprint.
+-   $u_k$: fracción del sprint dedicada a remediación.
 
-\subsection{\'Epica B --- Pol\'iticas de decisi\'on}
+-   $N_k$: funcionalidad nueva entregada.
+
+-   $R_k$: deuda remediada.
+
+-   $\nu_k$: valor económico generado.
+
+# Épicas del backlog
+
+## Épica A --- Núcleo determinístico del modelo
+
+Implementar el modelo básico de evolución sprint a sprint.
+
+## Épica B --- Políticas de decisión
 
 Implementar distintas estrategias para seleccionar $u_k$.
 
-\subsection{\'Epica C --- Simulaci\'on Monte Carlo}
+## Épica C --- Simulación Monte Carlo
 
-Ejecutar m\'ultiples corridas variando par\'ametros.
+Ejecutar múltiples corridas variando parámetros.
 
-\subsection{\'Epica D --- Optimizaci\'on}
+## Épica D --- Optimización
 
-Calcular $u_k$ \textit{\'optimo} bajo restricciones.
+Calcular $u_k$ *óptimo* bajo restricciones.
 
-\subsection{\'Epica E --- Persistencia y reproducibilidad}
+## Épica E --- Persistencia y reproducibilidad
 
-Guardar escenarios, par\'ametros, corridas y resultados.
+Guardar escenarios, parámetros, corridas y resultados.
 
-\subsection{\'Epica F --- Visualizaci\'on y reporting}
+## Épica F --- Visualización y reporting
 
-Generar CSV, gr\'aficos y reportes comparativos.
+Generar CSV, gráficos y reportes comparativos.
 
-\section{Backlog Scrum propuesto}
+# Backlog Scrum propuesto
 
-\subsection{\'Epica A --- N\'ucleo determin\'istico}
+## Épica A --- Núcleo determinístico
 
-\subsubsection{Historia A1 --- Crear estructura de par\'ametros del modelo}
+### Historia A1 --- Crear estructura de parámetros del modelo
 
-\textbf{Complejidad:} baja.
+**Complejidad:** baja.
 
-\textbf{Como} investigador, \textbf{quiero} definir los par\'ametros principales del modelo en una estructura Python, \textbf{para} ejecutar simulaciones reproducibles.
+**Como** investigador, **quiero** definir los parámetros principales del
+modelo en una estructura Python, **para** ejecutar simulaciones
+reproducibles.
 
-\paragraph{Criterios de aceptaci\'on}
+#### Criterios de aceptación
 
-\begin{itemize}[leftmargin=*]
-    \item Existe una clase \texttt{ModelParameters}.
-    \item Incluye al menos: \texttt{B0}, \texttt{D0}, \texttt{V0}, \texttt{alpha}, \texttt{beta}, \texttt{gamma}, \texttt{theta}, \texttt{lambda\_}, \texttt{rho}, \texttt{K}.
-    \item Valida valores negativos no permitidos.
-    \item Puede imprimirse o serializarse.
-\end{itemize}
+-   Existe una clase `ModelParameters`.
 
-\textbf{Riesgo de integraci\'on:} bajo.
+-   Incluye al menos: `B0`, `D0`, `V0`, `alpha`, `beta`, `gamma`,
+    `theta`, `lambda_`, `rho`, `K`.
 
-\subsubsection{Historia A2 --- Calcular velocidad efectiva $V_k$}
+-   Valida valores negativos no permitidos.
 
-\textbf{Complejidad:} baja.
+-   Puede imprimirse o serializarse.
 
-\textbf{Como} investigador, \textbf{quiero} calcular la velocidad efectiva afectada por deuda, \textbf{para} modelar p\'erdida de productividad.
+**Riesgo de integración:** bajo.
 
-Ejemplo:
+### Historia A2 --- Calcular velocidad efectiva $V_k$
 
-\begin{equation}
-V_k = \frac{V_0}{1+\gamma D_k}
-\end{equation}
+**Complejidad:** baja.
 
-\paragraph{Criterios de aceptaci\'on}
-
-\begin{itemize}[leftmargin=*]
-    \item Dado $D_k=0$, se obtiene $V_k=V_0$.
-    \item Si $D_k$ aumenta, $V_k$ disminuye.
-    \item Hay tests unitarios.
-\end{itemize}
-
-\textbf{Riesgo de integraci\'on:} bajo.
-
-\subsubsection{Historia A3 --- Simular un sprint con $u_k$ fijo}
-
-\textbf{Complejidad:} baja-media.
-
-\textbf{Como} investigador, \textbf{quiero} calcular el estado $k+1$ a partir de $B_k,D_k,u_k$, \textbf{para} construir trayectorias de evoluci\'on.
-
-Variables b\'asicas:
-
-\begin{equation}
-R_k = u_k V_k
-\end{equation}
-
-\begin{equation}
-N_k = (1-u_k)V_k
-\end{equation}
-
-\begin{equation}
-B_{k+1} = \max(0, B_k - N_k)
-\end{equation}
-
-\begin{equation}
-D_{k+1} = \max(0, D_k - R_k + \alpha N_k + \beta R_k)
-\end{equation}
-
-\paragraph{Criterios de aceptaci\'on}
-
-\begin{itemize}[leftmargin=*]
-    \item $0 \leq u_k \leq 1$.
-    \item $B_k$ nunca queda negativo.
-    \item $D_k$ nunca queda negativo.
-    \item Se devuelve un objeto \texttt{SprintState}.
-\end{itemize}
-
-\textbf{Riesgo de integraci\'on:} medio, porque define el contrato central del simulador.
-
-\subsubsection{Historia A4 --- Simular varios sprints determin\'isticos}
-
-\textbf{Complejidad:} media.
-
-\textbf{Como} investigador, \textbf{quiero} ejecutar una simulaci\'on de $K$ sprints, \textbf{para} observar la evoluci\'on del sistema.
-
-\paragraph{Criterios de aceptaci\'on}
-
-\begin{itemize}[leftmargin=*]
-    \item Se genera una tabla con una fila por sprint.
-    \item Incluye $B_k,D_k,V_k,u_k,N_k,R_k$.
-    \item La simulaci\'on se detiene si $B_k=0$ y $D_k=0$.
-    \item Hay tests de regresi\'on simples.
-\end{itemize}
-
-\textbf{Riesgo de integraci\'on:} medio.
-
-\subsection{\'Epica B --- Pol\'iticas de decisi\'on}
-
-\subsubsection{Historia B1 --- Pol\'itica naive ``deuda primero''}
-
-\textbf{Complejidad:} baja.
-
-\textbf{Como} investigador, \textbf{quiero} una pol\'itica donde $u_k=1$ mientras exista deuda, \textbf{para} usarla como baseline.
-
-\paragraph{Criterios de aceptaci\'on}
-
-\begin{itemize}[leftmargin=*]
-    \item Si $D_k>0$, entonces $u_k=1$.
-    \item Si $D_k=0$, entonces $u_k=0$.
-    \item Se integra con el simulador de varios sprints.
-\end{itemize}
-
-\textbf{Riesgo de integraci\'on:} bajo.
-
-\subsubsection{Historia B2 --- Pol\'itica backlog primero}
-
-\textbf{Complejidad:} baja.
-
-\textbf{Como} investigador, \textbf{quiero} una pol\'itica donde $u_k=0$ mientras exista backlog funcional, \textbf{para} comparar contra deuda primero.
-
-\paragraph{Criterios de aceptaci\'on}
-
-\begin{itemize}[leftmargin=*]
-    \item Si $B_k>0$, entonces $u_k=0$.
-    \item Si $B_k=0$ y $D_k>0$, entonces $u_k=1$.
-    \item Se integra con el simulador.
-\end{itemize}
-
-\textbf{Riesgo de integraci\'on:} bajo.
-
-\subsubsection{Historia B3 --- Pol\'itica proporcional}
-
-\textbf{Complejidad:} media.
-
-\textbf{Como} investigador, \textbf{quiero} definir $u_k$ proporcional a la deuda relativa, \textbf{para} tener una pol\'itica heur\'istica intermedia.
+**Como** investigador, **quiero** calcular la velocidad efectiva
+afectada por deuda, **para** modelar pérdida de productividad.
 
 Ejemplo:
 
-\begin{equation}
-u_k = \frac{D_k}{B_k+D_k}
-\end{equation}
+$$V_k = \frac{V_0}{1+\gamma D_k}$$
 
-\paragraph{Criterios de aceptaci\'on}
+#### Criterios de aceptación
 
-\begin{itemize}[leftmargin=*]
-    \item $u_k=0$ si $D_k=0$.
-    \item $u_k=1$ si $B_k=0$ y $D_k>0$.
-    \item $u_k\in[0,1]$.
-    \item Maneja correctamente $B_k=D_k=0$.
-\end{itemize}
+-   Dado $D_k=0$, se obtiene $V_k=V_0$.
 
-\textbf{Riesgo de integraci\'on:} medio.
+-   Si $D_k$ aumenta, $V_k$ disminuye.
 
-\subsubsection{Historia B4 --- Interfaz com\'un de pol\'iticas}
+-   Hay tests unitarios.
 
-\textbf{Complejidad:} media.
+**Riesgo de integración:** bajo.
 
-\textbf{Como} desarrollador, \textbf{quiero} que todas las pol\'iticas implementen una interfaz com\'un, \textbf{para} poder intercambiarlas sin modificar el motor de simulaci\'on.
+### Historia A3 --- Simular un sprint con $u_k$ fijo
 
-\paragraph{Criterios de aceptaci\'on}
+**Complejidad:** baja-media.
 
-\begin{itemize}[leftmargin=*]
-    \item Existe una interfaz \texttt{Policy}.
-    \item Cada pol\'itica implementa \texttt{decide\_u(state, params)}.
-    \item El motor no depende de clases concretas.
-\end{itemize}
+**Como** investigador, **quiero** calcular el estado $k+1$ a partir de
+$B_k,D_k,u_k$, **para** construir trayectorias de evolución.
 
-\textbf{Riesgo de integraci\'on:} alto, porque refactoriza historias previas.
+Variables básicas:
 
-\subsection{\'Epica C --- Simulaci\'on Monte Carlo}
+$$R_k = u_k V_k$$
 
-\subsubsection{Historia C1 --- Definir distribuciones uniformes de par\'ametros}
+$$N_k = (1-u_k)V_k$$
 
-\textbf{Complejidad:} media.
+$$B_{k+1} = \max(0, B_k - N_k)$$
 
-\textbf{Como} investigador, \textbf{quiero} definir par\'ametros aleatorios con distribuci\'on uniforme, \textbf{para} explorar incertidumbre.
+$$D_{k+1} = \max(0, D_k - R_k + \alpha N_k + \beta R_k)$$
 
-Ejemplo:
+#### Criterios de aceptación
 
-\begin{itemize}[leftmargin=*]
-    \item $s \sim U(1.0,1.4)$.
-    \item $\gamma \sim U(0.00,0.05)$.
-    \item $\theta \sim U(0,0.9)$.
-    \item $(1-\beta) \sim U(0.5,0.9)$.
-    \item $\lambda \sim U(0.2,1.0)$.
-\end{itemize}
+-   $0 \leq u_k \leq 1$.
 
-\paragraph{Criterios de aceptaci\'on}
+-   $B_k$ nunca queda negativo.
 
-\begin{itemize}[leftmargin=*]
-    \item Se pueden fijar semillas aleatorias.
-    \item Se puede muestrear un conjunto completo de par\'ametros.
-    \item Hay tests con semilla fija.
-\end{itemize}
+-   $D_k$ nunca queda negativo.
 
-\textbf{Riesgo de integraci\'on:} medio.
+-   Se devuelve un objeto `SprintState`.
 
-\subsubsection{Historia C2 --- Ejecutar $N$ simulaciones Monte Carlo}
+**Riesgo de integración:** medio, porque define el contrato central del
+simulador.
 
-\textbf{Complejidad:} media.
+### Historia A4 --- Simular varios sprints determinísticos
 
-\textbf{Como} investigador, \textbf{quiero} ejecutar muchas corridas, \textbf{para} estimar distribuciones de resultados.
+**Complejidad:** media.
 
-\paragraph{Criterios de aceptaci\'on}
+**Como** investigador, **quiero** ejecutar una simulación de $K$
+sprints, **para** observar la evolución del sistema.
 
-\begin{itemize}[leftmargin=*]
-    \item Permite configurar \texttt{n\_runs}.
-    \item Devuelve resultados agregados.
-    \item Conserva los resultados individuales.
-    \item Usa una pol\'itica seleccionable.
-\end{itemize}
+#### Criterios de aceptación
 
-\textbf{Riesgo de integraci\'on:} alto, porque combina modelo, pol\'iticas y par\'ametros aleatorios.
+-   Se genera una tabla con una fila por sprint.
 
-\subsubsection{Historia C3 --- Agregar m\'etricas de salida}
+-   Incluye $B_k,D_k,V_k,u_k,N_k,R_k$.
 
-\textbf{Complejidad:} media.
+-   La simulación se detiene si $B_k=0$ y $D_k=0$.
 
-\textbf{Como} investigador, \textbf{quiero} calcular m\'etricas por corrida, \textbf{para} comparar estrategias.
+-   Hay tests de regresión simples.
 
-M\'etricas sugeridas:
+**Riesgo de integración:** medio.
 
-\begin{itemize}[leftmargin=*]
-    \item Sprints hasta finalizar backlog.
-    \item Sprints hasta eliminar deuda.
-    \item Deuda final.
-    \item Valor acumulado descontado.
-    \item $u_k$ promedio.
-    \item Varianza de $u_k$.
-    \item Productividad efectiva promedio.
-    \item Defectos/inconsistencias detectadas.
-\end{itemize}
+## Épica B --- Políticas de decisión
 
-\paragraph{Criterios de aceptaci\'on}
+### Historia B1 --- Política naive "deuda primero"
 
-\begin{itemize}[leftmargin=*]
-    \item Las m\'etricas se calculan para cada corrida.
-    \item Se puede obtener media, desv\'io est\'andar y percentiles.
-    \item Se exportan a CSV.
-\end{itemize}
+**Complejidad:** baja.
 
-\textbf{Riesgo de integraci\'on:} alto.
+**Como** investigador, **quiero** una política donde $u_k=1$ mientras
+exista deuda, **para** usarla como baseline.
 
-\subsection{\'Epica D --- Optimizaci\'on}
+#### Criterios de aceptación
 
-\subsubsection{Historia D1 --- Implementar b\'usqueda por grilla de $u_k$}
+-   Si $D_k>0$, entonces $u_k=1$.
 
-\textbf{Complejidad:} media.
+-   Si $D_k=0$, entonces $u_k=0$.
 
-\textbf{Como} investigador, \textbf{quiero} evaluar muchos valores posibles de $u_k$, \textbf{para} encontrar una decisi\'on aproximadamente \textit{\'optima}.
+-   Se integra con el simulador de varios sprints.
+
+**Riesgo de integración:** bajo.
+
+### Historia B2 --- Política backlog primero
+
+**Complejidad:** baja.
+
+**Como** investigador, **quiero** una política donde $u_k=0$ mientras
+exista backlog funcional, **para** comparar contra deuda primero.
+
+#### Criterios de aceptación
+
+-   Si $B_k>0$, entonces $u_k=0$.
+
+-   Si $B_k=0$ y $D_k>0$, entonces $u_k=1$.
+
+-   Se integra con el simulador.
+
+**Riesgo de integración:** bajo.
+
+### Historia B3 --- Política proporcional
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** definir $u_k$ proporcional a la deuda
+relativa, **para** tener una política heurística intermedia.
 
 Ejemplo:
 
-\begin{equation}
-u_k \in \{0.0,0.01,0.02,\dots,1.0\}
-\end{equation}
+$$u_k = \frac{D_k}{B_k+D_k}$$
 
-\paragraph{Criterios de aceptaci\'on}
+#### Criterios de aceptación
 
-\begin{itemize}[leftmargin=*]
-    \item Eval\'ua una funci\'on objetivo.
-    \item Respeta $0 \leq u_k \leq 1$.
-    \item Devuelve el mejor $u_k$.
-    \item Maneja el caso $D_k=0 \Rightarrow u_k=0$.
-\end{itemize}
+-   $u_k=0$ si $D_k=0$.
 
-\textbf{Riesgo de integraci\'on:} medio-alto.
+-   $u_k=1$ si $B_k=0$ y $D_k>0$.
 
-\subsubsection{Historia D2 --- Definir funci\'on objetivo econ\'omica}
+-   $u_k\in[0,1]$.
 
-\textbf{Complejidad:} alta.
+-   Maneja correctamente $B_k=D_k=0$.
 
-\textbf{Como} investigador, \textbf{quiero} optimizar $u_k$ seg\'un una funci\'on econ\'omica, \textbf{para} balancear entrega de valor y reducci\'on de deuda.
+**Riesgo de integración:** medio.
+
+### Historia B4 --- Interfaz común de políticas
+
+**Complejidad:** media.
+
+**Como** desarrollador, **quiero** que todas las políticas implementen
+una interfaz común, **para** poder intercambiarlas sin modificar el
+motor de simulación.
+
+#### Criterios de aceptación
+
+-   Existe una interfaz `Policy`.
+
+-   Cada política implementa `decide_u(state, params)`.
+
+-   El motor no depende de clases concretas.
+
+**Riesgo de integración:** alto, porque refactoriza historias previas.
+
+## Épica C --- Simulación Monte Carlo
+
+### Historia C1 --- Definir distribuciones uniformes de parámetros
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** definir parámetros aleatorios con
+distribución uniforme, **para** explorar incertidumbre.
+
+Ejemplo:
+
+-   $s \sim U(1.0,1.4)$.
+
+-   $\gamma \sim U(0.00,0.05)$.
+
+-   $\theta \sim U(0,0.9)$.
+
+-   $(1-\beta) \sim U(0.5,0.9)$.
+
+-   $\lambda \sim U(0.2,1.0)$.
+
+#### Criterios de aceptación
+
+-   Se pueden fijar semillas aleatorias.
+
+-   Se puede muestrear un conjunto completo de parámetros.
+
+-   Hay tests con semilla fija.
+
+**Riesgo de integración:** medio.
+
+### Historia C2 --- Ejecutar $N$ simulaciones Monte Carlo
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** ejecutar muchas corridas, **para**
+estimar distribuciones de resultados.
+
+#### Criterios de aceptación
+
+-   Permite configurar `n_runs`.
+
+-   Devuelve resultados agregados.
+
+-   Conserva los resultados individuales.
+
+-   Usa una política seleccionable.
+
+**Riesgo de integración:** alto, porque combina modelo, políticas y
+parámetros aleatorios.
+
+### Historia C3 --- Agregar métricas de salida
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** calcular métricas por corrida,
+**para** comparar estrategias.
+
+Métricas sugeridas:
+
+-   Sprints hasta finalizar backlog.
+
+-   Sprints hasta eliminar deuda.
+
+-   Deuda final.
+
+-   Valor acumulado descontado.
+
+-   $u_k$ promedio.
+
+-   Varianza de $u_k$.
+
+-   Productividad efectiva promedio.
+
+-   Defectos/inconsistencias detectadas.
+
+#### Criterios de aceptación
+
+-   Las métricas se calculan para cada corrida.
+
+-   Se puede obtener media, desvío estándar y percentiles.
+
+-   Se exportan a CSV.
+
+**Riesgo de integración:** alto.
+
+## Épica D --- Optimización
+
+### Historia D1 --- Implementar búsqueda por grilla de $u_k$
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** evaluar muchos valores posibles de
+$u_k$, **para** encontrar una decisión aproximadamente *óptima*.
+
+Ejemplo:
+
+$$u_k \in \{0.0,0.01,0.02,\dots,1.0\}$$
+
+#### Criterios de aceptación
+
+-   Evalúa una función objetivo.
+
+-   Respeta $0 \leq u_k \leq 1$.
+
+-   Devuelve el mejor $u_k$.
+
+-   Maneja el caso $D_k=0 \Rightarrow u_k=0$.
+
+**Riesgo de integración:** medio-alto.
+
+### Historia D2 --- Definir función objetivo económica
+
+**Complejidad:** alta.
+
+**Como** investigador, **quiero** optimizar $u_k$ según una función
+económica, **para** balancear entrega de valor y reducción de deuda.
 
 Ejemplo conceptual:
 
-\begin{equation}
-J(u_k)=
+$$J(u_k)=
 \text{valor entregado}
 +
 \text{valor de capacidad futura}
 -
 \text{costo de demora}
 -
-\text{costo de deuda residual}
-\end{equation}
+\text{costo de deuda residual}$$
 
-\paragraph{Criterios de aceptaci\'on}
+#### Criterios de aceptación
 
-\begin{itemize}[leftmargin=*]
-    \item La funci\'on objetivo es configurable.
-    \item Usa $B_k,D_k,V_k,\lambda,\rho,\theta$.
-    \item Puede compararse contra pol\'iticas naive.
-    \item Hay tests de casos l\'imite.
-\end{itemize}
+-   La función objetivo es configurable.
 
-\textbf{Riesgo de integraci\'on:} alto.
+-   Usa $B_k,D_k,V_k,\lambda,\rho,\theta$.
 
-\subsubsection{Historia D3 --- Pol\'itica \textit{\'optima} local}
+-   Puede compararse contra políticas naive.
 
-\textbf{Complejidad:} alta.
+-   Hay tests de casos límite.
 
-\textbf{Como} investigador, \textbf{quiero} una pol\'itica que calcule $u_k$ \textit{\'optimo} en cada sprint, \textbf{para} comparar decisiones \textit{\'optimas} contra heur\'isticas.
+**Riesgo de integración:** alto.
 
-\paragraph{Criterios de aceptaci\'on}
+### Historia D3 --- Política *óptima* local
 
-\begin{itemize}[leftmargin=*]
-    \item Implementa la interfaz \texttt{Policy}.
-    \item Calcula $u_k$ usando b\'usqueda por grilla.
-    \item Respeta restricciones de frontera.
-    \item Se integra con Monte Carlo.
-\end{itemize}
+**Complejidad:** alta.
 
-\textbf{Riesgo de integraci\'on:} muy alto.
+**Como** investigador, **quiero** una política que calcule $u_k$
+*óptimo* en cada sprint, **para** comparar decisiones *óptimas* contra
+heurísticas.
 
-\subsubsection{Historia D4 --- Comparaci\'on entre pol\'iticas}
+#### Criterios de aceptación
 
-\textbf{Complejidad:} alta.
+-   Implementa la interfaz `Policy`.
 
-\textbf{Como} investigador, \textbf{quiero} ejecutar el mismo escenario con varias pol\'iticas, \textbf{para} comparar resultados.
+-   Calcula $u_k$ usando búsqueda por grilla.
 
-\paragraph{Criterios de aceptaci\'on}
+-   Respeta restricciones de frontera.
 
-\begin{itemize}[leftmargin=*]
-    \item Ejecuta naive, backlog-first, proporcional y \textit{\'optima}.
-    \item Produce m\'etricas comparables.
-    \item Exporta una tabla por pol\'itica.
-    \item Genera gr\'aficos comparativos.
-\end{itemize}
+-   Se integra con Monte Carlo.
 
-\textbf{Riesgo de integraci\'on:} muy alto.
+**Riesgo de integración:** muy alto.
 
-\subsection{\'Epica E --- Persistencia}
+### Historia D4 --- Comparación entre políticas
 
-\subsubsection{Historia E1 --- Guardar resultados en CSV}
+**Complejidad:** alta.
 
-\textbf{Complejidad:} baja.
+**Como** investigador, **quiero** ejecutar el mismo escenario con varias
+políticas, **para** comparar resultados.
 
-\textbf{Como} investigador, \textbf{quiero} guardar resultados en CSV, \textbf{para} analizarlos externamente.
+#### Criterios de aceptación
 
-\paragraph{Criterios de aceptaci\'on}
+-   Ejecuta naive, backlog-first, proporcional y *óptima*.
 
-\begin{itemize}[leftmargin=*]
-    \item Exporta estados sprint a sprint.
-    \item Exporta m\'etricas finales.
-    \item Los nombres de columnas son estables.
-\end{itemize}
+-   Produce métricas comparables.
 
-\textbf{Riesgo de integraci\'on:} bajo.
+-   Exporta una tabla por política.
 
-\subsubsection{Historia E2 --- Guardar escenarios en JSON}
+-   Genera gráficos comparativos.
 
-\textbf{Complejidad:} media.
+**Riesgo de integración:** muy alto.
 
-\textbf{Como} investigador, \textbf{quiero} guardar par\'ametros y configuraci\'on experimental en JSON, \textbf{para} repetir una corrida.
+## Épica E --- Persistencia
 
-\paragraph{Criterios de aceptaci\'on}
+### Historia E1 --- Guardar resultados en CSV
 
-\begin{itemize}[leftmargin=*]
-    \item Guarda par\'ametros.
-    \item Guarda pol\'itica usada.
-    \item Guarda semilla aleatoria.
-    \item Puede recargarse el escenario.
-\end{itemize}
+**Complejidad:** baja.
 
-\textbf{Riesgo de integraci\'on:} medio.
+**Como** investigador, **quiero** guardar resultados en CSV, **para**
+analizarlos externamente.
 
-\subsubsection{Historia E3 --- Reproducibilidad completa}
+#### Criterios de aceptación
 
-\textbf{Complejidad:} alta.
+-   Exporta estados sprint a sprint.
 
-\textbf{Como} investigador, \textbf{quiero} reproducir una corrida completa desde archivo, \textbf{para} validar resultados experimentales.
+-   Exporta métricas finales.
 
-\paragraph{Criterios de aceptaci\'on}
+-   Los nombres de columnas son estables.
 
-\begin{itemize}[leftmargin=*]
-    \item Un archivo JSON permite relanzar una simulaci\'on.
-    \item Con la misma semilla produce los mismos resultados.
-    \item Registra versi\'on del modelo.
-    \item Registra fecha/hora de ejecuci\'on.
-\end{itemize}
+**Riesgo de integración:** bajo.
 
-\textbf{Riesgo de integraci\'on:} alto.
+### Historia E2 --- Guardar escenarios en JSON
 
-\subsection{\'Epica F --- Visualizaci\'on}
+**Complejidad:** media.
 
-\subsubsection{Historia F1 --- Graficar evoluci\'on de $B_k$ y $D_k$}
+**Como** investigador, **quiero** guardar parámetros y configuración
+experimental en JSON, **para** repetir una corrida.
 
-\textbf{Complejidad:} baja.
+#### Criterios de aceptación
 
-\textbf{Como} investigador, \textbf{quiero} visualizar backlog y deuda por sprint, \textbf{para} interpretar trayectorias.
+-   Guarda parámetros.
 
-\paragraph{Criterios de aceptaci\'on}
+-   Guarda política usada.
 
-\begin{itemize}[leftmargin=*]
-    \item Genera PNG.
-    \item Muestra $B_k$ y $D_k$.
-    \item Permite elegir corrida o promedio.
-\end{itemize}
+-   Guarda semilla aleatoria.
 
-\textbf{Riesgo de integraci\'on:} bajo.
+-   Puede recargarse el escenario.
 
-\subsubsection{Historia F2 --- Boxplot de $u_k$ \textit{\'optimo}}
+**Riesgo de integración:** medio.
 
-\textbf{Complejidad:} media.
+### Historia E3 --- Reproducibilidad completa
 
-\textbf{Como} investigador, \textbf{quiero} visualizar la distribuci\'on de $u_k$, \textbf{para} observar variabilidad bajo incertidumbre.
+**Complejidad:** alta.
 
-\paragraph{Criterios de aceptaci\'on}
+**Como** investigador, **quiero** reproducir una corrida completa desde
+archivo, **para** validar resultados experimentales.
 
-\begin{itemize}[leftmargin=*]
-    \item Genera boxplot.
-    \item Agrupa por escenario.
-    \item Exporta PNG.
-\end{itemize}
+#### Criterios de aceptación
 
-\textbf{Riesgo de integraci\'on:} medio.
+-   Un archivo JSON permite relanzar una simulación.
 
-\subsubsection{Historia F3 --- Heatmap de sensibilidad}
+-   Con la misma semilla produce los mismos resultados.
 
-\textbf{Complejidad:} alta.
+-   Registra versión del modelo.
 
-\textbf{Como} investigador, \textbf{quiero} generar heatmaps variando dos par\'ametros, \textbf{para} observar regiones de decisi\'on.
+-   Registra fecha/hora de ejecución.
+
+**Riesgo de integración:** alto.
+
+## Épica F --- Visualización
+
+### Historia F1 --- Graficar evolución de $B_k$ y $D_k$
+
+**Complejidad:** baja.
+
+**Como** investigador, **quiero** visualizar backlog y deuda por sprint,
+**para** interpretar trayectorias.
+
+#### Criterios de aceptación
+
+-   Genera PNG.
+
+-   Muestra $B_k$ y $D_k$.
+
+-   Permite elegir corrida o promedio.
+
+**Riesgo de integración:** bajo.
+
+### Historia F2 --- Boxplot de $u_k$ *óptimo*
+
+**Complejidad:** media.
+
+**Como** investigador, **quiero** visualizar la distribución de $u_k$,
+**para** observar variabilidad bajo incertidumbre.
+
+#### Criterios de aceptación
+
+-   Genera boxplot.
+
+-   Agrupa por escenario.
+
+-   Exporta PNG.
+
+**Riesgo de integración:** medio.
+
+### Historia F3 --- Heatmap de sensibilidad
+
+**Complejidad:** alta.
+
+**Como** investigador, **quiero** generar heatmaps variando dos
+parámetros, **para** observar regiones de decisión.
 
 Ejemplo:
 
-\begin{itemize}[leftmargin=*]
-    \item Eje X: $B_k/(M s)$.
-    \item Eje Y: $D_k/B_k$.
-    \item Color: $u_k$ \textit{\'optimo} promedio.
-\end{itemize}
+-   Eje X: $B_k/(M s)$.
 
-\paragraph{Criterios de aceptaci\'on}
+-   Eje Y: $D_k/B_k$.
 
-\begin{itemize}[leftmargin=*]
-    \item Permite elegir dos par\'ametros de barrido.
-    \item Calcula promedio de $u_k$.
-    \item Exporta imagen y CSV.
-    \item Integra Monte Carlo + optimizaci\'on.
-\end{itemize}
+-   Color: $u_k$ *óptimo* promedio.
 
-\textbf{Riesgo de integraci\'on:} muy alto.
+#### Criterios de aceptación
 
-\section{Backlog resumido por complejidad}
+-   Permite elegir dos parámetros de barrido.
 
-\subsection{Historias bajas}
+-   Calcula promedio de $u_k$.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{ID} & \textbf{Historia} \\
-\midrule
-A1 & Par\'ametros del modelo \\
-A2 & Velocidad efectiva \\
-B1 & Pol\'itica deuda primero \\
-B2 & Pol\'itica backlog primero \\
-E1 & Exportar CSV \\
-F1 & Gr\'afico $B_k,D_k$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+-   Exporta imagen y CSV.
 
-\subsection{Historias medias}
+-   Integra Monte Carlo + optimización.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{ID} & \textbf{Historia} \\
-\midrule
-A3 & Simular un sprint \\
-A4 & Simular varios sprints \\
-B3 & Pol\'itica proporcional \\
-B4 & Interfaz com\'un de pol\'iticas \\
-C1 & Distribuciones uniformes \\
-C2 & Corridas Monte Carlo \\
-C3 & M\'etricas \\
-D1 & B\'usqueda por grilla \\
-E2 & Escenarios JSON \\
-F2 & Boxplots \\
-\bottomrule
-\end{tabular}
-\end{table}
+**Riesgo de integración:** muy alto.
 
-\subsection{Historias altas}
+# Backlog resumido por complejidad
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{ID} & \textbf{Historia} \\
-\midrule
-D2 & Funci\'on objetivo econ\'omica \\
-D3 & Pol\'itica \textit{\'optima} local \\
-D4 & Comparaci\'on de pol\'iticas \\
-E3 & Reproducibilidad completa \\
-F3 & Heatmap de sensibilidad \\
-\bottomrule
-\end{tabular}
-\end{table}
+## Historias bajas
 
-\section{Orden sugerido de integraci\'on}
+  **ID**   **Historia**
+  -------- --------------------------
+  A1       Parámetros del modelo
+  A2       Velocidad efectiva
+  B1       Política deuda primero
+  B2       Política backlog primero
+  E1       Exportar CSV
+  F1       Gráfico $B_k,D_k$
 
-Para generar problemas de interacci\'on medibles, no conviene integrar todo linealmente. Conviene usar secuencias alternativas.
+## Historias medias
 
-\subsection{Secuencia base}
+  **ID**   **Historia**
+  -------- -----------------------------
+  A3       Simular un sprint
+  A4       Simular varios sprints
+  B3       Política proporcional
+  B4       Interfaz común de políticas
+  C1       Distribuciones uniformes
+  C2       Corridas Monte Carlo
+  C3       Métricas
+  D1       Búsqueda por grilla
+  E2       Escenarios JSON
+  F2       Boxplots
 
-\begin{enumerate}[leftmargin=*]
-    \item A1 --- Par\'ametros.
-    \item A2 --- Velocidad.
-    \item A3 --- Un sprint.
-    \item A4 --- Simulaci\'on determin\'istica.
-    \item B1 --- Deuda primero.
-    \item B2 --- Backlog primero.
-    \item B3 --- Proporcional.
-    \item B4 --- Interfaz com\'un.
-    \item C1 --- Distribuciones.
-    \item C2 --- Monte Carlo.
-    \item C3 --- M\'etricas.
-    \item D1 --- Grilla.
-    \item D2 --- Funci\'on objetivo.
-    \item D3 --- Pol\'itica \textit{\'optima}.
-    \item D4 --- Comparaci\'on.
-    \item E1/E2/E3 --- Persistencia.
-    \item F1/F2/F3 --- Visualizaci\'on.
-\end{enumerate}
+## Historias altas
 
-\subsection{Secuencia alternativa para inducir fricci\'on}
+  **ID**   **Historia**
+  -------- ----------------------------
+  D2       Función objetivo económica
+  D3       Política *óptima* local
+  D4       Comparación de políticas
+  E3       Reproducibilidad completa
+  F3       Heatmap de sensibilidad
 
-\begin{enumerate}[leftmargin=*]
-    \item A1.
-    \item A2.
-    \item B1.
-    \item B2.
-    \item E1.
-    \item A3.
-    \item A4.
-    \item C1.
-    \item F1.
-    \item B4.
-    \item C2.
-    \item C3.
-    \item D1.
-    \item D2.
-    \item D3.
-    \item F2.
-    \item F3.
-    \item E3.
-\end{enumerate}
+# Orden sugerido de integración
 
-Esta segunda secuencia fuerza refactorizaciones porque introduce pol\'iticas y exportaci\'on antes de consolidar el motor.
+Para generar problemas de interacción medibles, no conviene integrar
+todo linealmente. Conviene usar secuencias alternativas.
 
-\section{Dise\~no de Experimentos factorial}
+## Secuencia base
 
-\subsection{Objetivo del DoE}
+1.  A1 --- Parámetros.
 
-Medir c\'omo distintas condiciones de desarrollo afectan:
+2.  A2 --- Velocidad.
 
-\begin{itemize}[leftmargin=*]
-    \item Productividad.
-    \item Defectos funcionales.
-    \item Defectos de integraci\'on.
-    \item Retrabajo.
-    \item Estabilidad del c\'odigo.
-    \item Dificultad de integraci\'on entre historias.
-    \item Calidad del resultado generado por Vibe Coding.
-\end{itemize}
+3.  A3 --- Un sprint.
 
-\section{Factores experimentales}
+4.  A4 --- Simulación determinística.
 
-\subsection{Factor A --- Complejidad de historia}
+5.  B1 --- Deuda primero.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Nivel} & \textbf{Descripci\'on} \\
-\midrule
-A1 & Baja \\
-A2 & Media \\
-A3 & Alta \\
-\bottomrule
-\end{tabular}
-\end{table}
+6.  B2 --- Backlog primero.
 
-\subsection{Factor B --- Tipo de acoplamiento dominante}
+7.  B3 --- Proporcional.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Nivel} & \textbf{Descripci\'on} \\
-\midrule
-B1 & Acoplamiento de datos \\
-B2 & Acoplamiento de control \\
-B3 & Acoplamiento temporal \\
-B4 & Acoplamiento matem\'atico \\
-\bottomrule
-\end{tabular}
-\end{table}
+8.  B4 --- Interfaz común.
+
+9.  C1 --- Distribuciones.
+
+10. C2 --- Monte Carlo.
+
+11. C3 --- Métricas.
+
+12. D1 --- Grilla.
+
+13. D2 --- Función objetivo.
+
+14. D3 --- Política *óptima*.
+
+15. D4 --- Comparación.
+
+16. E1/E2/E3 --- Persistencia.
+
+17. F1/F2/F3 --- Visualización.
+
+## Secuencia alternativa para inducir fricción
+
+1.  A1.
+
+2.  A2.
+
+3.  B1.
+
+4.  B2.
+
+5.  E1.
+
+6.  A3.
+
+7.  A4.
+
+8.  C1.
+
+9.  F1.
+
+10. B4.
+
+11. C2.
+
+12. C3.
+
+13. D1.
+
+14. D2.
+
+15. D3.
+
+16. F2.
+
+17. F3.
+
+18. E3.
+
+Esta segunda secuencia fuerza refactorizaciones porque introduce
+políticas y exportación antes de consolidar el motor.
+
+# Diseño de Experimentos factorial
+
+## Objetivo del DoE
+
+Medir cómo distintas condiciones de desarrollo afectan:
+
+-   Productividad.
+
+-   Defectos funcionales.
+
+-   Defectos de integración.
+
+-   Retrabajo.
+
+-   Estabilidad del código.
+
+-   Dificultad de integración entre historias.
+
+-   Calidad del resultado generado por Vibe Coding.
+
+# Factores experimentales
+
+## Factor A --- Complejidad de historia
+
+  **Nivel**   **Descripción**
+  ----------- -----------------
+  A1          Baja
+  A2          Media
+  A3          Alta
+
+## Factor B --- Tipo de acoplamiento dominante
+
+  **Nivel**   **Descripción**
+  ----------- -------------------------
+  B1          Acoplamiento de datos
+  B2          Acoplamiento de control
+  B3          Acoplamiento temporal
+  B4          Acoplamiento matemático
 
 Ejemplos:
 
-\begin{itemize}[leftmargin=*]
-    \item Datos: CSV, JSON, estructuras compartidas.
-    \item Control: pol\'iticas que modifican el flujo.
-    \item Temporal: Monte Carlo, semillas, orden de ejecuci\'on.
-    \item Matem\'atico: funci\'on objetivo, optimizaci\'on, restricciones.
-\end{itemize}
+-   Datos: CSV, JSON, estructuras compartidas.
 
-\subsection{Factor C --- Orden de integraci\'on}
+-   Control: políticas que modifican el flujo.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Nivel} & \textbf{Descripci\'on} \\
-\midrule
-C1 & Orden incremental natural \\
-C2 & Orden con refactorizaci\'on forzada \\
-C3 & Orden aleatorizado controlado \\
-\bottomrule
-\end{tabular}
-\end{table}
+-   Temporal: Monte Carlo, semillas, orden de ejecución.
 
-\subsection{Factor D --- Modalidad de desarrollo}
+-   Matemático: función objetivo, optimización, restricciones.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Nivel} & \textbf{Descripci\'on} \\
-\midrule
-D1 & Programaci\'on manual tradicional \\
-D2 & Vibe Coding con prompts simples \\
-D3 & Vibe Coding con prompts estructurados \\
-D4 & Vibe Coding con tests previos \\
-\bottomrule
-\end{tabular}
-\end{table}
+## Factor C --- Orden de integración
 
-\subsection{Factor E --- Nivel de especificaci\'on}
+  **Nivel**   **Descripción**
+  ----------- -----------------------------------
+  C1          Orden incremental natural
+  C2          Orden con refactorización forzada
+  C3          Orden aleatorizado controlado
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Nivel} & \textbf{Descripci\'on} \\
-\midrule
-E1 & Historia breve \\
-E2 & Historia + criterios de aceptaci\'on \\
-E3 & Historia + criterios + tests esperados \\
-E4 & Historia + contrato de interfaces \\
-\bottomrule
-\end{tabular}
-\end{table}
+## Factor D --- Modalidad de desarrollo
 
-\section{Dise\~no factorial m\'inimo recomendado}
+  **Nivel**   **Descripción**
+  ----------- ---------------------------------------
+  D1          Programación manual tradicional
+  D2          Vibe Coding con prompts simples
+  D3          Vibe Coding con prompts estructurados
+  D4          Vibe Coding con tests previos
 
-Un factorial completo ser\'ia demasiado grande:
+## Factor E --- Nivel de especificación
 
-\begin{equation}
-3 \times 4 \times 3 \times 4 \times 4 = 576
-\end{equation}
+  **Nivel**   **Descripción**
+  ----------- ----------------------------------------
+  E1          Historia breve
+  E2          Historia + criterios de aceptación
+  E3          Historia + criterios + tests esperados
+  E4          Historia + contrato de interfaces
 
-Eso es excesivo. Se recomienda un dise\~no fraccional o por bloques.
+# Diseño factorial mínimo recomendado
 
-\subsection{Dise\~no inicial recomendado}
+Un factorial completo sería demasiado grande:
+
+$$3 \times 4 \times 3 \times 4 \times 4 = 576$$
+
+Eso es excesivo. Se recomienda un diseño fraccional o por bloques.
+
+## Diseño inicial recomendado
 
 Usar estos factores principales:
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Factor} & \textbf{Niveles} \\
-\midrule
-Complejidad & baja, media, alta \\
-Modalidad & manual, vibe simple, vibe estructurado, vibe con tests \\
-Nivel de especificaci\'on & breve, criterios, tests, contrato \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Factor**                **Niveles**
+  ------------------------- --------------------------------------------------------
+  Complejidad               baja, media, alta
+  Modalidad                 manual, vibe simple, vibe estructurado, vibe con tests
+  Nivel de especificación   breve, criterios, tests, contrato
 
 Total:
 
-\begin{equation}
-3 \times 4 \times 4 = 48
-\end{equation}
+$$3 \times 4 \times 4 = 48$$
 
 Con 2 repeticiones:
 
-\begin{equation}
-48 \times 2 = 96 \text{ ejecuciones}
-\end{equation}
+$$48 \times 2 = 96 \text{ ejecuciones}$$
 
-\section{Variables dependientes}
+# Variables dependientes
 
-\subsection{Productividad}
+## Productividad
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{M\'etrica} & \textbf{Descripci\'on} \\
-\midrule
-Tiempo de implementaci\'on & Minutos por historia \\
-Tiempo hasta primer c\'odigo ejecutable & Minutos \\
-Tiempo hasta pasar tests & Minutos \\
-Cantidad de iteraciones de prompt & N\'umero \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Métrica**                             **Descripción**
+  --------------------------------------- ----------------------
+  Tiempo de implementación                Minutos por historia
+  Tiempo hasta primer código ejecutable   Minutos
+  Tiempo hasta pasar tests                Minutos
+  Cantidad de iteraciones de prompt       Número
 
-\subsection{Calidad}
+## Calidad
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{M\'etrica} & \textbf{Descripci\'on} \\
-\midrule
-Defectos unitarios & Errores dentro de una historia \\
-Defectos de integraci\'on & Errores al combinar historias \\
-Defectos matem\'aticos & Inconsistencias del modelo \\
-Defectos de borde & Errores con $B_k=0$, $D_k=0$, $u_k=0/1$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Métrica**               **Descripción**
+  ------------------------- -----------------------------------------
+  Defectos unitarios        Errores dentro de una historia
+  Defectos de integración   Errores al combinar historias
+  Defectos matemáticos      Inconsistencias del modelo
+  Defectos de borde         Errores con $B_k=0$, $D_k=0$, $u_k=0/1$
 
-\subsection{Mantenibilidad}
+## Mantenibilidad
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{M\'etrica} & \textbf{Descripci\'on} \\
-\midrule
-Complejidad ciclom\'atica & Complejidad estructural del c\'odigo \\
-Duplicaci\'on & Repetici\'on de fragmentos o estructuras \\
-Tama\~no de archivos & Longitud y distribuci\'on del c\'odigo \\
-Cantidad de refactorizaciones & Cambios estructurales necesarios \\
-Cambios necesarios para integrar nueva historia & Medida de esfuerzo de integraci\'on \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Métrica**                                       **Descripción**
+  ------------------------------------------------- ----------------------------------------
+  Complejidad ciclomática                           Complejidad estructural del código
+  Duplicación                                       Repetición de fragmentos o estructuras
+  Tamaño de archivos                                Longitud y distribución del código
+  Cantidad de refactorizaciones                     Cambios estructurales necesarios
+  Cambios necesarios para integrar nueva historia   Medida de esfuerzo de integración
 
-\subsection{Robustez}
+## Robustez
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{M\'etrica} & \textbf{Descripci\'on} \\
-\midrule
-Tests pasados & Proporci\'on o cantidad de pruebas exitosas \\
-Cobertura & Cobertura de tests \\
-Fallos ante valores extremos & Robustez frente a condiciones de borde \\
-Reproducibilidad con semilla fija & Capacidad de repetir resultados \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Métrica**                         **Descripción**
+  ----------------------------------- -------------------------------------------
+  Tests pasados                       Proporción o cantidad de pruebas exitosas
+  Cobertura                           Cobertura de tests
+  Fallos ante valores extremos        Robustez frente a condiciones de borde
+  Reproducibilidad con semilla fija   Capacidad de repetir resultados
 
-\section{Hip\'otesis experimentales}
+# Hipótesis experimentales
 
-\subsection{H1 --- Productividad}
+## H1 --- Productividad
 
-El Vibe Coding con prompts estructurados reduce el tiempo de implementaci\'on frente a programaci\'on manual.
+El Vibe Coding con prompts estructurados reduce el tiempo de
+implementación frente a programación manual.
 
-\subsection{H2 --- Calidad}
+## H2 --- Calidad
 
-El Vibe Coding con tests previos reduce defectos de integraci\'on frente a Vibe Coding con prompts simples.
+El Vibe Coding con tests previos reduce defectos de integración frente a
+Vibe Coding con prompts simples.
 
-\subsection{H3 --- Complejidad}
+## H3 --- Complejidad
 
-La ventaja de productividad del Vibe Coding disminuye en historias de alta complejidad matem\'atica.
+La ventaja de productividad del Vibe Coding disminuye en historias de
+alta complejidad matemática.
 
-\subsection{H4 --- Especificaci\'on}
+## H4 --- Especificación
 
-Las historias con contrato de interfaces producen menos defectos de integraci\'on que las historias breves.
+Las historias con contrato de interfaces producen menos defectos de
+integración que las historias breves.
 
-\subsection{H5 --- Interacci\'on}
+## H5 --- Interacción
 
-Existe interacci\'on entre modalidad de desarrollo y nivel de especificaci\'on:
+Existe interacción entre modalidad de desarrollo y nivel de
+especificación:
 
-\begin{equation}
-\text{Vibe Coding simple} + \text{historia breve}
-\end{equation}
+$$\text{Vibe Coding simple} + \text{historia breve}$$
 
-producir\'a m\'as errores que:
+producirá más errores que:
 
-\begin{equation}
-\text{Vibe Coding estructurado} + \text{contrato de interfaces}
-\end{equation}
+$$\text{Vibe Coding estructurado} + \text{contrato de interfaces}$$
 
-\section{Modelo estad\'istico sugerido}
+# Modelo estadístico sugerido
 
 Para analizar resultados:
 
-\begin{equation}
-Y =
+$$Y =
 \mu
 + A_i
 + D_j
@@ -884,86 +825,83 @@ Y =
 + (A D)_{ij}
 + (A E)_{ik}
 + (D E)_{jk}
-+ \varepsilon
-\end{equation}
++ \varepsilon$$
 
 donde:
 
-\begin{itemize}[leftmargin=*]
-    \item $Y$: m\'etrica observada.
-    \item $A_i$: efecto de complejidad.
-    \item $D_j$: efecto de modalidad de desarrollo.
-    \item $E_k$: efecto de nivel de especificaci\'on.
-    \item $(AD)$, $(AE)$, $(DE)$: interacciones.
-    \item $\varepsilon$: error experimental.
-\end{itemize}
+-   $Y$: métrica observada.
 
-M\'etricas posibles para $Y$:
+-   $A_i$: efecto de complejidad.
 
-\begin{itemize}[leftmargin=*]
-    \item Tiempo de implementaci\'on.
-    \item N\'umero de defectos.
-    \item Defectos de integraci\'on.
-    \item N\'umero de prompts.
-    \item Cobertura alcanzada.
-    \item Esfuerzo de retrabajo.
-\end{itemize}
+-   $D_j$: efecto de modalidad de desarrollo.
 
-\section{Unidad experimental}
+-   $E_k$: efecto de nivel de especificación.
+
+-   $(AD)$, $(AE)$, $(DE)$: interacciones.
+
+-   $\varepsilon$: error experimental.
+
+Métricas posibles para $Y$:
+
+-   Tiempo de implementación.
+
+-   Número de defectos.
+
+-   Defectos de integración.
+
+-   Número de prompts.
+
+-   Cobertura alcanzada.
+
+-   Esfuerzo de retrabajo.
+
+# Unidad experimental
 
 La unidad experimental recomendada es:
 
-\begin{quote}
-Una historia implementada bajo una combinaci\'on concreta de complejidad, modalidad de desarrollo y nivel de especificaci\'on.
-\end{quote}
+> Una historia implementada bajo una combinación concreta de
+> complejidad, modalidad de desarrollo y nivel de especificación.
 
 Ejemplo:
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{llll}
-\toprule
-\textbf{Historia} & \textbf{Complejidad} & \textbf{Modalidad} & \textbf{Especificaci\'on} \\
-\midrule
-D3 & Alta & Vibe con tests & Contrato de interfaces \\
-\bottomrule
-\end{tabular}
-\end{table}
+  **Historia**   **Complejidad**   **Modalidad**    **Especificación**
+  -------------- ----------------- ---------------- ------------------------
+  D3             Alta              Vibe con tests   Contrato de interfaces
 
-\section{Resultado esperado del experimento}
+# Resultado esperado del experimento
 
-El estudio deber\'ia permitir responder:
+El estudio debería permitir responder:
 
-\begin{enumerate}[leftmargin=*]
-    \item \textquestiondown Vibe Coding acelera la implementaci\'on?
-    \item \textquestiondown D\'onde introduce defectos?
-    \item \textquestiondown Qu\'e historias son m\'as riesgosas?
-    \item \textquestiondown Qu\'e nivel de especificaci\'on reduce errores?
-    \item \textquestiondown Cu\'ando aparecen problemas de integraci\'on?
-    \item \textquestiondown La generaci\'on asistida funciona mejor con tests previos?
-    \item \textquestiondown Qu\'e tipo de acoplamiento degrada m\'as la productividad?
-\end{enumerate}
+1.  Vibe Coding acelera la implementación?
 
-\section{Recomendaci\'on final}
+2.  Dónde introduce defectos?
 
-Para la investigaci\'on, este backlog debe usarse como instrumento experimental y no solo como especificaci\'on funcional.
+3.  Qué historias son más riesgosas?
 
-La combinaci\'on m\'as valiosa ser\'ia:
+4.  Qué nivel de especificación reduce errores?
 
-\begin{equation}
-\text{Complejidad}
+5.  Cuándo aparecen problemas de integración?
+
+6.  La generación asistida funciona mejor con tests previos?
+
+7.  Qué tipo de acoplamiento degrada más la productividad?
+
+# Recomendación final
+
+Para la investigación, este backlog debe usarse como instrumento
+experimental y no solo como especificación funcional.
+
+La combinación más valiosa sería:
+
+$$\text{Complejidad}
 \times
 \text{Modalidad de desarrollo}
 \times
-\text{Nivel de especificaci\'on}
-\end{equation}
+\text{Nivel de especificaci\'on}$$
 
 con foco especial en medir:
 
-\begin{equation}
-\text{defectos de integraci\'on}
-\end{equation}
+$$\text{defectos de integraci\'on}$$
 
-porque ah\'i es donde probablemente aparezca la se\~nal m\'as interesante del experimento.
-
-\end{document}
+porque ahí es donde probablemente aparezca la señal más interesante del
+experimento.
