@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doEVC"
+version = "0.1.0"
+description = "Design of Experiments – Voltage Control (UADER PI-D 230/24)"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "lu7did" }
+]
+keywords = ["DoE", "design of experiments", "voltage control", "R&D", "UADER"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "pyDOE3>=1.0.2",
+    "statsmodels>=0.14",
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/lu7did/DoEVC"
+Repository = "https://github.com/lu7did/DoEVC"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"

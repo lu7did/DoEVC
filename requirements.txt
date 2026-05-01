@@ -1,0 +1,22 @@
+# Core scientific computing
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+
+# Design of Experiments
+pyDOE3>=1.0.2
+
+# Statistical modelling
+statsmodels>=0.14
+
+# Visualisation
+matplotlib>=3.7
+seaborn>=0.12
+
+# Interactive notebooks
+jupyter>=1.0
+ipykernel>=6.0
+
+# Development / testing
+pytest>=7.4
+pytest-cov>=4.1
