@@ -9,17 +9,11 @@ $$B_k, D_k, V_k, u_k, N_k, R_k, \nu_k$$
 donde:
 
 -   $B_k$: backlog funcional remanente.
-
 -   $D_k$: deuda técnica remanente.
-
 -   $V_k$: velocidad efectiva del sprint.
-
 -   $u_k$: fracción del sprint dedicada a remediación.
-
 -   $N_k$: funcionalidad nueva entregada.
-
 -   $R_k$: deuda remediada.
-
 -   $\nu_k$: valor económico generado.
 
 # Épicas del backlog
