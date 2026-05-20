@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from .models import ModelParameters, _ensure_non_negative
+from .models import ModelParameters, ensure_non_negative
 from .velocity import calculate_effective_velocity
 
 
@@ -27,14 +27,14 @@ class SprintState:
 
     def __post_init__(self) -> None:
         """Validate the simulated sprint state."""
-        _ensure_non_negative("backlog", self.backlog)
-        _ensure_non_negative("technical_debt", self.technical_debt)
-        _ensure_non_negative("effective_velocity", self.effective_velocity)
+        ensure_non_negative("backlog", self.backlog)
+        ensure_non_negative("technical_debt", self.technical_debt)
+        ensure_non_negative("effective_velocity", self.effective_velocity)
         _ensure_fraction("remediation_fraction", self.remediation_fraction)
-        _ensure_non_negative("feature_capacity", self.feature_capacity)
-        _ensure_non_negative("remediation_capacity", self.remediation_capacity)
-        _ensure_non_negative("next_backlog", self.next_backlog)
-        _ensure_non_negative("next_technical_debt", self.next_technical_debt)
+        ensure_non_negative("feature_capacity", self.feature_capacity)
+        ensure_non_negative("remediation_capacity", self.remediation_capacity)
+        ensure_non_negative("next_backlog", self.next_backlog)
+        ensure_non_negative("next_technical_debt", self.next_technical_debt)
 
     def to_dict(self) -> dict[str, float]:
         """Serialize the sprint state to a dictionary."""
@@ -57,8 +57,8 @@ def simulate_sprint(
     remediation_fraction: float,
 ) -> SprintState:
     """Advance the deterministic model by one sprint with a fixed remediation split."""
-    _ensure_non_negative("backlog", backlog)
-    _ensure_non_negative("technical_debt", technical_debt)
+    ensure_non_negative("backlog", backlog)
+    ensure_non_negative("technical_debt", technical_debt)
     _ensure_fraction("remediation_fraction", remediation_fraction)
 
     effective_velocity = calculate_effective_velocity(parameters, technical_debt)

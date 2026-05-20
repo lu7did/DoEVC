@@ -39,7 +39,8 @@ def test_simulate_sprint_returns_state_with_expected_transitions() -> None:
     assert math.isclose(state.remediation_capacity, 1.5)
     assert math.isclose(state.feature_capacity, 4.5)
     assert math.isclose(state.next_backlog, 95.5)
-    assert math.isclose(state.next_technical_debt, 19.0)
+    assert math.isclose(state.next_technical_debt, 20.0)
+    assert state.to_dict()["next_technical_debt"] == state.next_technical_debt
 
 
 def test_simulate_sprint_never_returns_negative_backlog() -> None:

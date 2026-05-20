@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 
 
-def _ensure_non_negative(name: str, value: float) -> None:
+def ensure_non_negative(name: str, value: float) -> None:
     """Ensure that a numeric value is not negative."""
     if value < 0:
         raise ValueError(f"{name} must be non-negative.")
@@ -26,15 +26,15 @@ class ModelParameters:
 
     def __post_init__(self) -> None:
         """Validate the parameter set after initialization."""
-        _ensure_non_negative("B0", self.B0)
-        _ensure_non_negative("D0", self.D0)
-        _ensure_non_negative("V0", self.V0)
-        _ensure_non_negative("alpha", self.alpha)
-        _ensure_non_negative("beta", self.beta)
-        _ensure_non_negative("gamma", self.gamma)
-        _ensure_non_negative("theta", self.theta)
-        _ensure_non_negative("lambda_", self.lambda_)
-        _ensure_non_negative("rho", self.rho)
+        ensure_non_negative("B0", self.B0)
+        ensure_non_negative("D0", self.D0)
+        ensure_non_negative("V0", self.V0)
+        ensure_non_negative("alpha", self.alpha)
+        ensure_non_negative("beta", self.beta)
+        ensure_non_negative("gamma", self.gamma)
+        ensure_non_negative("theta", self.theta)
+        ensure_non_negative("lambda_", self.lambda_)
+        ensure_non_negative("rho", self.rho)
         if self.K <= 0:
             raise ValueError("K must be greater than zero.")
 
