@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 002
+- Build: 003
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -22,6 +22,10 @@ documentation, and CI automation.
   inputs.
 - `doevc_s001.calculate_effective_velocity()`: computes `V_k` from `V0`,
   `gamma`, and the current technical debt.
+- `doevc_s001.SprintState`: immutable snapshot for a single sprint transition.
+- `doevc_s001.SprintState.to_dict()`: serialization helper for sprint outputs.
+- `doevc_s001.simulate_sprint()`: advances the deterministic model one sprint
+  with a fixed remediation fraction.
 - `doevc_s001.get_version_label()`: human-readable version label.
 
 ## Repository structure

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 003] - 2026-05-20
+
+### Added
+
+- `SprintState` and `simulate_sprint()` implementing story A3 for one-sprint
+  deterministic state transitions with a fixed remediation fraction.
+- Regression and property-based tests covering the sprint formulas, clamping to
+  non-negative backlog and debt, and validation of `u_k` inside `[0, 1]`.
+
 ## [1.0 build 002] - 2026-05-20
 
 ### Added

@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-05-20T18:36:52.505-03:00 - Implementar las instrucciones contenidas en
+  `secuencia\s001\epicaA\storyA3.md`, ejecutar verificaciones locales y
+  completar el commit en GitHub.
 - 2026-05-20T15:59:24.826-03:00 - Implementar las instrucciones contenidas en
   `secuencia\s001\epicaA\storyA2.md`, ejecutar verificaciones locales y
   publicar el commit en GitHub.
