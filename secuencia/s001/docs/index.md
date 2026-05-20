@@ -2,6 +2,9 @@
 
 This directory contains the human-maintained documentation for sequence s001.
 
+The current public API includes `ProjectMetadata`, `ModelParameters`, and
+`get_version_label()`.
+
 Generated API documentation is produced with:
 
 ```bash
