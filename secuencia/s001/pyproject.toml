@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doevc-s001"
+version = "1.0.0"
+description = "First sequence scaffold for the DoEVC project."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = "CC0-1.0"
+authors = [{ name = "UADER PI-B 230/24" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "bandit>=1.7.9",
+    "black>=24.4.2",
+    "hypothesis>=6.112.1",
+    "mypy>=1.11.2",
+    "pdoc>=15.0.0",
+    "pydocstyle>=6.3.0",
+    "pyright>=1.1.390",
+    "pytest>=8.3.3",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.9",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+extend-exclude = "^(script|ejemplos)/"
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+src = ["src", "tests"]
+extend-exclude = ["script", "ejemplos", "site"]
+
+[tool.ruff.lint]
+select = ["B", "C4", "D", "E", "F", "I", "N", "SIM", "UP", "W"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--cov=doevc_s001", "--cov-report=term-missing", "--cov-fail-under=80"]
+
+[tool.mypy]
+python_version = "3.13"
+mypy_path = "src"
+packages = ["doevc_s001"]
+strict = true
+exclude = "^(script|ejemplos)/"
+
+[tool.pydocstyle]
+convention = "pep257"
+match-dir = "(?!script|ejemplos).*"
+
+[tool.bandit]
+exclude_dirs = ["tests", "script", "ejemplos", "docs", "site"]
+
+[tool.coverage.run]
+source = ["src/doevc_s001"]

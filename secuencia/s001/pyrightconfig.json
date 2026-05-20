@@ -1,0 +1,13 @@
+{
+  "include": [
+    "src/doevc_s001"
+  ],
+  "exclude": [
+    "script",
+    "ejemplos",
+    "docs",
+    "site"
+  ],
+  "pythonVersion": "3.13",
+  "typeCheckingMode": "strict"
+}
