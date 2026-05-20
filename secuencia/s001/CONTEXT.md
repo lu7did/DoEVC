@@ -3,7 +3,7 @@ del proyecto.
 
 El programa debe estar realizado para Python 3.13.
 El programa tiene que ser implementado utilizando un esqueleto de proyecto como el provisto por cookiecutter el cual tendrá su directorio
-raiz en la carpeta correspondiente a s000 que contiene éste archivo.
+raiz en la carpeta bajo el directorio @secuencia  que contiene éste archivo.
 Se crearán dos directorios adicionales en la estructura uno denominado script y el otro ejemplos, el contenido de los mismos
 no se incluirán en el workflow de validación de push
 Preservar este archivo CONTEXT.md en el repositorio para documentar las metareglas de creación para éste proyecto, el mismo
