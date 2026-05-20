@@ -1,7 +1,7 @@
 Esta es la información de contexto que deberá ser usada para definir los requerimientos de construcción
 del proyecto.
 
-El programa debe estar realizado para Python 3.12.
+El programa debe estar realizado para Python 3.13.
 El programa tiene que ser implementado utilizando un esqueleto de proyecto como el provisto por cookiecutter.
 Se crearán dos directorios adicionales en la estructura uno denominado script y el otro ejemplos, el contenido de los mismos
 no se incluirán en el workflow de validación de push

@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doevc"
+version = "1.0.0"
+description = "Technical debt simulation scaffold for the DoEVC project."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { file = "LICENSE" }
+authors = [{ name = "UADER PI-B 230/24" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "bandit>=1.7.9",
+    "black>=24.4.2",
+    "hypothesis>=6.112.1",
+    "mypy>=1.11.2",
+    "pdoc>=15.0.0",
+    "pydocstyle>=6.3.0",
+    "pyright>=1.1.390",
+    "pytest>=8.3.3",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.9",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+extend-exclude = "^(script|ejemplos)/"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src", "tests"]
+extend-exclude = ["script", "ejemplos", "doc", "docs/_build", "site"]
+
+[tool.ruff.lint]
+select = ["B", "C4", "D", "E", "F", "I", "N", "SIM", "UP", "W"]
+ignore = ["D203", "D213", "N999"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--cov=doEVC", "--cov-report=term-missing", "--cov-fail-under=80"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+packages = ["doEVC"]
+strict = true
+exclude = "^(script|ejemplos)/"
+
+[tool.pydocstyle]
+convention = "pep257"
+match-dir = "(?!script|ejemplos).*"
+
+[tool.bandit]
+exclude_dirs = ["tests", "script", "ejemplos", "docs", "site"]
+
+[tool.coverage.run]
+source = ["src/doEVC"]

@@ -1,0 +1,14 @@
+{
+  "include": [
+    "src/doEVC"
+  ],
+  "exclude": [
+    "script",
+    "ejemplos",
+    "doc",
+    "docs",
+    "site"
+  ],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "strict"
+}
