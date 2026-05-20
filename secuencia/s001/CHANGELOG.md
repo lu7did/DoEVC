@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 002] - 2026-05-20
+
+### Added
+
+- `calculate_effective_velocity()` implementing story A2 with the formula
+  `V_k = V_0 / (1 + gamma * D_k)`.
+- Unit and property-based tests covering zero debt, decreasing velocity under
+  increasing debt, formula compliance, and invalid negative debt.
+
 ## [1.0 build 001] - 2026-05-20
 
 ### Added
