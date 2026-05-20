@@ -1,14 +1,14 @@
 # DoEVC
 
-DoEVC is a Python 3.12 package for the UADER PI-B 230/24 project. It provides
+DoEVC is a Python 3.13 package for the UADER PI-B 230/24 project. It provides
 the initial scaffold for a technical debt simulator with Monte Carlo analysis,
 optimization, persistence, and reporting.
 
 ## Status
 
 - Version: 1.0
-- Build: 000
-- Python: 3.12
+- Build: 001
+- Python: 3.13
 - License: Creative Commons CC0 1.0
 
 `CONTEXT.md` remains in the repository as the source of the construction rules

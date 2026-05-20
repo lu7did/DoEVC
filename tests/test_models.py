@@ -29,7 +29,7 @@ def sample_parameters() -> dict[str, Any]:
 
 def test_version_label_matches_repository_build() -> None:
     """Return the repository version label."""
-    assert get_version_label() == "1.0 build 000"
+    assert get_version_label() == "1.0 build 001"
 
 
 def test_model_parameters_serialize_to_dictionary() -> None:

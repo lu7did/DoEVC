@@ -1,7 +1,7 @@
 """Version metadata for DoEVC."""
 
 VERSION = "1.0"
-BUILD = "000"
+BUILD = "001"
 __version__ = "1.0.0"
 
 

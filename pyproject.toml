@@ -7,7 +7,7 @@ name = "doevc"
 version = "1.0.0"
 description = "Technical debt simulation scaffold for the DoEVC project."
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.13,<3.14"
 license = { file = "LICENSE" }
 authors = [{ name = "UADER PI-B 230/24" }]
 dependencies = []
@@ -34,12 +34,12 @@ where = ["src"]
 
 [tool.black]
 line-length = 88
-target-version = ["py312"]
+target-version = ["py313"]
 extend-exclude = "^(script|ejemplos)/"
 
 [tool.ruff]
 line-length = 88
-target-version = "py312"
+target-version = "py313"
 src = ["src", "tests"]
 extend-exclude = ["script", "ejemplos", "doc", "docs/_build", "site"]
 
@@ -55,7 +55,7 @@ testpaths = ["tests"]
 addopts = ["--cov=doEVC", "--cov-report=term-missing", "--cov-fail-under=80"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 mypy_path = "src"
 packages = ["doEVC"]
 strict = true
