@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [1.0 build 005] - 2026-06-02
+
+### Added
+
+- `Policy`, `DebtFirstPolicy`, `BacklogFirstPolicy`, and
+  `ProportionalDebtPolicy` to provide the interchangeable policy interface
+  required by the Monte Carlo engine.
+- `simulate_deterministic_sprints()` and `run_monte_carlo()` implementing story
+  C2 with seeded reproducibility, per-run outputs, and aggregate results.
+- Regression tests covering policy behavior, engine integration,
+  reproducibility, and exact Monte Carlo run counts.
+
 ## [1.0 build 004] - 2026-06-02
 
 ### Added
