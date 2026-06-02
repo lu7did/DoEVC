@@ -20,6 +20,7 @@ def sample_parameters() -> dict[str, float | int]:
         "lambda_": 0.8,
         "rho": 0.4,
         "K": 16,
+        "s": 1.0,
     }
 
 
@@ -40,7 +41,7 @@ def test_model_parameters_have_string_representation() -> None:
 
 @pytest.mark.parametrize(
     "field_name",
-    ["B0", "D0", "V0", "alpha", "beta", "gamma", "theta", "lambda_", "rho"],
+    ["B0", "D0", "V0", "alpha", "beta", "gamma", "theta", "lambda_", "rho", "s"],
 )
 def test_model_parameters_reject_negative_values(field_name: str) -> None:
     """Reject negative numeric values for the model parameters."""
@@ -79,6 +80,7 @@ def test_model_parameters_reject_non_positive_sprint_count() -> None:
     ),
     rho=st.floats(min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False),
     k=st.integers(min_value=1, max_value=1_000),
+    s=st.floats(min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False),
 )
 def test_model_parameters_accept_non_negative_values(
     b0: float,
@@ -91,6 +93,7 @@ def test_model_parameters_accept_non_negative_values(
     lambda_: float,
     rho: float,
     k: int,
+    s: float,
 ) -> None:
     """Accept valid non-negative model parameters."""
     parameters = ModelParameters(
@@ -104,6 +107,8 @@ def test_model_parameters_accept_non_negative_values(
         lambda_=lambda_,
         rho=rho,
         K=k,
+        s=s,
     )
 
     assert parameters.to_dict()["K"] == k
+    assert parameters.to_dict()["s"] == s

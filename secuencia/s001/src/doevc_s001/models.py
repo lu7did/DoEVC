@@ -23,6 +23,7 @@ class ModelParameters:
     lambda_: float
     rho: float
     K: int
+    s: float = 1.0
 
     def __post_init__(self) -> None:
         """Validate the parameter set after initialization."""
@@ -35,6 +36,7 @@ class ModelParameters:
         ensure_non_negative("theta", self.theta)
         ensure_non_negative("lambda_", self.lambda_)
         ensure_non_negative("rho", self.rho)
+        ensure_non_negative("s", self.s)
         if self.K <= 0:
             raise ValueError("K must be greater than zero.")
 
@@ -51,4 +53,5 @@ class ModelParameters:
             "lambda_": self.lambda_,
             "rho": self.rho,
             "K": self.K,
+            "s": self.s,
         }

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [1.0 build 004] - 2026-06-02
+
+### Added
+
+- `UniformParameterSampler` and `sample_uniform_parameters()` implementing
+  story C1 with reproducible uniform draws for `s`, `gamma`, `theta`,
+  `(1 - beta)`, and `lambda_`.
+- Regression tests covering seeded reproducibility, reseeding, fixed-seed
+  sampling, and the documented parameter intervals.
+
 ## [1.0 build 003] - 2026-05-20
 
 ### Added

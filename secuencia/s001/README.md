@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 003
+- Build: 004
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -20,6 +20,10 @@ documentation, and CI automation.
 - `doevc_s001.ModelParameters`: validated parameter structure for the model.
 - `doevc_s001.ModelParameters.to_dict()`: serialization helper for simulation
   inputs.
+- `doevc_s001.UniformParameterSampler`: reproducible uniform sampler for story
+  C1 model parameters.
+- `doevc_s001.sample_uniform_parameters()`: convenience helper to sample one
+  complete `ModelParameters` instance from a seed.
 - `doevc_s001.calculate_effective_velocity()`: computes `V_k` from `V0`,
   `gamma`, and the current technical debt.
 - `doevc_s001.SprintState`: immutable snapshot for a single sprint transition.

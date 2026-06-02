@@ -22,6 +22,7 @@ def sample_parameters() -> ModelParameters:
         lambda_=0.8,
         rho=0.4,
         K=16,
+        s=1.0,
     )
 
 
@@ -68,6 +69,7 @@ def test_simulate_sprint_never_returns_negative_technical_debt() -> None:
         lambda_=0.8,
         rho=0.4,
         K=16,
+        s=1.0,
     )
 
     state = simulate_sprint(
@@ -149,6 +151,7 @@ def test_simulate_sprint_respects_acceptance_invariants(
         lambda_=0.8,
         rho=0.4,
         K=16,
+        s=1.0,
     )
 
     state = simulate_sprint(

@@ -22,6 +22,7 @@ def sample_parameters() -> ModelParameters:
         lambda_=0.8,
         rho=0.4,
         K=16,
+        s=1.0,
     )
 
 
@@ -72,6 +73,7 @@ def test_effective_velocity_matches_formula(
         lambda_=0.8,
         rho=0.4,
         K=16,
+        s=1.0,
     )
 
     result = calculate_effective_velocity(parameters, technical_debt=technical_debt)
