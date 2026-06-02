@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 005
+- Build: 006
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -33,6 +33,10 @@ documentation, and CI automation.
   any `Policy`.
 - `doevc_s001.run_monte_carlo()`: executes reproducible Monte Carlo batches and
   returns both individual run results and aggregate outcomes.
+- `doevc_s001.aggregate_metrics()`: computes mean, standard deviation, min, max,
+  and percentiles across Monte Carlo run metrics.
+- `doevc_s001.export_monte_carlo_metrics_csv()`: exports stable per-run metric
+  columns for external analysis.
 - `doevc_s001.calculate_effective_velocity()`: computes `V_k` from `V0`,
   `gamma`, and the current technical debt.
 - `doevc_s001.SprintState`: immutable snapshot for a single sprint transition.

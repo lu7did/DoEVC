@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## [1.0 build 006] - 2026-06-02
+
+### Added
+
+- Per-run Monte Carlo output metrics for convergence sprints, final backlog,
+  final technical debt, and average remediation fraction.
+- `aggregate_metrics()` with mean, standard deviation, min, max, and percentile
+  summaries across known Monte Carlo runs.
+- `export_monte_carlo_metrics_csv()` for stable CSV export of final per-run
+  metrics.
+
 ## [1.0 build 005] - 2026-06-02
 
 ### Added

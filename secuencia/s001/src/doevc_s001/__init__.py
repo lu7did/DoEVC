@@ -3,9 +3,12 @@
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .montecarlo import (
+    MetricSummary,
     MonteCarloAggregateResult,
     MonteCarloResult,
     MonteCarloRunResult,
+    aggregate_metrics,
+    export_monte_carlo_metrics_csv,
     run_monte_carlo,
 )
 from .policies import (
@@ -25,6 +28,7 @@ __all__ = [
     "BUILD",
     "DebtFirstPolicy",
     "ModelParameters",
+    "MetricSummary",
     "MonteCarloAggregateResult",
     "MonteCarloResult",
     "MonteCarloRunResult",
@@ -36,7 +40,9 @@ __all__ = [
     "SprintState",
     "UniformParameterSampler",
     "VERSION",
+    "aggregate_metrics",
     "calculate_effective_velocity",
+    "export_monte_carlo_metrics_csv",
     "get_version_label",
     "run_monte_carlo",
     "sample_uniform_parameters",
