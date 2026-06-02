@@ -11,9 +11,15 @@ from .montecarlo import (
     export_monte_carlo_metrics_csv,
     run_monte_carlo,
 )
+from .optimization import (
+    GridSearchEvaluation,
+    GridSearchResult,
+    search_optimal_remediation_fraction,
+)
 from .policies import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
+    FixedRemediationPolicy,
     Policy,
     ProportionalDebtPolicy,
 )
@@ -27,6 +33,9 @@ __all__ = [
     "BacklogFirstPolicy",
     "BUILD",
     "DebtFirstPolicy",
+    "FixedRemediationPolicy",
+    "GridSearchEvaluation",
+    "GridSearchResult",
     "ModelParameters",
     "MetricSummary",
     "MonteCarloAggregateResult",
@@ -46,6 +55,7 @@ __all__ = [
     "get_version_label",
     "run_monte_carlo",
     "sample_uniform_parameters",
+    "search_optimal_remediation_fraction",
     "simulate_deterministic_sprints",
     "simulate_sprint",
 ]

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [1.0 build 007] - 2026-06-02
+
+### Added
+
+- `FixedRemediationPolicy`, `GridSearchEvaluation`, `GridSearchResult`, and
+  `search_optimal_remediation_fraction()` implementing story D1 for fixed-`u`
+  grid optimization.
+- Regression tests covering known minimization and maximization scenarios,
+  configurable step sizes, and the `D_k = 0 => u_k = 0` edge case.
+
 ## [1.0 build 006] - 2026-06-02
 
 ### Added

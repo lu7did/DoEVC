@@ -7,6 +7,7 @@ The current public API includes `ProjectMetadata`, `ModelParameters`,
 `DebtFirstPolicy`, `BacklogFirstPolicy`, `ProportionalDebtPolicy`,
 `simulate_deterministic_sprints()`, `run_monte_carlo()`, `aggregate_metrics()`,
 `export_monte_carlo_metrics_csv()`, `calculate_effective_velocity()`,
+`FixedRemediationPolicy`, `search_optimal_remediation_fraction()`,
 `SprintState`, `simulate_sprint()`, and `get_version_label()`.
 
 Generated API documentation is produced with:

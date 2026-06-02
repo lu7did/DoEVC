@@ -18,6 +18,28 @@ class Policy(Protocol):
         ...
 
 
+def _ensure_fraction(name: str, value: float) -> None:
+    """Ensure that a remediation fraction lies inside the closed unit interval."""
+    if value < 0 or value > 1:
+        raise ValueError(f"{name} must be between 0 and 1.")
+
+
+@dataclass(slots=True, frozen=True)
+class FixedRemediationPolicy:
+    """Return the same remediation fraction for every sprint."""
+
+    remediation_fraction: float
+
+    def __post_init__(self) -> None:
+        """Validate the configured remediation fraction."""
+        _ensure_fraction("remediation_fraction", self.remediation_fraction)
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Return the configured remediation fraction."""
+        del state, params
+        return self.remediation_fraction
+
+
 @dataclass(slots=True, frozen=True)
 class DebtFirstPolicy:
     """Use full remediation while any technical debt remains."""

@@ -1,5 +1,9 @@
 # STORIES
 
+- 2026-06-02T17:34:38.710-03:00 - Implementa una historia específica a
+  continuación de acuerdo a las instrucciones y contexto definidos en
+  `secuencia\s001\epicaD\storyD1` al finalizar realiza las verificaciones
+  locales y completa el commit en GitHub.
 - 2026-06-02T02:43:12.908-03:00 - Implementa una historia específica a
   continuación de acuerdo a las instrucciones y contexto definidos en
   `secuencia\s001\epicaC\storyC3` al finalizar realiza las verificaciones

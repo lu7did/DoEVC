@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 006
+- Build: 007
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -37,6 +37,11 @@ documentation, and CI automation.
   and percentiles across Monte Carlo run metrics.
 - `doevc_s001.export_monte_carlo_metrics_csv()`: exports stable per-run metric
   columns for external analysis.
+- `doevc_s001.FixedRemediationPolicy`: reusable constant-`u` policy for grid
+  search and deterministic comparisons.
+- `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
+  grid and returns the remediation fraction that optimizes a configurable
+  objective.
 - `doevc_s001.calculate_effective_velocity()`: computes `V_k` from `V0`,
   `gamma`, and the current technical debt.
 - `doevc_s001.SprintState`: immutable snapshot for a single sprint transition.
