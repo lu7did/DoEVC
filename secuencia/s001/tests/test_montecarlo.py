@@ -74,8 +74,10 @@ def test_run_monte_carlo_returns_individual_and_aggregate_results() -> None:
     assert all(0.0 <= run.sampled_parameters.theta <= 0.9 for run in result.runs)
     assert all(0.5 <= 1.0 - run.sampled_parameters.beta <= 0.9 for run in result.runs)
     assert all(0.2 <= run.sampled_parameters.lambda_ <= 1.0 for run in result.runs)
+    assert all(run.total_economic_value is not None for run in result.runs)
     assert isinstance(result.aggregate.final_backlog, MetricSummary)
     assert isinstance(result.aggregate, MonteCarloAggregateResult)
+    assert result.aggregate.total_economic_value is not None
 
 
 @dataclass(slots=True)

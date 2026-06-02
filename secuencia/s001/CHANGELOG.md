@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [1.0 build 008] - 2026-06-02
+
+### Added
+
+- `EconomicObjectiveFunction` implementing story D2 with configurable weights
+  for delivered functionality, residual debt penalty, and sprint penalty.
+- Integration of the economic objective with D1 grid search and Monte Carlo
+  economic-value metrics.
+- Regression tests covering known objective scores, negative-weight rejection,
+  and scenarios where different weights choose different optimal remediation
+  fractions.
+
 ## [1.0 build 007] - 2026-06-02
 
 ### Added

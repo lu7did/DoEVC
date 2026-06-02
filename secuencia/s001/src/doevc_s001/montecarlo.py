@@ -9,6 +9,7 @@ from pathlib import Path
 from statistics import fmean, pstdev
 
 from .models import ModelParameters
+from .optimization import EconomicObjectiveFunction
 from .policies import Policy
 from .sampling import RandomSeed, UniformParameterSampler
 from .simulation import simulate_deterministic_sprints
@@ -144,8 +145,7 @@ def _calculate_total_economic_value(
     trajectory: tuple[SprintState, ...],
 ) -> float | None:
     """Return the total economic value when the model defines it."""
-    del parameters, trajectory
-    return None
+    return EconomicObjectiveFunction()(trajectory, parameters)
 
 
 def _percentile(values: tuple[float, ...], percentile: float) -> float:

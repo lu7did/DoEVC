@@ -15,6 +15,49 @@ type ObjectiveDirection = Literal["min", "max"]
 type ObjectiveFunction = Callable[[tuple[SprintState, ...], ModelParameters], float]
 
 
+def _calculate_delivered_functionality(trajectory: tuple[SprintState, ...]) -> float:
+    """Calculate realized delivered functionality across the trajectory."""
+    return sum(min(state.backlog, state.feature_capacity) for state in trajectory)
+
+
+@dataclass(slots=True, frozen=True)
+class EconomicObjectiveFunction:
+    """Score a trajectory using configurable economic weights."""
+
+    delivered_value_weight: float = 1.0
+    residual_debt_penalty_weight: float = 1.0
+    sprint_penalty_weight: float = 0.0
+
+    def __post_init__(self) -> None:
+        """Validate the configured economic weights."""
+        ensure_non_negative("delivered_value_weight", self.delivered_value_weight)
+        ensure_non_negative(
+            "residual_debt_penalty_weight",
+            self.residual_debt_penalty_weight,
+        )
+        ensure_non_negative("sprint_penalty_weight", self.sprint_penalty_weight)
+
+    def __call__(
+        self,
+        trajectory: tuple[SprintState, ...],
+        parameters: ModelParameters,
+    ) -> float:
+        """Evaluate the configured economic objective on one trajectory."""
+        delivered_value = (
+            self.delivered_value_weight
+            * parameters.lambda_
+            * _calculate_delivered_functionality(trajectory)
+        )
+        residual_debt = (
+            parameters.D0 if not trajectory else trajectory[-1].next_technical_debt
+        )
+        debt_penalty = (
+            self.residual_debt_penalty_weight * parameters.rho * residual_debt
+        )
+        sprint_penalty = self.sprint_penalty_weight * parameters.theta * len(trajectory)
+        return delivered_value - debt_penalty - sprint_penalty
+
+
 @dataclass(slots=True, frozen=True)
 class GridSearchEvaluation:
     """Store the objective result for one fixed remediation fraction."""

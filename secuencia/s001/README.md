@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 007
+- Build: 008
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -39,6 +39,8 @@ documentation, and CI automation.
   columns for external analysis.
 - `doevc_s001.FixedRemediationPolicy`: reusable constant-`u` policy for grid
   search and deterministic comparisons.
+- `doevc_s001.EconomicObjectiveFunction`: configurable economic score combining
+  delivered value, residual debt penalty, and sprint penalty weights.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.

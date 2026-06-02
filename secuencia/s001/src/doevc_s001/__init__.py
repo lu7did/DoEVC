@@ -12,6 +12,7 @@ from .montecarlo import (
     run_monte_carlo,
 )
 from .optimization import (
+    EconomicObjectiveFunction,
     GridSearchEvaluation,
     GridSearchResult,
     search_optimal_remediation_fraction,
@@ -33,6 +34,7 @@ __all__ = [
     "BacklogFirstPolicy",
     "BUILD",
     "DebtFirstPolicy",
+    "EconomicObjectiveFunction",
     "FixedRemediationPolicy",
     "GridSearchEvaluation",
     "GridSearchResult",
