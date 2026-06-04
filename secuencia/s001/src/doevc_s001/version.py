@@ -1,7 +1,7 @@
 """Version metadata for the DoEVC s001 sequence."""
 
 VERSION = "1.0"
-BUILD = "009"
+BUILD = "010"
 SEQUENCE_ID = "s001"
 PYTHON_VERSION = "3.13"
 

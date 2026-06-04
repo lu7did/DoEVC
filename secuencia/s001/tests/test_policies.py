@@ -104,6 +104,23 @@ def test_backlog_first_policy_prioritizes_backlog_then_debt() -> None:
     )
 
 
+def test_simulate_deterministic_sprints_uses_backlog_first_policy_as_b2_baseline() -> (
+    None
+):
+    """Spend capacity on backlog first, then switch to debt remediation."""
+    trajectory = simulate_deterministic_sprints(
+        sample_parameters(k=4),
+        BacklogFirstPolicy(),
+    )
+
+    assert len(trajectory) == 3
+    assert trajectory[0].remediation_fraction == 0.0
+    assert trajectory[1].remediation_fraction == 0.0
+    assert trajectory[1].next_backlog == 0.0
+    assert trajectory[2].remediation_fraction == 1.0
+    assert trajectory[2].next_technical_debt == 0.0
+
+
 def test_proportional_debt_policy_handles_edge_cases_and_general_case() -> None:
     """Compute the relative debt fraction without leaving the unit interval."""
     policy = ProportionalDebtPolicy()

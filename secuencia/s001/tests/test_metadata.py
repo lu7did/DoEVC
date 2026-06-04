@@ -19,7 +19,7 @@ def sample_metadata() -> dict[str, str]:
 
 def test_version_label_matches_sequence_build() -> None:
     """Return the sequence version label."""
-    assert get_version_label() == "1.0 build 009"
+    assert get_version_label() == "1.0 build 010"
 
 
 def test_metadata_serializes_to_dictionary() -> None:

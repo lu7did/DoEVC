@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 010] - 2026-06-04
+
+### Added
+
+- Explicit regression coverage for story B2 proving `BacklogFirstPolicy`
+  remains selectable from `simulate_deterministic_sprints()`, keeps
+  `u_k = 0` while backlog exists, and switches to `u_k = 1` once only
+  technical debt remains.
+
 ## [1.0 build 009] - 2026-06-04
 
 ### Added
