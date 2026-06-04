@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 
+import pytest
+
 from doevc_s001 import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
@@ -153,6 +155,24 @@ def test_proportional_debt_policy_handles_edge_cases_and_general_case() -> None:
         )
         == 0.25
     )
+
+
+def test_simulate_deterministic_sprints_uses_proportional_policy_as_b3_baseline() -> (
+    None
+):
+    """Apply the proportional heuristic as a selectable simulator policy."""
+    trajectory = simulate_deterministic_sprints(
+        sample_parameters(k=3),
+        ProportionalDebtPolicy(),
+    )
+
+    assert len(trajectory) == 3
+    assert trajectory[0].remediation_fraction == pytest.approx(4.0 / 12.0)
+    assert 0.0 <= trajectory[0].remediation_fraction <= 1.0
+    assert trajectory[1].remediation_fraction == pytest.approx(1.0 / 3.0)
+    assert 0.0 <= trajectory[1].remediation_fraction <= 1.0
+    assert trajectory[2].remediation_fraction == pytest.approx(1.0 / 3.0)
+    assert 0.0 <= trajectory[2].remediation_fraction <= 1.0
 
 
 @dataclass(slots=True)

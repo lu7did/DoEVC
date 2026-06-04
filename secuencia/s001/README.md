@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 010
+- Build: 011
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -30,8 +30,8 @@ documentation, and CI automation.
   technical debt remains and `u_k = 0` once it reaches zero.
 - `doevc_s001.BacklogFirstPolicy`: story B2 baseline with `u_k = 0` while
   backlog remains, then `u_k = 1` when only technical debt is left.
-- `doevc_s001.ProportionalDebtPolicy`: additional interchangeable baseline
-  remediation policy.
+- `doevc_s001.ProportionalDebtPolicy`: story B3 baseline using
+  `u_k = D_k / (B_k + D_k)` with safe handling of the zero-work edge case.
 - `doevc_s001.simulate_deterministic_sprints()`: chains up to `K` sprints using
   any `Policy`.
 - `doevc_s001.run_monte_carlo()`: executes reproducible Monte Carlo batches and

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [1.0 build 011] - 2026-06-04
+
+### Added
+
+- Explicit regression coverage for story B3 proving `ProportionalDebtPolicy`
+  remains selectable from `simulate_deterministic_sprints()`, applies the
+  documented `D_k / (B_k + D_k)` heuristic, and stays inside `[0, 1]`.
+
 ## [1.0 build 010] - 2026-06-04
 
 ### Added
