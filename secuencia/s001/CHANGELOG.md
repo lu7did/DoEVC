@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [1.0 build 009] - 2026-06-04
+
+### Added
+
+- Explicit regression coverage for story B1 proving `DebtFirstPolicy` remains
+  selectable from `simulate_deterministic_sprints()` and switches from
+  `u_k = 1` to `u_k = 0` as soon as technical debt reaches zero.
+
 ## [1.0 build 008] - 2026-06-02
 
 ### Added

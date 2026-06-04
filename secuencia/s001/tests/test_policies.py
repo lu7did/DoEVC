@@ -63,6 +63,20 @@ def test_debt_first_policy_prioritizes_debt_until_it_reaches_zero() -> None:
     )
 
 
+def test_simulate_deterministic_sprints_uses_debt_first_policy_as_b1_baseline() -> None:
+    """Apply the debt-first baseline until debt reaches zero, then resume delivery."""
+    trajectory = simulate_deterministic_sprints(
+        sample_parameters(k=3),
+        DebtFirstPolicy(),
+    )
+
+    assert len(trajectory) == 3
+    assert trajectory[0].remediation_fraction == 1.0
+    assert trajectory[0].next_technical_debt == 0.0
+    assert trajectory[1].remediation_fraction == 0.0
+    assert trajectory[2].remediation_fraction == 0.0
+
+
 def test_backlog_first_policy_prioritizes_backlog_then_debt() -> None:
     """Keep delivery first while backlog exists, then switch to debt."""
     policy = BacklogFirstPolicy()

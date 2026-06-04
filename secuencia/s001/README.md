@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 008
+- Build: 009
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -26,9 +26,10 @@ documentation, and CI automation.
   complete `ModelParameters` instance from a seed.
 - `doevc_s001.Policy`: common policy protocol for deterministic and Monte Carlo
   execution.
-- `doevc_s001.DebtFirstPolicy`, `doevc_s001.BacklogFirstPolicy`, and
-  `doevc_s001.ProportionalDebtPolicy`: interchangeable baseline remediation
-  policies.
+- `doevc_s001.DebtFirstPolicy`: naive story B1 baseline with `u_k = 1` while
+  technical debt remains and `u_k = 0` once it reaches zero.
+- `doevc_s001.BacklogFirstPolicy` and `doevc_s001.ProportionalDebtPolicy`:
+  additional interchangeable baseline remediation policies.
 - `doevc_s001.simulate_deterministic_sprints()`: chains up to `K` sprints using
   any `Policy`.
 - `doevc_s001.run_monte_carlo()`: executes reproducible Monte Carlo batches and
