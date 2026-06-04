@@ -8,6 +8,7 @@ from doevc_s001 import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
     ModelParameters,
+    Policy,
     ProportionalDebtPolicy,
     SprintState,
     simulate_deterministic_sprints,
@@ -173,6 +174,31 @@ def test_simulate_deterministic_sprints_uses_proportional_policy_as_b3_baseline(
     assert 0.0 <= trajectory[1].remediation_fraction <= 1.0
     assert trajectory[2].remediation_fraction == pytest.approx(1.0 / 3.0)
     assert 0.0 <= trajectory[2].remediation_fraction <= 1.0
+
+
+@pytest.mark.parametrize(
+    ("policy", "expected_first_fraction"),
+    [
+        (DebtFirstPolicy(), 1.0),
+        (BacklogFirstPolicy(), 0.0),
+        (ProportionalDebtPolicy(), 4.0 / 12.0),
+    ],
+)
+def test_all_baseline_policies_are_interchangeable_in_the_simulator(
+    policy: Policy,
+    expected_first_fraction: float,
+) -> None:
+    """Allow every baseline policy to plug into the simulator via ``Policy``."""
+    assert isinstance(policy, Policy)
+
+    trajectory = simulate_deterministic_sprints(
+        sample_parameters(k=2),
+        policy,
+    )
+
+    assert len(trajectory) == 2
+    assert trajectory[0].remediation_fraction == pytest.approx(expected_first_fraction)
+    assert all(0.0 <= sprint.remediation_fraction <= 1.0 for sprint in trajectory)
 
 
 @dataclass(slots=True)

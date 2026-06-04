@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [1.0 build 012] - 2026-06-04
+
+### Added
+
+- Explicit B4 integration coverage proving the `Policy` protocol lets
+  `DebtFirstPolicy`, `BacklogFirstPolicy`, and `ProportionalDebtPolicy`
+  interchangeably drive `simulate_deterministic_sprints()`.
+
 ## [1.0 build 011] - 2026-06-04
 
 ### Added

@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 011
+- Build: 012
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -24,8 +24,8 @@ documentation, and CI automation.
   C1 model parameters.
 - `doevc_s001.sample_uniform_parameters()`: convenience helper to sample one
   complete `ModelParameters` instance from a seed.
-- `doevc_s001.Policy`: common policy protocol for deterministic and Monte Carlo
-  execution.
+- `doevc_s001.Policy`: story B4 common protocol that lets deterministic and
+  Monte Carlo engines accept interchangeable policy objects via `decide_u(...)`.
 - `doevc_s001.DebtFirstPolicy`: naive story B1 baseline with `u_k = 1` while
   technical debt remains and `u_k = 0` once it reaches zero.
 - `doevc_s001.BacklogFirstPolicy`: story B2 baseline with `u_k = 0` while
