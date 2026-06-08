@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 015
+- Build: 016
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -52,6 +52,8 @@ documentation, and CI automation.
   CSV row per deterministic sprint state.
 - `doevc_s001.export_metrics_csv()`: story E1 helper that exports aggregate
   Monte Carlo metric summaries to CSV.
+- `doevc_s001.save_scenario()`: story E2 helper that stores parameters,
+  policy name, and seed in a reproducible JSON scenario file.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.

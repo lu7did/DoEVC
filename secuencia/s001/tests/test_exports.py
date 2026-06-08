@@ -1,6 +1,7 @@
 """Tests for CSV export helpers in DoEVC s001."""
 
 import csv
+import json
 
 from doevc_s001 import (
     DebtFirstPolicy,
@@ -9,6 +10,7 @@ from doevc_s001 import (
     export_metrics_csv,
     export_sprint_states_csv,
     run_monte_carlo,
+    save_scenario,
     simulate_deterministic_sprints,
 )
 
@@ -129,3 +131,40 @@ def test_export_metrics_csv_skips_missing_economic_value_row(tmp_path: str) -> N
         "final_technical_debt",
         "average_remediation_fraction",
     ]
+
+
+def test_save_scenario_writes_expected_json_structure(tmp_path: str) -> None:
+    """Persist a scenario as standard JSON with the expected top-level fields."""
+    json_path = save_scenario(
+        sample_parameters(),
+        "DebtFirstPolicy",
+        123,
+        tmp_path / "scenario.json",
+    )
+
+    with json_path.open(encoding="utf-8") as json_file:
+        payload = json.load(json_file)
+
+    assert payload == {
+        "parameters": sample_parameters().to_dict(),
+        "policy_name": "DebtFirstPolicy",
+        "seed": 123,
+    }
+
+
+def test_save_scenario_serializes_binary_seeds_as_json_safe_data(tmp_path: str) -> None:
+    """Convert binary seeds to structured JSON data so the file stays loadable."""
+    json_path = save_scenario(
+        sample_parameters(),
+        "DebtFirstPolicy",
+        b"\x01\x02\x03",
+        tmp_path / "scenario-bytes.json",
+    )
+
+    with json_path.open(encoding="utf-8") as json_file:
+        payload = json.load(json_file)
+
+    assert payload["seed"] == {
+        "type": "bytes",
+        "value": [1, 2, 3],
+    }

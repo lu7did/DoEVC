@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 016] - 2026-06-08
+
+### Added
+
+- `save_scenario()` implementing story E2 to persist parameters, policy name,
+  and seed as standard JSON for reproducible experiments.
+- Regression tests proving the JSON output is loadable with `json.load()` and
+  contains the expected scenario fields.
+
 ## [1.0 build 015] - 2026-06-08
 
 ### Added

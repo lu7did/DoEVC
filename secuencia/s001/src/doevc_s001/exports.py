@@ -1,13 +1,26 @@
-"""CSV export helpers for sprint trajectories and aggregate metrics."""
+"""CSV and JSON export helpers for reproducible DoEVC experiments."""
 
 from __future__ import annotations
 
 import csv
+import json
 from os import PathLike
 from pathlib import Path
 
+from .models import ModelParameters
 from .montecarlo import MonteCarloAggregateResult
+from .sampling import RandomSeed
 from .sprint import SprintState
+
+
+def _serialize_seed(seed: RandomSeed) -> int | float | str | None | dict[str, object]:
+    """Serialize supported seed types to JSON-compatible values."""
+    if isinstance(seed, (bytes, bytearray)):
+        return {
+            "type": type(seed).__name__,
+            "value": list(seed),
+        }
+    return seed
 
 
 def export_sprint_states_csv(
@@ -82,5 +95,25 @@ def export_metrics_csv(
                     "percentile_75": summary.percentile_75,
                 }
             )
+
+    return destination_path
+
+
+def save_scenario(
+    params: ModelParameters,
+    policy_name: str,
+    seed: RandomSeed,
+    destination: str | PathLike[str],
+) -> Path:
+    """Save a reproducible experiment scenario to a JSON file."""
+    destination_path = Path(destination)
+    scenario = {
+        "parameters": params.to_dict(),
+        "policy_name": policy_name,
+        "seed": _serialize_seed(seed),
+    }
+
+    with destination_path.open("w", encoding="utf-8") as json_file:
+        json.dump(scenario, json_file, indent=2, sort_keys=True)
 
     return destination_path
