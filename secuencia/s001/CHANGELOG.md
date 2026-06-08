@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [1.0 build 013] - 2026-06-08
+
+### Added
+
+- `OptimalLocalPolicy` implementing story D3 by choosing the locally optimal
+  remediation fraction from the current sprint state using the configurable
+  economic objective and fixed-`u` grid search.
+- Integration tests proving the new policy remains interchangeable via
+  `Policy` and beats at least one heuristic policy in a known scenario.
+
 ## [1.0 build 012] - 2026-06-04
 
 ### Added

@@ -15,6 +15,7 @@ from .optimization import (
     EconomicObjectiveFunction,
     GridSearchEvaluation,
     GridSearchResult,
+    OptimalLocalPolicy,
     search_optimal_remediation_fraction,
 )
 from .policies import (
@@ -43,6 +44,7 @@ __all__ = [
     "MonteCarloAggregateResult",
     "MonteCarloResult",
     "MonteCarloRunResult",
+    "OptimalLocalPolicy",
     "Policy",
     "PYTHON_VERSION",
     "ProjectMetadata",

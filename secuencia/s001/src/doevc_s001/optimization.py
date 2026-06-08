@@ -59,6 +59,34 @@ class EconomicObjectiveFunction:
 
 
 @dataclass(slots=True, frozen=True)
+class OptimalLocalPolicy:
+    """Choose the locally optimal remediation fraction for each sprint state."""
+
+    objective: ObjectiveFunction
+    direction: ObjectiveDirection = "max"
+    step: float = 0.01
+
+    def __post_init__(self) -> None:
+        """Validate the local optimization configuration."""
+        if self.direction not in {"min", "max"}:
+            raise ValueError("direction must be either 'min' or 'max'.")
+        if self.step <= 0 or self.step > 1:
+            raise ValueError("step must be greater than 0 and at most 1.")
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Return the remediation fraction that optimizes the local objective."""
+        result = search_optimal_remediation_fraction(
+            params,
+            self.objective,
+            direction=self.direction,
+            step=self.step,
+            backlog=state.backlog,
+            technical_debt=state.technical_debt,
+        )
+        return result.best_remediation_fraction
+
+
+@dataclass(slots=True, frozen=True)
 class GridSearchEvaluation:
     """Store the objective result for one fixed remediation fraction."""
 
