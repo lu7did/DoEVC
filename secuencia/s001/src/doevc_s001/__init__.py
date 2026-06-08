@@ -30,6 +30,7 @@ from .optimization import (
     OptimalLocalPolicy,
     search_optimal_remediation_fraction,
 )
+from .plotting import plot_simulation
 from .policies import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
@@ -76,6 +77,7 @@ __all__ = [
     "export_monte_carlo_metrics_csv",
     "get_version_label",
     "load_and_run",
+    "plot_simulation",
     "run_monte_carlo",
     "save_scenario",
     "sample_uniform_parameters",

@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.13,<3.14"
 license = "CC0-1.0"
 authors = [{ name = "UADER PI-B 230/24" }]
-dependencies = []
+dependencies = ["matplotlib>=3.10.0"]
 
 [project.optional-dependencies]
 dev = [

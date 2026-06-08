@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 017
+- Build: 018
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -56,6 +56,8 @@ documentation, and CI automation.
   policy name, and seed in a reproducible JSON scenario file.
 - `doevc_s001.load_and_run()`: story E3 helper that rebuilds a saved scenario
   from JSON and replays the deterministic simulation.
+- `doevc_s001.plot_simulation()`: story F1 helper that writes a PNG chart for
+  deterministic sprint backlog and technical debt trajectories.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.

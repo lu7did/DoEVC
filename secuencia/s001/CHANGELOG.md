@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 018] - 2026-06-08
+
+### Added
+
+- `plot_simulation()` implementing story F1 to render deterministic backlog and
+  technical debt trajectories as a PNG using matplotlib in non-interactive
+  mode.
+- Regression tests proving the plot is exported as a non-empty PNG file.
+
 ## [1.0 build 017] - 2026-06-08
 
 ### Added
