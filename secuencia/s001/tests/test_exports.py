@@ -189,6 +189,105 @@ def test_load_and_run_reproduces_a_saved_scenario_round_trip(tmp_path: str) -> N
     assert loaded == original
 
 
+@pytest.mark.parametrize(
+    ("seed", "expected_payload"),
+    [
+        (
+            b"\x01\x02\x03",
+            {
+                "type": "bytes",
+                "value": [1, 2, 3],
+            },
+        ),
+        (
+            bytearray(b"\x04\x05\x06"),
+            {
+                "type": "bytearray",
+                "value": [4, 5, 6],
+            },
+        ),
+    ],
+)
+def test_load_and_run_accepts_serialized_binary_seeds(
+    tmp_path: str,
+    seed: bytes | bytearray,
+    expected_payload: dict[str, object],
+) -> None:
+    """Accept serialized bytes and bytearray seeds when replaying a scenario."""
+    parameters = sample_parameters()
+    original = simulate_deterministic_sprints(parameters, DebtFirstPolicy())
+    json_path = save_scenario(
+        parameters,
+        "DebtFirstPolicy",
+        seed,
+        tmp_path / "binary-seed-scenario.json",
+    )
+
+    with json_path.open(encoding="utf-8") as json_file:
+        payload = json.load(json_file)
+
+    assert payload["seed"] == expected_payload
+    assert load_and_run(json_path) == original
+
+
+@pytest.mark.parametrize(
+    ("seed_payload", "message"),
+    [
+        (
+            {
+                "type": 7,
+                "value": [1, 2, 3],
+            },
+            "serialized seed type must be a string",
+        ),
+        (
+            {
+                "type": "bytes",
+                "value": "123",
+            },
+            "serialized seed values must be an integer list",
+        ),
+        (
+            {
+                "type": "bytes",
+                "value": [1, "2", 3],
+            },
+            "serialized seed values must be an integer list",
+        ),
+        (
+            {
+                "type": "memoryview",
+                "value": [1, 2, 3],
+            },
+            "serialized seed type is not supported",
+        ),
+    ],
+)
+def test_load_and_run_rejects_invalid_serialized_seeds(
+    tmp_path: str,
+    seed_payload: dict[str, object],
+    message: str,
+) -> None:
+    """Raise a clear error when a saved scenario contains an invalid serialized seed."""
+    json_path = save_scenario(
+        sample_parameters(),
+        "DebtFirstPolicy",
+        123,
+        tmp_path / "invalid-seed-scenario.json",
+    )
+
+    with json_path.open(encoding="utf-8") as json_file:
+        payload = json.load(json_file)
+
+    payload["seed"] = seed_payload
+
+    with json_path.open("w", encoding="utf-8") as json_file:
+        json.dump(payload, json_file)
+
+    with pytest.raises(ValueError, match=message):
+        load_and_run(json_path)
+
+
 def test_load_and_run_rejects_unknown_policy_names(tmp_path: str) -> None:
     """Raise a clear error when the scenario names an unsupported policy."""
     json_path = save_scenario(

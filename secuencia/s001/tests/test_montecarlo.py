@@ -17,6 +17,7 @@ from doevc_s001 import (
     export_monte_carlo_metrics_csv,
     run_monte_carlo,
 )
+from doevc_s001.montecarlo import _percentile
 
 
 def sample_parameters(*, k: int = 4) -> ModelParameters:
@@ -187,6 +188,107 @@ def test_aggregate_metrics_rejects_empty_runs() -> None:
         aggregate_metrics(())
 
 
+def test_percentile_rejects_empty_sequences() -> None:
+    """Reject percentile requests without any source values."""
+    with pytest.raises(ValueError, match="values must not be empty"):
+        _percentile((), 0.5)
+
+
+def test_run_monte_carlo_handles_empty_trajectories_and_legacy_fields() -> None:
+    """Preserve zero-work runs and backward-compatible serialized fields."""
+    zero_work_parameters = ModelParameters(
+        B0=0.0,
+        D0=0.0,
+        V0=4.0,
+        alpha=0.0,
+        beta=0.2,
+        gamma=0.01,
+        theta=0.2,
+        lambda_=0.8,
+        rho=0.4,
+        K=4,
+        s=1.0,
+    )
+    result = run_monte_carlo(
+        1,
+        DebtFirstPolicy(),
+        seed=99,
+        base_parameters=zero_work_parameters,
+    )
+
+    run = result.runs[0]
+
+    assert run.trajectory == ()
+    assert run.executed_sprints == 0
+    assert run.final_backlog == 0.0
+    assert run.final_technical_debt == 0.0
+    assert run.average_remediation_fraction == 0.0
+    assert run.completed is True
+    assert run.to_dict()["executed_sprints"] == 0
+    assert run.to_dict()["sampled_parameters"]["D0"] == 0.0
+
+
+def test_aggregate_metrics_serializes_without_economic_value_summary() -> None:
+    """Keep aggregate serialization stable when some runs have no economic value."""
+    runs = (
+        MonteCarloRunResult(
+            run_index=1,
+            sampled_parameters=sample_parameters(),
+            trajectory=(),
+            convergence_sprints=1,
+            final_backlog=2.0,
+            final_technical_debt=1.0,
+            average_remediation_fraction=0.0,
+            total_economic_value=None,
+            completed=False,
+        ),
+        MonteCarloRunResult(
+            run_index=2,
+            sampled_parameters=sample_parameters(),
+            trajectory=(),
+            convergence_sprints=1,
+            final_backlog=0.0,
+            final_technical_debt=0.0,
+            average_remediation_fraction=1.0,
+            total_economic_value=5.0,
+            completed=True,
+        ),
+    )
+
+    aggregate = aggregate_metrics(runs)
+    serialized = aggregate.to_dict()
+
+    assert aggregate.total_economic_value is None
+    assert aggregate.mean_final_backlog == 1.0
+    assert aggregate.mean_final_technical_debt == 0.5
+    assert aggregate.mean_executed_sprints == 1.0
+    assert serialized["total_economic_value"] is None
+
+
+def test_aggregate_metrics_supports_single_run_percentiles() -> None:
+    """Return stable statistics when only one run is available."""
+    runs = (
+        MonteCarloRunResult(
+            run_index=1,
+            sampled_parameters=sample_parameters(),
+            trajectory=(),
+            convergence_sprints=3,
+            final_backlog=2.5,
+            final_technical_debt=1.5,
+            average_remediation_fraction=0.25,
+            total_economic_value=7.5,
+            completed=False,
+        ),
+    )
+
+    aggregate = aggregate_metrics(runs)
+
+    assert aggregate.convergence_sprints.standard_deviation == 0.0
+    assert aggregate.convergence_sprints.percentile_25 == 3.0
+    assert aggregate.total_economic_value is not None
+    assert aggregate.total_economic_value.percentile_75 == 7.5
+
+
 def test_export_monte_carlo_metrics_csv_writes_stable_columns(
     tmp_path: pytest.TempPathFactory,
 ) -> None:
@@ -217,3 +319,29 @@ def test_export_monte_carlo_metrics_csv_writes_stable_columns(
         "completed",
     ]
     assert len(rows) == 2
+
+
+def test_export_monte_carlo_metrics_csv_writes_blank_for_missing_economic_value(
+    tmp_path: pytest.TempPathFactory,
+) -> None:
+    """Serialize missing economic values as blank CSV cells."""
+    run = MonteCarloRunResult(
+        run_index=1,
+        sampled_parameters=sample_parameters(),
+        trajectory=(),
+        convergence_sprints=0,
+        final_backlog=8.0,
+        final_technical_debt=4.0,
+        average_remediation_fraction=0.0,
+        total_economic_value=None,
+        completed=False,
+    )
+    aggregate = aggregate_metrics((run,))
+    result = MonteCarloResult(runs=(run,), aggregate=aggregate)
+
+    csv_path = export_monte_carlo_metrics_csv(result, tmp_path / "blank-economic.csv")
+
+    with csv_path.open(encoding="utf-8", newline="") as csv_file:
+        row = next(csv.DictReader(csv_file))
+
+    assert row["total_economic_value"] == ""
