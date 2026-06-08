@@ -3,12 +3,15 @@
 import csv
 import json
 
+import pytest
+
 from doevc_s001 import (
     DebtFirstPolicy,
     ModelParameters,
     aggregate_metrics,
     export_metrics_csv,
     export_sprint_states_csv,
+    load_and_run,
     run_monte_carlo,
     save_scenario,
     simulate_deterministic_sprints,
@@ -168,3 +171,40 @@ def test_save_scenario_serializes_binary_seeds_as_json_safe_data(tmp_path: str) 
         "type": "bytes",
         "value": [1, 2, 3],
     }
+
+
+def test_load_and_run_reproduces_a_saved_scenario_round_trip(tmp_path: str) -> None:
+    """Load a saved scenario and reproduce the original deterministic trajectory."""
+    parameters = sample_parameters()
+    original = simulate_deterministic_sprints(parameters, DebtFirstPolicy())
+    json_path = save_scenario(
+        parameters,
+        "DebtFirstPolicy",
+        123,
+        tmp_path / "round-trip-scenario.json",
+    )
+
+    loaded = load_and_run(json_path)
+
+    assert loaded == original
+
+
+def test_load_and_run_rejects_unknown_policy_names(tmp_path: str) -> None:
+    """Raise a clear error when the scenario names an unsupported policy."""
+    json_path = save_scenario(
+        sample_parameters(),
+        "UnknownPolicy",
+        123,
+        tmp_path / "unknown-policy.json",
+    )
+
+    with json_path.open(encoding="utf-8") as json_file:
+        payload = json.load(json_file)
+
+    payload["policy_name"] = "UnknownPolicy"
+
+    with json_path.open("w", encoding="utf-8") as json_file:
+        json.dump(payload, json_file)
+
+    with pytest.raises(ValueError, match="is not registered"):
+        load_and_run(json_path)

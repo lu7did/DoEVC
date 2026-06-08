@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 017] - 2026-06-08
+
+### Added
+
+- `load_and_run()` implementing story E3 by reconstructing parameters and a
+  registered policy from a saved JSON scenario and replaying the simulation.
+- Regression tests proving the E2→E3 round-trip reproduces the same
+  deterministic sprint states and rejects unknown policy names.
+
 ## [1.0 build 016] - 2026-06-08
 
 ### Added

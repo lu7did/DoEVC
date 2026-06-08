@@ -1,16 +1,37 @@
-"""CSV and JSON export helpers for reproducible DoEVC experiments."""
+"""CSV and JSON helpers for reproducible DoEVC experiments."""
 
 from __future__ import annotations
 
 import csv
 import json
+from collections.abc import Callable
 from os import PathLike
 from pathlib import Path
+from typing import TypeGuard, cast
 
 from .models import ModelParameters
 from .montecarlo import MonteCarloAggregateResult
+from .optimization import EconomicObjectiveFunction, OptimalLocalPolicy
+from .policies import (
+    BacklogFirstPolicy,
+    DebtFirstPolicy,
+    Policy,
+    ProportionalDebtPolicy,
+)
 from .sampling import RandomSeed
+from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState
+
+type PolicyFactory = Callable[[], Policy]
+
+_POLICY_REGISTRY: dict[str, PolicyFactory] = {
+    "BacklogFirstPolicy": BacklogFirstPolicy,
+    "DebtFirstPolicy": DebtFirstPolicy,
+    "OptimalLocalPolicy": lambda: OptimalLocalPolicy(
+        objective=EconomicObjectiveFunction()
+    ),
+    "ProportionalDebtPolicy": ProportionalDebtPolicy,
+}
 
 
 def _serialize_seed(seed: RandomSeed) -> int | float | str | None | dict[str, object]:
@@ -21,6 +42,33 @@ def _serialize_seed(seed: RandomSeed) -> int | float | str | None | dict[str, ob
             "value": list(seed),
         }
     return seed
+
+
+def _deserialize_seed(
+    seed: int | float | str | None | dict[str, object],
+) -> RandomSeed:
+    """Deserialize JSON-compatible seed data to the original supported type."""
+    if isinstance(seed, dict):
+        seed_type = seed.get("type")
+        values = seed.get("value")
+        if not isinstance(seed_type, str):
+            raise ValueError("serialized seed type must be a string.")
+        if not _is_integer_list(values):
+            raise ValueError("serialized seed values must be an integer list.")
+        integer_values = values
+        if seed_type == "bytes":
+            return bytes(integer_values)
+        if seed_type == "bytearray":
+            return bytearray(integer_values)
+        raise ValueError("serialized seed type is not supported.")
+    return seed
+
+
+def _is_integer_list(value: object) -> TypeGuard[list[int]]:
+    """Return whether a JSON value is a list containing only integers."""
+    if not isinstance(value, list):
+        return False
+    return all(isinstance(item, int) for item in cast(list[object], value))
 
 
 def export_sprint_states_csv(
@@ -117,3 +165,20 @@ def save_scenario(
         json.dump(scenario, json_file, indent=2, sort_keys=True)
 
     return destination_path
+
+
+def load_and_run(destination: str | PathLike[str]) -> tuple[SprintState, ...]:
+    """Load a saved scenario JSON and execute the deterministic simulation."""
+    destination_path = Path(destination)
+    with destination_path.open(encoding="utf-8") as json_file:
+        scenario = json.load(json_file)
+
+    policy_name = scenario["policy_name"]
+    try:
+        policy = _POLICY_REGISTRY[policy_name]()
+    except KeyError as error:
+        raise ValueError(f"policy {policy_name!r} is not registered.") from error
+
+    parameters = ModelParameters(**scenario["parameters"])
+    _ = _deserialize_seed(scenario["seed"])
+    return simulate_deterministic_sprints(parameters, policy)

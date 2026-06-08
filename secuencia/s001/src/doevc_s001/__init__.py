@@ -6,7 +6,12 @@ from .comparison import (
     PolicyComparisonTable,
     compare_policies,
 )
-from .exports import export_metrics_csv, export_sprint_states_csv, save_scenario
+from .exports import (
+    export_metrics_csv,
+    export_sprint_states_csv,
+    load_and_run,
+    save_scenario,
+)
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .montecarlo import (
@@ -70,6 +75,7 @@ __all__ = [
     "compare_policies",
     "export_monte_carlo_metrics_csv",
     "get_version_label",
+    "load_and_run",
     "run_monte_carlo",
     "save_scenario",
     "sample_uniform_parameters",
