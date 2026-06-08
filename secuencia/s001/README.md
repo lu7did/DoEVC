@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 019
+- Build: 020
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -61,6 +61,9 @@ documentation, and CI automation.
 - `doevc_s001.plot_optimal_u_distribution()`: story F2 helper that writes a
   PNG boxplot for the per-run optimal remediation distribution in Monte Carlo
   experiments.
+- `doevc_s001.plot_sensitivity_heatmap()`: story F3 helper that writes a PNG
+  heatmap for the average remediation produced by a policy across two named
+  parameter sweeps.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [1.0 build 020] - 2026-06-08
+
+### Added
+
+- `plot_sensitivity_heatmap()` implementing story F3 to render a non-interactive
+  matplotlib heatmap of average remediation across two named model-parameter
+  sweeps.
+- Regression tests proving the heatmap PNG is created, the sensitivity matrix
+  has the expected dimensions, and invalid sweep configurations are rejected.
+
 ## [1.0 build 019] - 2026-06-08
 
 ### Added

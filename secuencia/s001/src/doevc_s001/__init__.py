@@ -30,7 +30,11 @@ from .optimization import (
     OptimalLocalPolicy,
     search_optimal_remediation_fraction,
 )
-from .plotting import plot_optimal_u_distribution, plot_simulation
+from .plotting import (
+    plot_optimal_u_distribution,
+    plot_sensitivity_heatmap,
+    plot_simulation,
+)
 from .policies import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
@@ -78,6 +82,7 @@ __all__ = [
     "get_version_label",
     "load_and_run",
     "plot_optimal_u_distribution",
+    "plot_sensitivity_heatmap",
     "plot_simulation",
     "run_monte_carlo",
     "save_scenario",
