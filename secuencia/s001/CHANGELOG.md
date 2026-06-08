@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 019] - 2026-06-08
+
+### Added
+
+- `plot_optimal_u_distribution()` implementing story F2 to render a matplotlib
+  boxplot of the per-run optimal remediation distribution in non-interactive
+  mode.
+- Regression tests proving the boxplot is exported as a non-empty PNG file.
+
 ## [1.0 build 018] - 2026-06-08
 
 ### Added

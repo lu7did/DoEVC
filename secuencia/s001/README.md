@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 018
+- Build: 019
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -58,6 +58,9 @@ documentation, and CI automation.
   from JSON and replays the deterministic simulation.
 - `doevc_s001.plot_simulation()`: story F1 helper that writes a PNG chart for
   deterministic sprint backlog and technical debt trajectories.
+- `doevc_s001.plot_optimal_u_distribution()`: story F2 helper that writes a
+  PNG boxplot for the per-run optimal remediation distribution in Monte Carlo
+  experiments.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.

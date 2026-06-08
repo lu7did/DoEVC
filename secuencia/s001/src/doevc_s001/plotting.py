@@ -1,4 +1,4 @@
-"""Visualization helpers for deterministic DoEVC simulations."""
+"""Visualization helpers for deterministic and Monte Carlo DoEVC outputs."""
 
 from __future__ import annotations
 
@@ -13,11 +13,12 @@ matplotlib.use("Agg")
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 
+from .montecarlo import MonteCarloRunResult
 from .sprint import SprintState
 
 
-class _PlotAxes(Protocol):
-    """Protocol covering the axes methods used by the plot helper."""
+class _Axes(Protocol):
+    """Protocol covering the axes methods used by the plotting helpers."""
 
     def plot(
         self,
@@ -38,6 +39,8 @@ class _PlotAxes(Protocol):
 
     def grid(self, visible: bool, *, alpha: float) -> None: ...
 
+    def boxplot(self, x: tuple[float, ...]) -> object: ...
+
 
 class _FigureSaver(Protocol):
     """Protocol covering the figure save method used by the plot helper."""
@@ -57,13 +60,34 @@ def plot_simulation(
 
     figure = Figure(figsize=(8, 4.5), tight_layout=True)
     FigureCanvasAgg(figure)
-    axes = cast(_PlotAxes, figure.subplots())
+    axes = cast(_Axes, figure.subplots())
     axes.plot(sprint_indices, backlog_values, label="B_k", linewidth=2)
     axes.plot(sprint_indices, debt_values, label="D_k", linewidth=2)
     axes.set_xlabel("Sprint")
     axes.set_ylabel("Trabajo pendiente")
     axes.set_title("Evolucion de backlog y deuda tecnica")
     axes.legend()
+    axes.grid(True, alpha=0.3)
+    cast(_FigureSaver, figure).savefig(destination_path, format="png")
+    return destination_path
+
+
+def plot_optimal_u_distribution(
+    results: tuple[MonteCarloRunResult, ...],
+    destination: str | PathLike[str],
+) -> Path:
+    """Render a PNG boxplot for the per-run optimal remediation distribution."""
+    destination_path = Path(destination)
+    remediation_values = tuple(run.average_remediation_fraction for run in results)
+    if not remediation_values:
+        raise ValueError("results must not be empty.")
+
+    figure = Figure(figsize=(6, 4.5), tight_layout=True)
+    FigureCanvasAgg(figure)
+    axes = cast(_Axes, figure.subplots())
+    axes.boxplot(remediation_values)
+    axes.set_ylabel("u_k promedio")
+    axes.set_title("Distribucion de u_k optimo")
     axes.grid(True, alpha=0.3)
     cast(_FigureSaver, figure).savefig(destination_path, format="png")
     return destination_path
