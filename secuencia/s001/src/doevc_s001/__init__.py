@@ -6,6 +6,7 @@ from .comparison import (
     PolicyComparisonTable,
     compare_policies,
 )
+from .exports import export_metrics_csv, export_sprint_states_csv
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .montecarlo import (
@@ -43,6 +44,8 @@ __all__ = [
     "DebtFirstPolicy",
     "DeterministicPolicyComparisonRow",
     "EconomicObjectiveFunction",
+    "export_metrics_csv",
+    "export_sprint_states_csv",
     "FixedRemediationPolicy",
     "GridSearchEvaluation",
     "GridSearchResult",

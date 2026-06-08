@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 015] - 2026-06-08
+
+### Added
+
+- `export_sprint_states_csv()` and `export_metrics_csv()` implementing story
+  E1 for deterministic sprint trajectories and aggregate Monte Carlo metrics.
+- Regression tests proving the generated CSV files are readable with the
+  standard `csv` module and contain the documented structure.
+
 ## [1.0 build 014] - 2026-06-08
 
 ### Added

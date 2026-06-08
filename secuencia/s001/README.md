@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 014
+- Build: 015
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -48,6 +48,10 @@ documentation, and CI automation.
   locally optimal remediation fraction from the current sprint state.
 - `doevc_s001.compare_policies()`: story D4 helper that evaluates the same
   scenario across multiple policies in deterministic or Monte Carlo mode.
+- `doevc_s001.export_sprint_states_csv()`: story E1 helper that exports one
+  CSV row per deterministic sprint state.
+- `doevc_s001.export_metrics_csv()`: story E1 helper that exports aggregate
+  Monte Carlo metric summaries to CSV.
 - `doevc_s001.search_optimal_remediation_fraction()`: evaluates a fixed `u`
   grid and returns the remediation fraction that optimizes a configurable
   objective.
