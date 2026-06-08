@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## [1.0 build 014] - 2026-06-08
+
+### Added
+
+- `compare_policies()` plus deterministic and Monte Carlo comparison row types
+  to evaluate multiple policies on the same scenario and return a comparative
+  table with C3 metrics.
+- Regression tests proving the comparison table includes all evaluated
+  policies, yields distinct outcomes, and reuses the caller objective in Monte
+  Carlo mode.
+
 ## [1.0 build 013] - 2026-06-08
 
 ### Added
