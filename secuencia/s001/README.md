@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 003
+- Build: 004
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -26,6 +26,8 @@ documentation, and CI automation.
 - `doevc_s001.SprintState.to_dict()`: serialization helper for sprint outputs.
 - `doevc_s001.simulate_sprint()`: advances the deterministic model one sprint
   with a fixed remediation fraction.
+- `doevc_s001.simulate_deterministic_sprints()`: chains up to `K` fixed-split
+  sprints into a full deterministic trajectory.
 - `doevc_s001.get_version_label()`: human-readable version label.
 
 ## Repository structure

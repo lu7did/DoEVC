@@ -8,6 +8,7 @@ Current implemented functionality includes:
 - `ModelParameters` for deterministic model configuration
 - `calculate_effective_velocity()` for debt-adjusted productivity
 - `simulate_sprint()` for one-sprint deterministic transitions
+- `simulate_deterministic_sprints()` for full fixed-split trajectories
 
 Generated API documentation is produced with:
 

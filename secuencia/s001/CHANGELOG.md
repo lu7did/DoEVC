@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 004] - 2026-08-19
+
+### Added
+
+- `simulate_deterministic_sprints()` implementing story A4 to chain `K`
+  fixed-split sprints into one deterministic trajectory.
+- Regression tests covering known trajectories, explicit initial states, and
+  early stop behavior once backlog and debt are both zero.
+
 ## [1.0 build 003] - 2026-08-19
 
 ### Added
