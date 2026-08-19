@@ -14,6 +14,7 @@ class Policy(Protocol):
 
     def decide_u(self, state: SprintState, params: ModelParameters) -> float:
         """Return the remediation fraction for the current sprint."""
+        ...
 
 
 class DebtFirstPolicy:
