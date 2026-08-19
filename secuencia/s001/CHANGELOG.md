@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0 build 021] - 2026-08-19
+
+### Changed
+
+- Sequence `s001` context aligned with the canonical repository-wide context,
+  including a local Pytest coverage target of 95%.
+
 ## [1.0 build 020] - 2026-06-08
 
 ### Added

@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-08-12T17:37:24.718-03:00 - Implementar las instrucciones contenidas en
+  `secuencia\s001\epicaA\storyA1.md`.
+
 - 2026-06-08T12:33:39.177-03:00 - implementa una historia específica a
   continuación de acuerdo a las instrucciones y contexto definidos en
   `secuencia\s001\epicaF\storyF3` al finalizar realiza las verificaciones

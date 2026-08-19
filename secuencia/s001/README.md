@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 020
+- Build: 021
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
