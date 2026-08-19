@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 005] - 2026-08-19
+
+### Added
+
+- `Policy` and `DebtFirstPolicy` implementing story B1 as a selectable
+  remediation baseline for the deterministic simulator.
+- Regression tests covering both branches of the B1 policy and its integration
+  with `simulate_deterministic_sprints()`.
+
 ## [1.0 build 004] - 2026-08-19
 
 ### Added

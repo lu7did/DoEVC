@@ -9,6 +9,7 @@ Current implemented functionality includes:
 - `calculate_effective_velocity()` for debt-adjusted productivity
 - `simulate_sprint()` for one-sprint deterministic transitions
 - `simulate_deterministic_sprints()` for full fixed-split trajectories
+- `DebtFirstPolicy` for the B1 debt-first remediation baseline
 
 Generated API documentation is produced with:
 

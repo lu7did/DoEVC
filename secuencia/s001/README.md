@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 004
+- Build: 005
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -28,6 +28,8 @@ documentation, and CI automation.
   with a fixed remediation fraction.
 - `doevc_s001.simulate_deterministic_sprints()`: chains up to `K` fixed-split
   sprints into a full deterministic trajectory.
+- `doevc_s001.Policy`: protocol for selectable remediation policies.
+- `doevc_s001.DebtFirstPolicy`: B1 baseline with `u_k = 1` while debt exists.
 - `doevc_s001.get_version_label()`: human-readable version label.
 
 ## Repository structure
