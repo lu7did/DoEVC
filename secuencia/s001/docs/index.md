@@ -7,6 +7,7 @@ Current implemented functionality includes:
 - `ProjectMetadata` for validated sequence metadata
 - `ModelParameters` for deterministic model configuration
 - `calculate_effective_velocity()` for debt-adjusted productivity
+- `simulate_sprint()` for one-sprint deterministic transitions
 
 Generated API documentation is produced with:
 
