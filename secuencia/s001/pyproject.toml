@@ -52,7 +52,7 @@ convention = "pep257"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = ["--cov=doevc_s001", "--cov-report=term-missing", "--cov-fail-under=80"]
+addopts = ["--cov=doevc_s001", "--cov-report=term-missing", "--cov-fail-under=95"]
 
 [tool.mypy]
 python_version = "3.13"

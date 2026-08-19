@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-08-19T17:09:52.206-03:00 - Implementar las instrucciones contenidas en
+  `secuencia\s001\epicaA\storyA1.md`.
+
 - 2026-08-12T17:37:24.718-03:00 - Implementar las instrucciones contenidas en
   `secuencia\s001\epicaA\storyA1.md`.
 

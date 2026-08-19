@@ -13,13 +13,13 @@ def sample_metadata() -> dict[str, str]:
         "project_name": "DoEVC",
         "sequence_id": "s001",
         "python_version": "3.13",
-        "build": "000",
+        "build": "001",
     }
 
 
 def test_version_label_matches_sequence_build() -> None:
     """Return the sequence version label."""
-    assert get_version_label() == "1.0 build 000"
+    assert get_version_label() == "1.0 build 001"
 
 
 def test_metadata_serializes_to_dictionary() -> None:
