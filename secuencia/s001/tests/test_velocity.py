@@ -43,6 +43,15 @@ def test_effective_velocity_decreases_when_debt_grows() -> None:
     assert high_debt_velocity < low_debt_velocity
 
 
+def test_effective_velocity_is_always_positive_for_valid_parameters() -> None:
+    """Keep the effective velocity strictly positive for valid inputs."""
+    parameters = sample_parameters()
+
+    result = calculate_effective_velocity(parameters, technical_debt=10_000.0)
+
+    assert result > 0.0
+
+
 def test_effective_velocity_rejects_negative_technical_debt() -> None:
     """Reject negative technical debt values."""
     with pytest.raises(ValueError, match="technical_debt must be non-negative"):
