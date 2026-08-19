@@ -9,6 +9,12 @@ def ensure_non_negative(name: str, value: float) -> None:
         raise ValueError(f"{name} must be non-negative.")
 
 
+def ensure_positive(name: str, value: float) -> None:
+    """Ensure that a numeric value is strictly positive."""
+    if value <= 0:
+        raise ValueError(f"{name} must be greater than zero.")
+
+
 @dataclass(slots=True, frozen=True)
 class ModelParameters:
     """Store the validated base parameters of the deterministic model."""
@@ -29,7 +35,7 @@ class ModelParameters:
         """Validate the parameter set after initialization."""
         ensure_non_negative("B0", self.B0)
         ensure_non_negative("D0", self.D0)
-        ensure_non_negative("V0", self.V0)
+        ensure_positive("V0", self.V0)
         ensure_non_negative("alpha", self.alpha)
         ensure_non_negative("beta", self.beta)
         ensure_non_negative("gamma", self.gamma)

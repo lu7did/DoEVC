@@ -41,7 +41,7 @@ def test_model_parameters_have_string_representation() -> None:
 
 @pytest.mark.parametrize(
     "field_name",
-    ["B0", "D0", "V0", "alpha", "beta", "gamma", "theta", "lambda_", "rho", "s"],
+    ["B0", "D0", "alpha", "beta", "gamma", "theta", "lambda_", "rho", "s"],
 )
 def test_model_parameters_reject_negative_values(field_name: str) -> None:
     """Reject negative numeric values for the model parameters."""
@@ -49,6 +49,15 @@ def test_model_parameters_reject_negative_values(field_name: str) -> None:
     data[field_name] = -0.1
 
     with pytest.raises(ValueError, match="must be non-negative"):
+        ModelParameters(**data)
+
+
+def test_model_parameters_reject_non_positive_base_velocity() -> None:
+    """Reject a base velocity that would make effective velocity non-positive."""
+    data = sample_parameters()
+    data["V0"] = 0.0
+
+    with pytest.raises(ValueError, match="greater than zero"):
         ModelParameters(**data)
 
 
@@ -64,7 +73,7 @@ def test_model_parameters_reject_non_positive_sprint_count() -> None:
 @given(
     b0=st.floats(min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False),
     d0=st.floats(min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False),
-    v0=st.floats(min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False),
+    v0=st.floats(min_value=0.1, max_value=1_000, allow_infinity=False, allow_nan=False),
     alpha=st.floats(
         min_value=0, max_value=1_000, allow_infinity=False, allow_nan=False
     ),

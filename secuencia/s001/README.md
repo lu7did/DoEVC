@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 001
+- Build: 002
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -20,6 +20,8 @@ documentation, and CI automation.
 - `doevc_s001.ModelParameters`: validated parameter structure for the model.
 - `doevc_s001.ModelParameters.to_dict()`: serialization helper for simulation
   inputs.
+- `doevc_s001.calculate_effective_velocity()`: computes `V_k` from `V0`,
+  `gamma`, and the current technical debt.
 - `doevc_s001.get_version_label()`: human-readable version label.
 
 ## Repository structure
