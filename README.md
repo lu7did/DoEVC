@@ -28,6 +28,7 @@ used for this stage.
 | `src/doEVC/` | Python package source code |
 | `tests/` | Automated test suite |
 | `docs/` | Basic project documentation |
+| `docs/DoE_VibeCoding_Sequence.xlsx` | Vibe coding work sequence |
 | `script/` | Auxiliary scripts excluded from CI validation scope |
 | `ejemplos/` | Example assets excluded from CI validation scope |
 | `.github/workflows/` | GitHub Actions automation |
