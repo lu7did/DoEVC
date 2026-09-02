@@ -35,3 +35,15 @@ class BacklogFirstPolicy:
         if state.backlog > 0:
             return 0.0
         return 1.0 if state.technical_debt > 0 else 0.0
+
+
+class ProportionalPolicy:
+    """Allocate remediation according to the relative technical debt."""
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Choose the remediation fraction for the current sprint."""
+        del params
+        total_work = state.backlog + state.technical_debt
+        if total_work == 0:
+            return 0.0
+        return state.technical_debt / total_work

@@ -2,7 +2,7 @@
 
 from .metadata import ProjectMetadata
 from .models import ModelParameters
-from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy
+from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -16,6 +16,7 @@ __all__ = [
     "Policy",
     "PYTHON_VERSION",
     "ProjectMetadata",
+    "ProportionalPolicy",
     "SEQUENCE_ID",
     "SprintState",
     "VERSION",

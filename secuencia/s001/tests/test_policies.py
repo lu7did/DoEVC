@@ -4,6 +4,7 @@ from doevc_s001 import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
     ModelParameters,
+    ProportionalPolicy,
     SprintState,
     simulate_deterministic_sprints,
 )
@@ -92,6 +93,58 @@ def test_backlog_first_policy_returns_full_remediation_after_backlog_is_gone() -
     )
 
 
+def test_proportional_policy_returns_relative_technical_debt() -> None:
+    """Return the technical-debt share of the total outstanding work."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            sample_state(backlog=6.0, technical_debt=2.0),
+            sample_parameters(),
+        )
+        == 0.25
+    )
+
+
+def test_proportional_policy_returns_zero_when_debt_is_gone() -> None:
+    """Return no remediation when there is no technical debt."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            sample_state(backlog=6.0, technical_debt=0.0),
+            sample_parameters(),
+        )
+        == 0.0
+    )
+
+
+def test_proportional_policy_returns_full_remediation_when_only_debt_remains() -> None:
+    """Return full remediation when only technical debt remains."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            sample_state(backlog=0.0, technical_debt=2.0),
+            sample_parameters(),
+        )
+        == 1.0
+    )
+
+
+def test_proportional_policy_handles_no_remaining_work() -> None:
+    """Avoid division by zero when neither backlog nor debt remains."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            sample_state(backlog=0.0, technical_debt=0.0),
+            sample_parameters(),
+        )
+        == 0.0
+    )
+
+
 def test_simulate_deterministic_sprints_accepts_debt_first_policy() -> None:
     """Integrate the B1 policy with the deterministic multi-sprint simulator."""
     trajectory = simulate_deterministic_sprints(
@@ -118,3 +171,15 @@ def test_simulate_deterministic_sprints_accepts_backlog_first_policy() -> None:
     assert trajectory[1].remediation_fraction == 0.0
     assert trajectory[2].remediation_fraction == 1.0
     assert trajectory[2].next_technical_debt == 0.0
+
+
+def test_simulate_deterministic_sprints_accepts_proportional_policy() -> None:
+    """Integrate the B3 policy with the deterministic multi-sprint simulator."""
+    trajectory = simulate_deterministic_sprints(
+        sample_parameters(k=3),
+        ProportionalPolicy(),
+    )
+
+    assert len(trajectory) == 3
+    assert trajectory[0].remediation_fraction == 1 / 3
+    assert all(0.0 <= state.remediation_fraction <= 1.0 for state in trajectory)

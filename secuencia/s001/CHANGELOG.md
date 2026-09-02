@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 007] - 2026-09-02
+
+### Added
+
+- `ProportionalPolicy` implementing story B3 with
+  `u_k = D_k / (B_k + D_k)` and a zero-work guard.
+- Regression tests for proportional decisions, edge cases, and simulator
+  integration.
+
 ## [1.0 build 006] - 2026-09-02
 
 ### Added
