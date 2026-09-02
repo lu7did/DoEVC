@@ -10,6 +10,7 @@ Current implemented functionality includes:
 - `simulate_sprint()` for one-sprint deterministic transitions
 - `simulate_deterministic_sprints()` for full fixed-split trajectories
 - `DebtFirstPolicy` for the B1 debt-first remediation baseline
+- `BacklogFirstPolicy` for the B2 backlog-first remediation baseline
 
 Generated API documentation is produced with:
 

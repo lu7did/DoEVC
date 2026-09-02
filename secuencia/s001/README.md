@@ -7,7 +7,7 @@ documentation, and CI automation.
 ## Status
 
 - Version: 1.0
-- Build: 005
+- Build: 006
 - Python: 3.13
 - License: Creative Commons CC0 1.0
 
@@ -30,6 +30,8 @@ documentation, and CI automation.
   sprints into a full deterministic trajectory.
 - `doevc_s001.Policy`: protocol for selectable remediation policies.
 - `doevc_s001.DebtFirstPolicy`: B1 baseline with `u_k = 1` while debt exists.
+- `doevc_s001.BacklogFirstPolicy`: B2 baseline with `u_k = 0` while backlog
+  exists.
 - `doevc_s001.get_version_label()`: human-readable version label.
 
 ## Repository structure

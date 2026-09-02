@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.0 build 006] - 2026-09-02
+
+### Added
+
+- `BacklogFirstPolicy` implementing story B2 as a selectable remediation
+  policy that completes the functional backlog before addressing debt.
+- Regression tests for both B2 decision branches and its integration with
+  `simulate_deterministic_sprints()`.
+
 ## [1.0 build 005] - 2026-08-19
 
 ### Added

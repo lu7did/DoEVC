@@ -24,3 +24,14 @@ class DebtFirstPolicy:
         """Choose the remediation fraction for the current sprint."""
         del params
         return 1.0 if state.technical_debt > 0 else 0.0
+
+
+class BacklogFirstPolicy:
+    """Deliver backlog work before applying full technical-debt remediation."""
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Choose the remediation fraction for the current sprint."""
+        del params
+        if state.backlog > 0:
+            return 0.0
+        return 1.0 if state.technical_debt > 0 else 0.0
