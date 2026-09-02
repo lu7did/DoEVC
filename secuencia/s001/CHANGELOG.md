@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [1.0 build 008] - 2026-09-02
+
+### Changed
+
+- B1, B2, and B3 policies now explicitly implement the shared `Policy`
+  protocol, making their common simulator contract clear.
+
+### Added
+
+- Parameterized integration coverage verifying that each policy is
+  interchangeable in `simulate_deterministic_sprints()`.
+
 ## [1.0 build 007] - 2026-09-02
 
 ### Added

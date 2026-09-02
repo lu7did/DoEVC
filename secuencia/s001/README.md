@@ -29,6 +29,8 @@ documentation, and CI automation.
 - `doevc_s001.simulate_deterministic_sprints()`: chains up to `K` fixed-split
   sprints into a full deterministic trajectory.
 - `doevc_s001.Policy`: protocol for selectable remediation policies.
+- B1, B2, and B3 policies explicitly implement `doevc_s001.Policy` and are
+  interchangeable in the deterministic simulator.
 - `doevc_s001.DebtFirstPolicy`: B1 baseline with `u_k = 1` while debt exists.
 - `doevc_s001.BacklogFirstPolicy`: B2 baseline with `u_k = 0` while backlog
   exists.

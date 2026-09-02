@@ -1,9 +1,12 @@
 """Tests for the debt-first baseline policy in DoEVC s001."""
 
+import pytest
+
 from doevc_s001 import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
     ModelParameters,
+    Policy,
     ProportionalPolicy,
     SprintState,
     simulate_deterministic_sprints,
@@ -183,3 +186,17 @@ def test_simulate_deterministic_sprints_accepts_proportional_policy() -> None:
     assert len(trajectory) == 3
     assert trajectory[0].remediation_fraction == 1 / 3
     assert all(0.0 <= state.remediation_fraction <= 1.0 for state in trajectory)
+
+
+@pytest.mark.parametrize(
+    "policy",
+    [DebtFirstPolicy(), BacklogFirstPolicy(), ProportionalPolicy()],
+)
+def test_each_policy_is_interchangeable_in_the_deterministic_simulator(
+    policy: Policy,
+) -> None:
+    """Accept every B1-B3 policy through the common Policy interface."""
+    trajectory = simulate_deterministic_sprints(sample_parameters(k=1), policy)
+
+    assert isinstance(policy, Policy)
+    assert len(trajectory) == 1

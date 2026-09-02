@@ -9,6 +9,7 @@ Current implemented functionality includes:
 - `calculate_effective_velocity()` for debt-adjusted productivity
 - `simulate_sprint()` for one-sprint deterministic transitions
 - `simulate_deterministic_sprints()` for full fixed-split trajectories
+- `Policy` as the common interface for interchangeable remediation policies
 - `DebtFirstPolicy` for the B1 debt-first remediation baseline
 - `BacklogFirstPolicy` for the B2 backlog-first remediation baseline
 - `ProportionalPolicy` for the B3 proportional remediation heuristic

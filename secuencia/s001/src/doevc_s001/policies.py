@@ -17,7 +17,7 @@ class Policy(Protocol):
         ...
 
 
-class DebtFirstPolicy:
+class DebtFirstPolicy(Policy):
     """Use full remediation while any technical debt remains."""
 
     def decide_u(self, state: SprintState, params: ModelParameters) -> float:
@@ -26,7 +26,7 @@ class DebtFirstPolicy:
         return 1.0 if state.technical_debt > 0 else 0.0
 
 
-class BacklogFirstPolicy:
+class BacklogFirstPolicy(Policy):
     """Deliver backlog work before applying full technical-debt remediation."""
 
     def decide_u(self, state: SprintState, params: ModelParameters) -> float:
@@ -37,7 +37,7 @@ class BacklogFirstPolicy:
         return 1.0 if state.technical_debt > 0 else 0.0
 
 
-class ProportionalPolicy:
+class ProportionalPolicy(Policy):
     """Allocate remediation according to the relative technical debt."""
 
     def decide_u(self, state: SprintState, params: ModelParameters) -> float:
