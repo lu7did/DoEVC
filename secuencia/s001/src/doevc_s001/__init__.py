@@ -3,6 +3,7 @@
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
+from .sampling import sample_model_parameters
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -22,6 +23,7 @@ __all__ = [
     "VERSION",
     "calculate_effective_velocity",
     "get_version_label",
+    "sample_model_parameters",
     "simulate_deterministic_sprints",
     "simulate_sprint",
 ]
