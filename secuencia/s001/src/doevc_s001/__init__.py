@@ -1,5 +1,10 @@
 """Top-level package for the DoEVC s001 sequence."""
 
+from .comparison import (
+    MonteCarloComparisonConfig,
+    PolicyComparison,
+    compare_policies,
+)
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .monte_carlo import (
@@ -10,6 +15,7 @@ from .monte_carlo import (
     MonteCarloSimulation,
     MonteCarloSummary,
     aggregate_metrics,
+    calculate_run_metrics,
     run_monte_carlo,
 )
 from .optimization import (
@@ -29,6 +35,7 @@ from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_la
 __all__ = [
     "BUILD",
     "BacklogFirstPolicy",
+    "MonteCarloComparisonConfig",
     "DEFAULT_MODEL_PARAMETERS",
     "DebtFirstPolicy",
     "GridSearchEvaluation",
@@ -39,6 +46,7 @@ __all__ = [
     "MonteCarloResult",
     "MonteCarloSimulation",
     "MonteCarloSummary",
+    "PolicyComparison",
     "ObjectiveFunction",
     "OptimalLocalPolicy",
     "Policy",
@@ -50,6 +58,8 @@ __all__ = [
     "VERSION",
     "aggregate_metrics",
     "calculate_effective_velocity",
+    "calculate_run_metrics",
+    "compare_policies",
     "get_version_label",
     "grid_search_remediation",
     "run_monte_carlo",

@@ -118,7 +118,7 @@ def _run_sampled_simulation(
     return MonteCarloRun(
         parameters=parameters,
         trajectory=trajectory,
-        metrics=_calculate_run_metrics(trajectory),
+        metrics=calculate_run_metrics(trajectory),
     )
 
 
@@ -141,7 +141,7 @@ def aggregate_metrics(
     }
 
 
-def _calculate_run_metrics(
+def calculate_run_metrics(
     trajectory: tuple[SprintState, ...],
 ) -> MonteCarloResult:
     """Calculate the required metrics for one simulation trajectory."""
