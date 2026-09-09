@@ -5,6 +5,7 @@ from .comparison import (
     PolicyComparison,
     compare_policies,
 )
+from .export import export_metrics_csv, export_sprint_states_csv
 from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .monte_carlo import (
@@ -60,6 +61,8 @@ __all__ = [
     "calculate_effective_velocity",
     "calculate_run_metrics",
     "compare_policies",
+    "export_metrics_csv",
+    "export_sprint_states_csv",
     "get_version_label",
     "grid_search_remediation",
     "run_monte_carlo",
