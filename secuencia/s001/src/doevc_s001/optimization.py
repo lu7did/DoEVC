@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from math import isclose
 
 from .models import ModelParameters
+from .policies import Policy
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState
 
@@ -51,17 +52,45 @@ class GridSearchResult:
     evaluations: tuple[GridSearchEvaluation, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class OptimalLocalPolicy(Policy):
+    """Select the locally optimal remediation fraction at each sprint."""
+
+    objective: Callable[[tuple[SprintState, ...]], float]
+    step: float = 0.01
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Optimize remediation using the current sprint state as the baseline."""
+        result = grid_search_remediation(
+            params,
+            self.objective,
+            step=self.step,
+            maximize=True,
+            backlog=state.backlog,
+            technical_debt=state.technical_debt,
+        )
+        return result.best_remediation_fraction
+
+
 def grid_search_remediation(
     parameters: ModelParameters,
     objective: Callable[[tuple[SprintState, ...]], float],
     *,
     step: float = 0.01,
     maximize: bool = False,
+    backlog: float | None = None,
+    technical_debt: float | None = None,
 ) -> GridSearchResult:
     """Optimize a fixed remediation fraction over the inclusive unit interval."""
     grid = _build_remediation_grid(step)
     evaluations = tuple(
-        _evaluate_remediation_fraction(parameters, objective, remediation_fraction)
+        _evaluate_remediation_fraction(
+            parameters,
+            objective,
+            remediation_fraction,
+            backlog=backlog,
+            technical_debt=technical_debt,
+        )
         for remediation_fraction in grid
     )
     best_evaluation = (
@@ -92,9 +121,17 @@ def _evaluate_remediation_fraction(
     parameters: ModelParameters,
     objective: Callable[[tuple[SprintState, ...]], float],
     remediation_fraction: float,
+    *,
+    backlog: float | None,
+    technical_debt: float | None,
 ) -> GridSearchEvaluation:
     """Simulate one fixed fraction and evaluate its resulting trajectory."""
-    trajectory = simulate_deterministic_sprints(parameters, remediation_fraction)
+    trajectory = simulate_deterministic_sprints(
+        parameters,
+        remediation_fraction,
+        backlog=backlog,
+        technical_debt=technical_debt,
+    )
     return GridSearchEvaluation(
         remediation_fraction=remediation_fraction,
         objective_value=objective(trajectory),

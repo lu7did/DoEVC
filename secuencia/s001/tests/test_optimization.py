@@ -2,7 +2,15 @@
 
 import pytest
 
-from doevc_s001 import ModelParameters, ObjectiveFunction, grid_search_remediation
+from doevc_s001 import (
+    DebtFirstPolicy,
+    ModelParameters,
+    ObjectiveFunction,
+    OptimalLocalPolicy,
+    Policy,
+    grid_search_remediation,
+    simulate_deterministic_sprints,
+)
 
 
 def test_grid_search_finds_the_fraction_that_minimizes_an_objective() -> None:
@@ -77,6 +85,25 @@ def test_economic_objective_weights_produce_distinct_optima() -> None:
 
     assert feature_focused.best_remediation_fraction == 0.0
     assert debt_focused.best_remediation_fraction == 1.0
+
+
+def test_optimal_local_policy_outperforms_debt_first_for_feature_value() -> None:
+    """Choose local feature delivery when it has greater economic value."""
+    parameters = _parameters_with_backlog_and_debt()
+    objective = ObjectiveFunction(
+        delivered_functionality_weight=2.0,
+        remaining_debt_penalty=1.0,
+    )
+    policy = OptimalLocalPolicy(objective, step=1.0)
+    optimal_trajectory = simulate_deterministic_sprints(parameters, policy)
+    debt_first_trajectory = simulate_deterministic_sprints(
+        parameters,
+        DebtFirstPolicy(),
+    )
+
+    assert isinstance(policy, Policy)
+    assert optimal_trajectory[0].remediation_fraction == 0.0
+    assert objective(optimal_trajectory) > objective(debt_first_trajectory)
 
 
 def _parameters_with_only_backlog() -> ModelParameters:

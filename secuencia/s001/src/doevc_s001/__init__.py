@@ -16,6 +16,7 @@ from .optimization import (
     GridSearchEvaluation,
     GridSearchResult,
     ObjectiveFunction,
+    OptimalLocalPolicy,
     grid_search_remediation,
 )
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
@@ -39,6 +40,7 @@ __all__ = [
     "MonteCarloSimulation",
     "MonteCarloSummary",
     "ObjectiveFunction",
+    "OptimalLocalPolicy",
     "Policy",
     "PYTHON_VERSION",
     "ProjectMetadata",
