@@ -1,7 +1,9 @@
 """Monte Carlo simulation helpers for uncertain model parameters."""
 
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from random import Random
+from statistics import fmean, pstdev
 
 from .models import ModelParameters
 from .policies import Policy
@@ -24,11 +26,32 @@ DEFAULT_MODEL_PARAMETERS = ModelParameters(
 
 
 @dataclass(frozen=True, slots=True)
+class MonteCarloResult:
+    """Store output metrics calculated from one Monte Carlo trajectory."""
+
+    sprint_count: int
+    final_technical_debt: float
+    mean_remediation_fraction: float
+    final_backlog: float
+
+
+@dataclass(frozen=True, slots=True)
 class MonteCarloRun:
     """Store the sampled parameters and trajectory of one Monte Carlo run."""
 
     parameters: ModelParameters
     trajectory: tuple[SprintState, ...]
+    metrics: MonteCarloResult
+
+
+@dataclass(frozen=True, slots=True)
+class MetricSummary:
+    """Store descriptive statistics for one metric across Monte Carlo runs."""
+
+    mean: float
+    standard_deviation: float
+    minimum: float
+    maximum: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -46,6 +69,7 @@ class MonteCarloSimulation:
 
     runs: tuple[MonteCarloRun, ...]
     summary: MonteCarloSummary
+    metrics: dict[str, MetricSummary]
 
 
 def run_monte_carlo(
@@ -73,11 +97,12 @@ def run_monte_carlo(
         runs=runs,
         summary=MonteCarloSummary(
             run_count=n_runs,
-            final_backlogs=tuple(run.trajectory[-1].next_backlog for run in runs),
+            final_backlogs=tuple(run.metrics.final_backlog for run in runs),
             final_technical_debts=tuple(
-                run.trajectory[-1].next_technical_debt for run in runs
+                run.metrics.final_technical_debt for run in runs
             ),
         ),
+        metrics=aggregate_metrics(tuple(run.metrics for run in runs)),
     )
 
 
@@ -89,7 +114,62 @@ def _run_sampled_simulation(
 ) -> MonteCarloRun:
     """Sample parameters and execute one deterministic trajectory."""
     parameters = sample_model_parameters(base_parameters, seed=sample_seed)
+    trajectory = simulate_deterministic_sprints(parameters, policy)
     return MonteCarloRun(
         parameters=parameters,
-        trajectory=simulate_deterministic_sprints(parameters, policy),
+        trajectory=trajectory,
+        metrics=_calculate_run_metrics(trajectory),
+    )
+
+
+def aggregate_metrics(
+    results: Sequence[MonteCarloResult],
+) -> dict[str, MetricSummary]:
+    """Calculate population statistics for every metric across all runs."""
+    if not results:
+        raise ValueError("results must contain at least one Monte Carlo result.")
+
+    return {
+        "sprint_count": _summarize(result.sprint_count for result in results),
+        "final_technical_debt": _summarize(
+            result.final_technical_debt for result in results
+        ),
+        "mean_remediation_fraction": _summarize(
+            result.mean_remediation_fraction for result in results
+        ),
+        "final_backlog": _summarize(result.final_backlog for result in results),
+    }
+
+
+def _calculate_run_metrics(
+    trajectory: tuple[SprintState, ...],
+) -> MonteCarloResult:
+    """Calculate the required metrics for one simulation trajectory."""
+    if not trajectory:
+        return MonteCarloResult(
+            sprint_count=0,
+            final_technical_debt=0.0,
+            mean_remediation_fraction=0.0,
+            final_backlog=0.0,
+        )
+
+    final_state = trajectory[-1]
+    return MonteCarloResult(
+        sprint_count=len(trajectory),
+        final_technical_debt=final_state.next_technical_debt,
+        mean_remediation_fraction=fmean(
+            state.remediation_fraction for state in trajectory
+        ),
+        final_backlog=final_state.next_backlog,
+    )
+
+
+def _summarize(values: Iterable[float]) -> MetricSummary:
+    """Calculate population descriptive statistics for a non-empty metric."""
+    metric_values = tuple(values)
+    return MetricSummary(
+        mean=fmean(metric_values),
+        standard_deviation=pstdev(metric_values),
+        minimum=min(metric_values),
+        maximum=max(metric_values),
     )

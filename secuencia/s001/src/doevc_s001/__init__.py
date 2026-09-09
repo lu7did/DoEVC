@@ -4,9 +4,12 @@ from .metadata import ProjectMetadata
 from .models import ModelParameters
 from .monte_carlo import (
     DEFAULT_MODEL_PARAMETERS,
+    MetricSummary,
+    MonteCarloResult,
     MonteCarloRun,
     MonteCarloSimulation,
     MonteCarloSummary,
+    aggregate_metrics,
     run_monte_carlo,
 )
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
@@ -21,8 +24,10 @@ __all__ = [
     "BacklogFirstPolicy",
     "DEFAULT_MODEL_PARAMETERS",
     "DebtFirstPolicy",
+    "MetricSummary",
     "ModelParameters",
     "MonteCarloRun",
+    "MonteCarloResult",
     "MonteCarloSimulation",
     "MonteCarloSummary",
     "Policy",
@@ -32,6 +37,7 @@ __all__ = [
     "SEQUENCE_ID",
     "SprintState",
     "VERSION",
+    "aggregate_metrics",
     "calculate_effective_velocity",
     "get_version_label",
     "run_monte_carlo",
