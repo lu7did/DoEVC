@@ -8,7 +8,29 @@ from .models import ModelParameters
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState
 
-ObjectiveFunction = Callable[[tuple[SprintState, ...]], float]
+
+@dataclass(frozen=True, slots=True)
+class ObjectiveFunction:
+    """Evaluate trajectories using configurable economic value weights."""
+
+    delivered_functionality_weight: float = 1.0
+    remaining_debt_penalty: float = 1.0
+    sprint_penalty: float = 0.0
+
+    def __call__(self, trajectory: tuple[SprintState, ...]) -> float:
+        """Return the weighted economic value of a simulation trajectory."""
+        if not trajectory:
+            return 0.0
+
+        delivered_functionality = sum(
+            state.backlog - state.next_backlog for state in trajectory
+        )
+        final_technical_debt = trajectory[-1].next_technical_debt
+        return (
+            self.delivered_functionality_weight * delivered_functionality
+            - self.remaining_debt_penalty * final_technical_debt
+            - self.sprint_penalty * len(trajectory)
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,7 +53,7 @@ class GridSearchResult:
 
 def grid_search_remediation(
     parameters: ModelParameters,
-    objective: ObjectiveFunction,
+    objective: Callable[[tuple[SprintState, ...]], float],
     *,
     step: float = 0.01,
     maximize: bool = False,
@@ -68,7 +90,7 @@ def _build_remediation_grid(step: float) -> tuple[float, ...]:
 
 def _evaluate_remediation_fraction(
     parameters: ModelParameters,
-    objective: ObjectiveFunction,
+    objective: Callable[[tuple[SprintState, ...]], float],
     remediation_fraction: float,
 ) -> GridSearchEvaluation:
     """Simulate one fixed fraction and evaluate its resulting trajectory."""

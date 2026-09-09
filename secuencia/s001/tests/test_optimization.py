@@ -2,7 +2,7 @@
 
 import pytest
 
-from doevc_s001 import ModelParameters, grid_search_remediation
+from doevc_s001 import ModelParameters, ObjectiveFunction, grid_search_remediation
 
 
 def test_grid_search_finds_the_fraction_that_minimizes_an_objective() -> None:
@@ -53,11 +53,54 @@ def test_grid_search_rejects_steps_that_do_not_divide_the_unit_interval() -> Non
         )
 
 
+def test_economic_objective_weights_produce_distinct_optima() -> None:
+    """Select different fractions when feature and debt weights change."""
+    parameters = _parameters_with_backlog_and_debt()
+    feature_focused = grid_search_remediation(
+        parameters,
+        ObjectiveFunction(
+            delivered_functionality_weight=2.0,
+            remaining_debt_penalty=1.0,
+        ),
+        step=1.0,
+        maximize=True,
+    )
+    debt_focused = grid_search_remediation(
+        parameters,
+        ObjectiveFunction(
+            delivered_functionality_weight=1.0,
+            remaining_debt_penalty=2.0,
+        ),
+        step=1.0,
+        maximize=True,
+    )
+
+    assert feature_focused.best_remediation_fraction == 0.0
+    assert debt_focused.best_remediation_fraction == 1.0
+
+
 def _parameters_with_only_backlog() -> ModelParameters:
     """Return a one-sprint model with a known fixed-fraction outcome."""
     return ModelParameters(
         B0=10.0,
         D0=0.0,
+        V0=10.0,
+        alpha=0.0,
+        beta=0.0,
+        gamma=0.0,
+        theta=0.0,
+        lambda_=0.0,
+        rho=0.0,
+        K=1,
+        s=1.0,
+    )
+
+
+def _parameters_with_backlog_and_debt() -> ModelParameters:
+    """Return a one-sprint model where delivery and debt compete."""
+    return ModelParameters(
+        B0=10.0,
+        D0=10.0,
         V0=10.0,
         alpha=0.0,
         beta=0.0,
