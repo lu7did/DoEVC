@@ -33,7 +33,7 @@ from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_label
-from .visualization import plot_simulation
+from .visualization import plot_optimal_u_distribution, plot_simulation
 
 __all__ = [
     "BUILD",
@@ -69,6 +69,7 @@ __all__ = [
     "grid_search_remediation",
     "load_and_run",
     "plot_simulation",
+    "plot_optimal_u_distribution",
     "run_monte_carlo",
     "sample_model_parameters",
     "save_scenario",
