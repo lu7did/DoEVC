@@ -2,6 +2,13 @@
 
 from .metadata import ProjectMetadata
 from .models import ModelParameters
+from .monte_carlo import (
+    DEFAULT_MODEL_PARAMETERS,
+    MonteCarloRun,
+    MonteCarloSimulation,
+    MonteCarloSummary,
+    run_monte_carlo,
+)
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .sampling import sample_model_parameters
 from .simulation import simulate_deterministic_sprints
@@ -12,8 +19,12 @@ from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_la
 __all__ = [
     "BUILD",
     "BacklogFirstPolicy",
+    "DEFAULT_MODEL_PARAMETERS",
     "DebtFirstPolicy",
     "ModelParameters",
+    "MonteCarloRun",
+    "MonteCarloSimulation",
+    "MonteCarloSummary",
     "Policy",
     "PYTHON_VERSION",
     "ProjectMetadata",
@@ -23,6 +34,7 @@ __all__ = [
     "VERSION",
     "calculate_effective_velocity",
     "get_version_label",
+    "run_monte_carlo",
     "sample_model_parameters",
     "simulate_deterministic_sprints",
     "simulate_sprint",
