@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 003
+- Build: 004
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -21,6 +21,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   un sprint con una fracción de remediación fija.
 - `simulate_deterministic_sprints()`: encadena hasta `K` sprints con una
   fracción fija y finaliza anticipadamente cuando no queda trabajo.
+- `DebtFirstPolicy`: política baseline que remedia toda la deuda antes de
+  entregar funcionalidad.
 
 ## Instalación y validación
 

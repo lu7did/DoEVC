@@ -1,6 +1,7 @@
 """Public API for the DoEVC second-cycle model."""
 
 from .models import ModelParameters
+from .policies import DebtFirstPolicy
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -8,6 +9,7 @@ from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_la
 
 __all__ = [
     "BUILD",
+    "DebtFirstPolicy",
     "ModelParameters",
     "PYTHON_VERSION",
     "SEQUENCE_ID",
