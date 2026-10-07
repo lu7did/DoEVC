@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 000
+- Build: 003
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -17,6 +17,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   reproducibles.
 - `calculate_effective_velocity()`: calcula la velocidad efectiva afectada por
   deuda técnica mediante `V_k = V0 / (1 + gamma * D_k)`.
+- `SprintState` y `simulate_sprint()`: ejecutan la transición determinista de
+  un sprint con una fracción de remediación fija.
 
 ## Instalación y validación
 

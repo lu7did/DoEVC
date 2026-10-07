@@ -1,6 +1,7 @@
 """Public API for the DoEVC second-cycle model."""
 
 from .models import ModelParameters
+from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_label
 
@@ -9,7 +10,9 @@ __all__ = [
     "ModelParameters",
     "PYTHON_VERSION",
     "SEQUENCE_ID",
+    "SprintState",
     "VERSION",
     "calculate_effective_velocity",
     "get_version_label",
+    "simulate_sprint",
 ]

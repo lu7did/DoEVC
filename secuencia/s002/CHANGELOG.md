@@ -1,13 +1,20 @@
 # Changelog
 
-## [Unreleased]
+## [1.0 build 003] - 2026-10-07
+
+### Added
+
+- `SprintState` y `simulate_sprint()` para modelar transiciones deterministas
+  con una fracción fija de remediación.
+
+## [1.0 build 002] - 2026-10-07
 
 ### Added
 
 - `calculate_effective_velocity()` para modelar la pérdida de productividad
   asociada a la deuda técnica.
 
-## [1.0 build 000] - 2026-10-07
+## [1.0 build 001] - 2026-10-07
 
 ### Added
 
