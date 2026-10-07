@@ -33,6 +33,7 @@ def test_model_parameters_are_serializable_and_printable() -> None:
         "lambda_": 0.8,
         "rho": 0.4,
         "K": 12,
+        "s": 1.0,
     }
     assert "ModelParameters" in str(parameters)
 

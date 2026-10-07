@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 008] - 2026-10-07
+
+### Added
+
+- Muestreo uniforme reproducible de los parámetros inciertos del modelo.
+
 ## [1.0 build 007] - 2026-10-07
 
 ### Changed

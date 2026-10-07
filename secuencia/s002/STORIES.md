@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-07T15:44:01.380-03:00 - Desarrollar la épica C, historia C1 de
+  `secuencia/s002`: muestrear parámetros inciertos uniformes con semilla.
+
 - 2026-10-07T15:40:36.252-03:00 - Desarrollar la épica B, historia B4 de
   `secuencia/s002`: definir el protocolo común de políticas intercambiables.
 

@@ -2,6 +2,7 @@
 
 from .models import ModelParameters
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
+from .sampling import sample_model_parameters
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -22,4 +23,5 @@ __all__ = [
     "get_version_label",
     "simulate_deterministic_sprints",
     "simulate_sprint",
+    "sample_model_parameters",
 ]

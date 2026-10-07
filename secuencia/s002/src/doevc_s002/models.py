@@ -26,6 +26,7 @@ class ModelParameters:
     lambda_: float
     rho: float
     K: int
+    s: float = 1.0
 
     def __post_init__(self) -> None:
         """Validate every parameter after initialization."""
@@ -39,6 +40,7 @@ class ModelParameters:
             "theta",
             "lambda_",
             "rho",
+            "s",
         ):
             _validate_non_negative(name, getattr(self, name))
 
