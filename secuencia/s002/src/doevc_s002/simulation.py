@@ -3,7 +3,7 @@
 from numbers import Real
 
 from .models import ModelParameters
-from .policies import BacklogFirstPolicy, DebtFirstPolicy
+from .policies import BacklogFirstPolicy, DebtFirstPolicy, ProportionalPolicy
 from .sprint import SprintState, simulate_sprint
 
 
@@ -11,7 +11,7 @@ def simulate_deterministic_sprints(
     parameters: ModelParameters,
     remediation_fraction: Real | None = None,
     *,
-    policy: DebtFirstPolicy | BacklogFirstPolicy | None = None,
+    policy: DebtFirstPolicy | BacklogFirstPolicy | ProportionalPolicy | None = None,
 ) -> list[SprintState]:
     """Simulate up to K fixed-split or policy-driven sprints."""
     if policy is None:

@@ -6,6 +6,7 @@ from doevc_s002 import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
     ModelParameters,
+    ProportionalPolicy,
     simulate_deterministic_sprints,
 )
 
@@ -48,3 +49,26 @@ def test_backlog_first_policy_integrates_with_deterministic_simulation() -> None
     assert [state.remediation_fraction for state in states] == [0.0, 1.0]
     assert states[0].next_backlog == 0
     assert states[-1].next_debt == 0
+
+
+@pytest.mark.parametrize(
+    ("backlog", "debt", "expected"),
+    [(10, 0, 0.0), (0, 10, 1.0), (0, 0, 0.0), (3, 1, 0.25)],
+)
+def test_proportional_policy_handles_general_and_edge_cases(
+    backlog: float, debt: float, expected: float
+) -> None:
+    """Choose the debt share of remaining work without division by zero."""
+    result = ProportionalPolicy().decide_u(backlog, debt)
+
+    assert result == expected
+    assert 0 <= result <= 1
+
+
+def test_proportional_policy_integrates_with_deterministic_simulation() -> None:
+    """Use the proportional fraction in every deterministic sprint."""
+    parameters = ModelParameters(6, 2, 4, 0, 0, 0, 0, 0, 0, 1)
+
+    states = simulate_deterministic_sprints(parameters, policy=ProportionalPolicy())
+
+    assert states[0].remediation_fraction == pytest.approx(0.25)

@@ -23,6 +23,17 @@ class BacklogFirstPolicy:
         return 0.0 if backlog > 0 else 1.0 if debt > 0 else 0.0
 
 
+class ProportionalPolicy:
+    """Allocate capacity in proportion to the current technical debt."""
+
+    def decide_u(self, backlog: Real, debt: Real) -> float:
+        """Return debt as a fraction of all remaining work."""
+        _validate_work("backlog", backlog)
+        _validate_work("debt", debt)
+        total_work = backlog + debt
+        return 0.0 if total_work == 0 else float(debt / total_work)
+
+
 def _validate_work(name: str, value: Real) -> None:
     """Validate a non-negative backlog or debt quantity."""
     if isinstance(value, bool) or not isinstance(value, Real):

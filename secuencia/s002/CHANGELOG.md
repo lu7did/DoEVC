@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 006] - 2026-10-07
+
+### Added
+
+- `ProportionalPolicy`, seleccionable desde el simulador determinista.
+
 ## [1.0 build 005] - 2026-10-07
 
 ### Added
