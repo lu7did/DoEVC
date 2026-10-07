@@ -15,6 +15,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   `K`.
 - `ModelParameters.to_dict()`: serializa los parámetros para experimentos
   reproducibles.
+- `calculate_effective_velocity()`: calcula la velocidad efectiva afectada por
+  deuda técnica mediante `V_k = V0 / (1 + gamma * D_k)`.
 
 ## Instalación y validación
 
