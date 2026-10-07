@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-07T15:29:35.129-03:00 - Desarrollar la épica B, historia B2 de
+  `secuencia/s002`: incorporar una política de backlog primero.
+
 - 2026-10-07T15:21:39.175-03:00 - Desarrollar la épica B, historia B1 de
   `secuencia/s002`: incorporar una política baseline de deuda primero.
 
