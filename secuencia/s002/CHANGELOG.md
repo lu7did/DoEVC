@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 009] - 2026-10-07
+
+### Added
+
+- Ejecución Monte Carlo reproducible con resultados individuales y agregados.
+
 ## [1.0 build 008] - 2026-10-07
 
 ### Added

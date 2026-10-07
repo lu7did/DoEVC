@@ -1,6 +1,7 @@
 """Public API for the DoEVC second-cycle model."""
 
 from .models import ModelParameters
+from .monte_carlo import MonteCarloResult, MonteCarloRun, run_monte_carlo
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .sampling import sample_model_parameters
 from .simulation import simulate_deterministic_sprints
@@ -13,6 +14,8 @@ __all__ = [
     "BacklogFirstPolicy",
     "DebtFirstPolicy",
     "ModelParameters",
+    "MonteCarloResult",
+    "MonteCarloRun",
     "PYTHON_VERSION",
     "Policy",
     "ProportionalPolicy",
@@ -24,4 +27,5 @@ __all__ = [
     "simulate_deterministic_sprints",
     "simulate_sprint",
     "sample_model_parameters",
+    "run_monte_carlo",
 ]

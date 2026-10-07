@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-07T15:46:13.676-03:00 - Desarrollar la épica C, historia C2 de
+  `secuencia/s002`: ejecutar simulaciones Monte Carlo reproducibles.
+
 - 2026-10-07T15:44:01.380-03:00 - Desarrollar la épica C, historia C1 de
   `secuencia/s002`: muestrear parámetros inciertos uniformes con semilla.
 
