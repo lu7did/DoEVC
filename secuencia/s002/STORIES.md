@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-07T15:40:36.252-03:00 - Desarrollar la épica B, historia B4 de
+  `secuencia/s002`: definir el protocolo común de políticas intercambiables.
+
 - 2026-10-07T15:33:33.671-03:00 - Desarrollar la épica B, historia B3 de
   `secuencia/s002`: incorporar una política proporcional a la deuda relativa.
 

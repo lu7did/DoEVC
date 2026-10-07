@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 007] - 2026-10-07
+
+### Changed
+
+- Las políticas implementan el protocolo común `Policy`.
+
 ## [1.0 build 006] - 2026-10-07
 
 ### Added

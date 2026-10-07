@@ -7,8 +7,14 @@ from doevc_s002 import (
     DebtFirstPolicy,
     ModelParameters,
     ProportionalPolicy,
+    SprintState,
     simulate_deterministic_sprints,
 )
+
+
+def _state(backlog: float, debt: float) -> SprintState:
+    """Create the current-state view provided to a policy."""
+    return SprintState(backlog, debt, 1, 0, 0, 0, backlog, debt)
 
 
 @pytest.mark.parametrize(("debt", "expected"), [(10, 1.0), (0, 0.0)])
@@ -16,7 +22,12 @@ def test_debt_first_policy_selects_the_expected_fraction(
     debt: float, expected: float
 ) -> None:
     """Allocate all capacity to debt only while debt exists."""
-    assert DebtFirstPolicy().decide_u(10, debt) == expected
+    assert (
+        DebtFirstPolicy().decide_u(
+            _state(10, debt), ModelParameters(0, 0, 1, 0, 0, 0, 0, 0, 0, 1)
+        )
+        == expected
+    )
 
 
 def test_debt_first_policy_integrates_with_deterministic_simulation() -> None:
@@ -37,7 +48,12 @@ def test_backlog_first_policy_selects_the_expected_fraction(
     backlog: float, debt: float, expected: float
 ) -> None:
     """Deliver backlog before remediating remaining debt."""
-    assert BacklogFirstPolicy().decide_u(backlog, debt) == expected
+    assert (
+        BacklogFirstPolicy().decide_u(
+            _state(backlog, debt), ModelParameters(0, 0, 1, 0, 0, 0, 0, 0, 0, 1)
+        )
+        == expected
+    )
 
 
 def test_backlog_first_policy_integrates_with_deterministic_simulation() -> None:
@@ -59,7 +75,9 @@ def test_proportional_policy_handles_general_and_edge_cases(
     backlog: float, debt: float, expected: float
 ) -> None:
     """Choose the debt share of remaining work without division by zero."""
-    result = ProportionalPolicy().decide_u(backlog, debt)
+    result = ProportionalPolicy().decide_u(
+        _state(backlog, debt), ModelParameters(0, 0, 1, 0, 0, 0, 0, 0, 0, 1)
+    )
 
     assert result == expected
     assert 0 <= result <= 1
@@ -72,3 +90,13 @@ def test_proportional_policy_integrates_with_deterministic_simulation() -> None:
     states = simulate_deterministic_sprints(parameters, policy=ProportionalPolicy())
 
     assert states[0].remediation_fraction == pytest.approx(0.25)
+
+
+@pytest.mark.parametrize(
+    "policy", [DebtFirstPolicy(), BacklogFirstPolicy(), ProportionalPolicy()]
+)
+def test_every_policy_is_interchangeable_in_the_simulator(policy: object) -> None:
+    """Accept each B-series policy without concrete simulator coupling."""
+    parameters = ModelParameters(2, 2, 2, 0, 0, 0, 0, 0, 0, 1)
+
+    assert len(simulate_deterministic_sprints(parameters, policy=policy)) == 1

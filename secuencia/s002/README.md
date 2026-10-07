@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 006
+- Build: 007
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -25,6 +25,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   entregar funcionalidad.
 - `BacklogFirstPolicy`: política que entrega el backlog antes de remediar deuda.
 - `ProportionalPolicy`: política que asigna remediación según la deuda relativa.
+- `Policy`: contrato intercambiable para políticas del simulador.
 
 ## Instalación y validación
 
