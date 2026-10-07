@@ -19,6 +19,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   deuda técnica mediante `V_k = V0 / (1 + gamma * D_k)`.
 - `SprintState` y `simulate_sprint()`: ejecutan la transición determinista de
   un sprint con una fracción de remediación fija.
+- `simulate_deterministic_sprints()`: encadena hasta `K` sprints con una
+  fracción fija y finaliza anticipadamente cuando no queda trabajo.
 
 ## Instalación y validación
 

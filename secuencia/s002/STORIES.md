@@ -1,5 +1,9 @@
 # STORIES
 
+- 2026-10-07T15:17:45.960-03:00 - Desarrollar la épica A, historia A4 de
+  `secuencia/s002`: simular una trayectoria determinista de hasta K sprints
+  con una fracción fija de remediación.
+
 - 2026-10-07T15:15:27.627-03:00 - Desarrollar la épica A, historia A3 de
   `secuencia/s002`: simular la transición determinista de un sprint usando una
   fracción fija de remediación.

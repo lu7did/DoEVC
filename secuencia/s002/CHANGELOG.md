@@ -6,6 +6,8 @@
 
 - `SprintState` y `simulate_sprint()` para modelar transiciones deterministas
   con una fracción fija de remediación.
+- `simulate_deterministic_sprints()` para observar una trayectoria completa de
+  hasta `K` sprints y detenerla cuando backlog y deuda llegan a cero.
 
 ## [1.0 build 002] - 2026-10-07
 
