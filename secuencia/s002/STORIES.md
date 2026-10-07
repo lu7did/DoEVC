@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-07T15:49:24.288-03:00 - Desarrollar la épica C, historia C3 de
+  `secuencia/s002`: agregar métricas y agregados de resultados Monte Carlo.
+
 - 2026-10-07T15:46:13.676-03:00 - Desarrollar la épica C, historia C2 de
   `secuencia/s002`: ejecutar simulaciones Monte Carlo reproducibles.
 

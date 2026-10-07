@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 009
+- Build: 010
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -29,6 +29,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 - `sample_model_parameters()`: muestrea parámetros inciertos uniformes y
   reproducibles a partir de una semilla.
 - `run_monte_carlo()`: ejecuta corridas reproducibles con resultados individuales.
+- `MonteCarloResult.aggregate_metrics()`: resume métricas de cada corrida.
 
 ## Instalación y validación
 

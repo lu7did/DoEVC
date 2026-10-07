@@ -16,3 +16,21 @@ def test_monte_carlo_is_reproducible_for_a_fixed_seed() -> None:
     assert run_monte_carlo(2, DebtFirstPolicy(), 42) == run_monte_carlo(
         2, DebtFirstPolicy(), 42
     )
+
+
+def test_monte_carlo_aggregates_known_run_metrics() -> None:
+    """Aggregate all required per-run metrics for later comparison."""
+    result = run_monte_carlo(2, DebtFirstPolicy(), 42)
+
+    metrics = result.aggregate_metrics()
+    assert set(metrics) == {
+        "sprints",
+        "final_debt",
+        "mean_remediation",
+        "final_backlog",
+    }
+    assert (
+        metrics["sprints"]["min"]
+        <= metrics["sprints"]["mean"]
+        <= metrics["sprints"]["max"]
+    )

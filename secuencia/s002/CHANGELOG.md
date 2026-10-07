@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 010] - 2026-10-07
+
+### Added
+
+- Métricas por corrida Monte Carlo y agregados estadísticos.
+
 ## [1.0 build 009] - 2026-10-07
 
 ### Added
