@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 016] - 2026-10-14
+
+### Added
+
+- Persistencia JSON de escenarios reproducibles.
+
 ## [1.0 build 015] - 2026-10-14
 
 ### Added
