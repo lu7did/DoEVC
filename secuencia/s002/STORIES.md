@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-14T13:23:03.408-03:00 - Desarrollar la épica D, historia D1 de
+  `secuencia/s002`: buscar por grilla la fracción de remediación óptima.
+
 - 2026-10-07T15:49:24.288-03:00 - Desarrollar la épica C, historia C3 de
   `secuencia/s002`: agregar métricas y agregados de resultados Monte Carlo.
 

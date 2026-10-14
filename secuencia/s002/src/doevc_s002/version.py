@@ -1,7 +1,7 @@
 """Version metadata for the second sequence."""
 
 VERSION = "1.0"
-BUILD = "010"
+BUILD = "011"
 SEQUENCE_ID = "s002"
 PYTHON_VERSION = "3.13"
 

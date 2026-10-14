@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 011] - 2026-10-14
+
+### Added
+
+- Búsqueda por grilla de fracciones de remediación con objetivo configurable.
+
 ## [1.0 build 010] - 2026-10-07
 
 ### Added
