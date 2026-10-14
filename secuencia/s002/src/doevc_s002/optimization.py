@@ -12,6 +12,26 @@ Objective = Callable[[list[SprintState]], Real]
 
 
 @dataclass(frozen=True, slots=True)
+class ObjectiveFunction:
+    """Economic objective with configurable delivery, debt, and time weights."""
+
+    delivered_value_weight: float = 1.0
+    remaining_debt_penalty: float = 1.0
+    sprint_penalty: float = 0.0
+
+    def __call__(self, states: list[SprintState]) -> float:
+        """Evaluate the economic value of a complete deterministic trajectory."""
+        if not states:
+            return 0.0
+        delivered_value = sum(state.backlog - state.next_backlog for state in states)
+        return (
+            self.delivered_value_weight * delivered_value
+            - self.remaining_debt_penalty * states[-1].next_debt
+            - self.sprint_penalty * len(states)
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class GridSearchResult:
     """Optimal fixed remediation fraction and all evaluated trajectories."""
 

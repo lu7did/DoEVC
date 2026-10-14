@@ -1,6 +1,6 @@
 """Regression tests for remediation grid search."""
 
-from doevc_s002 import ModelParameters, grid_search_remediation
+from doevc_s002 import ModelParameters, ObjectiveFunction, grid_search_remediation
 
 
 def _parameters() -> ModelParameters:
@@ -28,3 +28,16 @@ def test_grid_search_can_maximize_a_custom_objective() -> None:
     )
 
     assert result.remediation_fraction == 0.0
+
+
+def test_economic_weights_change_the_optimal_fraction() -> None:
+    """Prioritize delivery or debt reduction according to configured weights."""
+    delivery_first = grid_search_remediation(
+        _parameters(), ObjectiveFunction(1, 0), step=0.5, maximize=True
+    )
+    debt_first = grid_search_remediation(
+        _parameters(), ObjectiveFunction(0, 1), step=0.5, maximize=True
+    )
+
+    assert delivery_first.remediation_fraction == 0.0
+    assert debt_first.remediation_fraction == 1.0

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 012] - 2026-10-14
+
+### Added
+
+- Función objetivo económica configurable para la búsqueda por grilla.
+
 ## [1.0 build 011] - 2026-10-14
 
 ### Added

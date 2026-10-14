@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-14T13:27:03.444-03:00 - Desarrollar la épica D, historia D2 de
+  `secuencia/s002`: agregar una función objetivo económica configurable.
+
 - 2026-10-14T13:23:03.408-03:00 - Desarrollar la épica D, historia D1 de
   `secuencia/s002`: buscar por grilla la fracción de remediación óptima.
 

@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 011
+- Build: 012
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -32,6 +32,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 - `MonteCarloResult.aggregate_metrics()`: resume métricas de cada corrida.
 - `grid_search_remediation()`: evalúa fracciones fijas para optimizar un
   objetivo configurable.
+- `ObjectiveFunction`: cuantifica valor entregado, deuda remanente y duración.
 
 ## Instalación y validación
 
