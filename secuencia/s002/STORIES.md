@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-14T13:46:34.959-03:00 - Desarrollar la épica F, historia F3 de
+  `secuencia/s002`: generar un heatmap de sensibilidad de dos parámetros.
+
 - 2026-10-14T13:44:13.315-03:00 - Desarrollar la épica F, historia F2 de
   `secuencia/s002`: generar un boxplot de remediación en Monte Carlo.
 

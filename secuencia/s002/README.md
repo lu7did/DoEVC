@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 019
+- Build: 020
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -44,6 +44,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 - `plot_simulation()`: genera un PNG no interactivo de backlog y deuda.
 - `plot_optimal_u_distribution()`: genera un boxplot PNG de remediación por
   corrida Monte Carlo.
+- `plot_sensitivity_heatmap()`: genera un heatmap PNG de remediación para dos
+  parámetros configurables.
 
 ## Instalación y validación
 

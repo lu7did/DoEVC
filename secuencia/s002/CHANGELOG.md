@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 020] - 2026-10-14
+
+### Added
+
+- Heatmap PNG de sensibilidad de remediación para dos parámetros del modelo.
+
 ## [1.0 build 019] - 2026-10-14
 
 ### Added
