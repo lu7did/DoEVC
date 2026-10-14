@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 018] - 2026-10-14
+
+### Added
+
+- Visualización PNG no interactiva de trayectorias deterministas.
+
 ## [1.0 build 017] - 2026-10-14
 
 ### Added

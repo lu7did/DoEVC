@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 017
+- Build: 018
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -41,6 +41,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   y métricas agregadas en formato CSV.
 - `save_scenario()`: persiste parámetros, política y semilla en JSON.
 - `load_and_run()`: reconstruye y ejecuta un escenario JSON reproducible.
+- `plot_simulation()`: genera un PNG no interactivo de backlog y deuda.
 
 ## Instalación y validación
 

@@ -17,6 +17,7 @@ from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, PYTHON_VERSION, SEQUENCE_ID, VERSION, get_version_label
+from .visualization import plot_simulation
 
 __all__ = [
     "BUILD",
@@ -47,4 +48,5 @@ __all__ = [
     "run_monte_carlo",
     "grid_search_remediation",
     "load_and_run",
+    "plot_simulation",
 ]
