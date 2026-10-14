@@ -1,5 +1,6 @@
 """Public API for the DoEVC second-cycle model."""
 
+from .comparison import PolicyComparison, compare_policies
 from .models import ModelParameters
 from .monte_carlo import MonteCarloResult, MonteCarloRun, run_monte_carlo
 from .optimization import (
@@ -20,6 +21,7 @@ __all__ = [
     "BacklogFirstPolicy",
     "DebtFirstPolicy",
     "ModelParameters",
+    "PolicyComparison",
     "MonteCarloResult",
     "MonteCarloRun",
     "ObjectiveFunction",
@@ -32,6 +34,7 @@ __all__ = [
     "SprintState",
     "VERSION",
     "calculate_effective_velocity",
+    "compare_policies",
     "get_version_label",
     "simulate_deterministic_sprints",
     "simulate_sprint",

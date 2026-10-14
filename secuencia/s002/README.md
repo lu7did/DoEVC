@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 013
+- Build: 014
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -35,6 +35,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 - `ObjectiveFunction`: cuantifica valor entregado, deuda remanente y duración.
 - `OptimalLocalPolicy`: selecciona por grilla la mejor decisión del próximo
   sprint.
+- `compare_policies()`: compara políticas en escenarios deterministas o Monte
+  Carlo equivalentes.
 
 ## Instalación y validación
 

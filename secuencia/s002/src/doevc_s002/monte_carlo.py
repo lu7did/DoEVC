@@ -64,7 +64,11 @@ class MonteCarloResult:
 
 
 def run_monte_carlo(
-    n_runs: int, policy: Policy, seed: int | None = None
+    n_runs: int,
+    policy: Policy,
+    seed: int | None = None,
+    *,
+    base_parameters: ModelParameters | None = None,
 ) -> MonteCarloResult:
     """Execute reproducible simulations using independently sampled parameters."""
     if isinstance(n_runs, bool) or not isinstance(n_runs, int):
@@ -73,7 +77,9 @@ def run_monte_carlo(
         raise ValueError("n_runs must be non-negative.")
 
     random = Random(seed)
-    base_parameters = ModelParameters(100, 20, 10, 0.1, 0.2, 0.01, 0.3, 0.5, 0.4, 12)
+    base_parameters = base_parameters or ModelParameters(
+        100, 20, 10, 0.1, 0.2, 0.01, 0.3, 0.5, 0.4, 12
+    )
     runs = tuple(
         MonteCarloRun(
             parameters := sample_model_parameters(
