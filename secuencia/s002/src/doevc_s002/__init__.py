@@ -2,7 +2,12 @@
 
 from .models import ModelParameters
 from .monte_carlo import MonteCarloResult, MonteCarloRun, run_monte_carlo
-from .optimization import GridSearchResult, ObjectiveFunction, grid_search_remediation
+from .optimization import (
+    GridSearchResult,
+    ObjectiveFunction,
+    OptimalLocalPolicy,
+    grid_search_remediation,
+)
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .sampling import sample_model_parameters
 from .simulation import simulate_deterministic_sprints
@@ -18,6 +23,7 @@ __all__ = [
     "MonteCarloResult",
     "MonteCarloRun",
     "ObjectiveFunction",
+    "OptimalLocalPolicy",
     "GridSearchResult",
     "PYTHON_VERSION",
     "Policy",

@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 012
+- Build: 013
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -33,6 +33,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 - `grid_search_remediation()`: evalúa fracciones fijas para optimizar un
   objetivo configurable.
 - `ObjectiveFunction`: cuantifica valor entregado, deuda remanente y duración.
+- `OptimalLocalPolicy`: selecciona por grilla la mejor decisión del próximo
+  sprint.
 
 ## Instalación y validación
 

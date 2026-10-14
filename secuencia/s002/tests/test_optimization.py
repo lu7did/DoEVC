@@ -1,6 +1,13 @@
 """Regression tests for remediation grid search."""
 
-from doevc_s002 import ModelParameters, ObjectiveFunction, grid_search_remediation
+from doevc_s002 import (
+    DebtFirstPolicy,
+    ModelParameters,
+    ObjectiveFunction,
+    OptimalLocalPolicy,
+    grid_search_remediation,
+    simulate_deterministic_sprints,
+)
 
 
 def _parameters() -> ModelParameters:
@@ -41,3 +48,17 @@ def test_economic_weights_change_the_optimal_fraction() -> None:
 
     assert delivery_first.remediation_fraction == 0.0
     assert debt_first.remediation_fraction == 1.0
+
+
+def test_optimal_local_policy_beats_debt_first_for_delivery_value() -> None:
+    """Use the locally optimal decision through the generic policy interface."""
+    parameters = _parameters()
+    objective = ObjectiveFunction(1, 0)
+    optimal_states = simulate_deterministic_sprints(
+        parameters, policy=OptimalLocalPolicy(objective, step=0.5)
+    )
+    debt_first_states = simulate_deterministic_sprints(
+        parameters, policy=DebtFirstPolicy()
+    )
+
+    assert objective(optimal_states) > objective(debt_first_states)

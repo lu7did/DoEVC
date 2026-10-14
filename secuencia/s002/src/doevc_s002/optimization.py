@@ -1,7 +1,7 @@
 """Grid-search optimization for fixed remediation fractions."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from numbers import Real
 
 from .models import ModelParameters
@@ -38,6 +38,21 @@ class GridSearchResult:
     remediation_fraction: float
     objective_value: float
     trajectories: dict[float, tuple[SprintState, ...]]
+
+
+@dataclass(frozen=True, slots=True)
+class OptimalLocalPolicy:
+    """Choose the one-sprint remediation fraction with highest objective value."""
+
+    objective: Objective
+    step: float = 0.01
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Optimize the next sprint from the current state."""
+        local_parameters = replace(params, B0=state.backlog, D0=state.debt, K=1)
+        return grid_search_remediation(
+            local_parameters, self.objective, step=self.step, maximize=True
+        ).remediation_fraction
 
 
 def grid_search_remediation(

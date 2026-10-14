@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 013] - 2026-10-14
+
+### Added
+
+- Política óptima local basada en la función objetivo y búsqueda por grilla.
+
 ## [1.0 build 012] - 2026-10-14
 
 ### Added
