@@ -12,7 +12,7 @@ from .optimization import (
 )
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .sampling import sample_model_parameters
-from .scenario import save_scenario
+from .scenario import load_and_run, save_scenario
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -46,4 +46,5 @@ __all__ = [
     "save_scenario",
     "run_monte_carlo",
     "grid_search_remediation",
+    "load_and_run",
 ]

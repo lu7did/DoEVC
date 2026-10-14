@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 017] - 2026-10-14
+
+### Added
+
+- Reconstrucción y ejecución reproducible de escenarios JSON.
+
 ## [1.0 build 016] - 2026-10-14
 
 ### Added
