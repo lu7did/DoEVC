@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 019] - 2026-10-14
+
+### Added
+
+- Boxplot PNG de distribución de remediación en corridas Monte Carlo.
+
 ## [1.0 build 018] - 2026-10-14
 
 ### Added

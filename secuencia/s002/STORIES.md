@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-14T13:44:13.315-03:00 - Desarrollar la épica F, historia F2 de
+  `secuencia/s002`: generar un boxplot de remediación en Monte Carlo.
+
 - 2026-10-14T13:39:42.211-03:00 - Desarrollar la épica F, historia F1 de
   `secuencia/s002`: generar un PNG con backlog y deuda por sprint.
 

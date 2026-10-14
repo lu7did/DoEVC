@@ -1,6 +1,13 @@
 """Regression tests for generated simulation charts."""
 
-from doevc_s002 import ModelParameters, plot_simulation, simulate_deterministic_sprints
+from doevc_s002 import (
+    DebtFirstPolicy,
+    ModelParameters,
+    plot_optimal_u_distribution,
+    plot_simulation,
+    run_monte_carlo,
+    simulate_deterministic_sprints,
+)
 
 
 def test_plot_simulation_creates_a_nonempty_png(tmp_path: object) -> None:
@@ -11,6 +18,16 @@ def test_plot_simulation_creates_a_nonempty_png(tmp_path: object) -> None:
     )
 
     plot_simulation(states, filepath)
+
+    assert filepath.exists()
+    assert filepath.stat().st_size > 0
+
+
+def test_plot_optimal_u_distribution_creates_a_nonempty_png(tmp_path: object) -> None:
+    """Save a boxplot from Monte Carlo remediation metrics."""
+    filepath = tmp_path / "distribution.png"  # type: ignore[operator]
+
+    plot_optimal_u_distribution(run_monte_carlo(2, DebtFirstPolicy(), 7), filepath)
 
     assert filepath.exists()
     assert filepath.stat().st_size > 0
