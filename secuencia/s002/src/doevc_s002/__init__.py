@@ -1,6 +1,7 @@
 """Public API for the DoEVC second-cycle model."""
 
 from .comparison import PolicyComparison, compare_policies
+from .export import export_metrics_csv, export_sprint_states_csv
 from .models import ModelParameters
 from .monte_carlo import MonteCarloResult, MonteCarloRun, run_monte_carlo
 from .optimization import (
@@ -35,6 +36,8 @@ __all__ = [
     "VERSION",
     "calculate_effective_velocity",
     "compare_policies",
+    "export_metrics_csv",
+    "export_sprint_states_csv",
     "get_version_label",
     "simulate_deterministic_sprints",
     "simulate_sprint",

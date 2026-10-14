@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 015] - 2026-10-14
+
+### Added
+
+- Exportación CSV de trayectorias de sprint y métricas Monte Carlo.
+
 ## [1.0 build 014] - 2026-10-14
 
 ### Added

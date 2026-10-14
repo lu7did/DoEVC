@@ -5,7 +5,7 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
 ## Estado
 
 - Versión: 1.0
-- Build: 014
+- Build: 015
 - Licencia: Creative Commons CC0 1.0
 
 ## Funciones disponibles
@@ -37,6 +37,8 @@ Paquete Python 3.13 para el segundo ciclo del modelo DoEVC.
   sprint.
 - `compare_policies()`: compara políticas en escenarios deterministas o Monte
   Carlo equivalentes.
+- `export_sprint_states_csv()` y `export_metrics_csv()`: exportan trayectorias
+  y métricas agregadas en formato CSV.
 
 ## Instalación y validación
 
