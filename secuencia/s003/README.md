@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 007
+- Build: 008
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -20,10 +20,11 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 - `SprintState`: conserva las entradas, capacidades y estados resultantes del
   sprint.
 - `simulate_sprints()`: encadena hasta `K` sprints determinísticos con una
-  asignación fija o política y detención temprana al completar backlog y deuda.
-- `debt_first_allocation()`: asigna toda la capacidad a remediación mientras
-  exista deuda técnica.
-- `backlog_first_allocation()`: asigna toda la capacidad a entrega mientras
-  exista backlog funcional.
-- `proportional_allocation()`: asigna remediación según la proporción de
-  deuda sobre el trabajo total restante.
+  asignación fija o cualquier `Policy`.
+- `Policy`: protocolo intercambiable que define `decide_u()`.
+- `DebtFirstPolicy`: asigna toda la capacidad a remediación mientras exista
+  deuda técnica.
+- `BacklogFirstPolicy`: asigna toda la capacidad a entrega mientras exista
+  backlog funcional.
+- `ProportionalPolicy`: asigna remediación según la proporción de deuda sobre
+  el trabajo total restante.

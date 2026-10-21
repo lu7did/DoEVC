@@ -2,9 +2,10 @@
 
 from .models import ModelParameters
 from .policies import (
-    backlog_first_allocation,
-    debt_first_allocation,
-    proportional_allocation,
+    BacklogFirstPolicy,
+    DebtFirstPolicy,
+    Policy,
+    ProportionalPolicy,
 )
 from .simulation import simulate_sprints
 from .sprint import SprintState, simulate_sprint
@@ -13,14 +14,15 @@ from .version import BUILD, VERSION, get_version_label
 
 __all__ = [
     "BUILD",
+    "BacklogFirstPolicy",
+    "DebtFirstPolicy",
     "ModelParameters",
+    "Policy",
+    "ProportionalPolicy",
     "SprintState",
     "VERSION",
-    "backlog_first_allocation",
     "calculate_effective_velocity",
-    "debt_first_allocation",
     "get_version_label",
-    "proportional_allocation",
     "simulate_sprint",
     "simulate_sprints",
 ]

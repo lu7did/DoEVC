@@ -39,6 +39,11 @@ class SprintState:  # pylint: disable=too-many-instance-attributes
     next_backlog: float
     next_debt: float
 
+    @classmethod
+    def current(cls, backlog: float, debt: float) -> "SprintState":
+        """Create a snapshot of a state before capacity has been allocated."""
+        return cls(backlog, debt, 0.0, 0.0, 0.0, 0.0, backlog, debt)
+
 
 def simulate_sprint(
     parameters: ModelParameters, backlog: object, debt: object, allocation: object

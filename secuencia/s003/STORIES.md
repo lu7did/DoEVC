@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:23:12.252-03:00 - Desarrollar la épica B, historia B4 de
+  `secuencia/s003`: definir una interfaz común e intercambiable de políticas.
+
 - 2026-10-21T10:20:36.944-03:00 - Desarrollar la épica B, historia B3 de
   `secuencia/s003`: incorporar la política proporcional a la deuda relativa.
 

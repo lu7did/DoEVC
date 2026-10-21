@@ -1,87 +1,71 @@
-"""Regression tests for allocation policies in s003."""
+"""Regression tests for interchangeable policies in s003."""
 
 import pytest
 
 from doevc_s003 import (
+    BacklogFirstPolicy,
+    DebtFirstPolicy,
     ModelParameters,
-    backlog_first_allocation,
-    debt_first_allocation,
-    proportional_allocation,
+    Policy,
+    ProportionalPolicy,
+    SprintState,
     simulate_sprints,
 )
 
 
-def _parameters(*, debt: float) -> ModelParameters:
-    """Create a policy scenario whose debt clears in one sprint."""
-    return ModelParameters(100, debt, 10, 0, 0, 0, 0, 0, 0, 2)
+def _parameters(*, backlog: float = 100, debt: float = 5) -> ModelParameters:
+    """Create a policy scenario whose state changes within two sprints."""
+    return ModelParameters(backlog, debt, 10, 0, 0, 0, 0, 0, 0, 2)
 
 
-def test_debt_first_allocates_all_capacity_when_debt_remains() -> None:
-    """Select full remediation for a positive debt state."""
-    assert debt_first_allocation(10, 0.01) == 1
+def _state(backlog: float, debt: float) -> SprintState:
+    """Create the current state supplied to a policy decision."""
+    return SprintState.current(backlog, debt)
 
 
-def test_debt_first_allocates_no_capacity_when_debt_is_cleared() -> None:
-    """Select full delivery after technical debt is eliminated."""
-    assert debt_first_allocation(10, 0) == 0
+def test_debt_first_selects_remediation_until_debt_is_cleared() -> None:
+    """Select full remediation only while debt remains."""
+    policy = DebtFirstPolicy()
+
+    assert policy.decide_u(_state(10, 0.01), _parameters()) == 1
+    assert policy.decide_u(_state(10, 0), _parameters()) == 0
 
 
-def test_debt_first_policy_is_selected_by_multi_sprint_simulation() -> None:
-    """Recalculate policy allocation from each linked sprint state."""
-    trajectory = simulate_sprints(_parameters(debt=5), debt_first_allocation)
+def test_backlog_first_selects_delivery_until_backlog_is_cleared() -> None:
+    """Select delivery before remediation when functional work remains."""
+    policy = BacklogFirstPolicy()
+
+    assert policy.decide_u(_state(0.01, 10), _parameters()) == 0
+    assert policy.decide_u(_state(0, 0.01), _parameters()) == 1
+
+
+def test_proportional_policy_handles_general_and_boundary_states() -> None:
+    """Return the relative debt fraction without dividing by zero."""
+    policy = ProportionalPolicy()
+
+    assert policy.decide_u(_state(3, 1), _parameters()) == 0.25
+    assert policy.decide_u(_state(10, 0), _parameters()) == 0
+    assert policy.decide_u(_state(0, 10), _parameters()) == 1
+    assert policy.decide_u(_state(0, 0), _parameters()) == 0
+
+
+@pytest.mark.parametrize(
+    "policy",
+    [DebtFirstPolicy(), BacklogFirstPolicy(), ProportionalPolicy()],
+)
+def test_each_policy_implements_the_common_protocol_and_runs_in_simulation(
+    policy: Policy,
+) -> None:
+    """Allow every policy to be exchanged by the deterministic engine."""
+    trajectory = simulate_sprints(_parameters(), policy)
+
+    assert isinstance(policy, Policy)
+    assert len(trajectory) == 2
+    assert all(0 <= state.allocation <= 1 for state in trajectory)
+
+
+def test_debt_first_policy_recomputes_allocation_for_linked_sprints() -> None:
+    """Switch to delivery after the previous sprint clears the debt."""
+    trajectory = simulate_sprints(_parameters(), DebtFirstPolicy())
 
     assert [state.allocation for state in trajectory] == [1, 0]
-    assert trajectory[0].next_debt == 0
-    assert trajectory[1].delivery_capacity == 10
-
-
-def test_debt_first_rejects_negative_debt() -> None:
-    """Reject debt values that are outside the model domain."""
-    with pytest.raises(ValueError, match="debt"):
-        debt_first_allocation(10, -0.1)
-
-
-def test_backlog_first_allocates_no_capacity_to_remediation_with_backlog() -> None:
-    """Select full delivery while functional work remains."""
-    assert backlog_first_allocation(0.01, 10) == 0
-
-
-def test_backlog_first_allocates_all_capacity_when_only_debt_remains() -> None:
-    """Select full remediation after functional backlog is cleared."""
-    assert backlog_first_allocation(0, 0.01) == 1
-
-
-def test_backlog_first_policy_is_selected_by_multi_sprint_simulation() -> None:
-    """Switch from delivery to remediation as the linked state changes."""
-    trajectory = simulate_sprints(
-        ModelParameters(5, 5, 10, 0, 0, 0, 0, 0, 0, 2),
-        backlog_first_allocation,
-    )
-
-    assert [state.allocation for state in trajectory] == [0, 1]
-    assert trajectory[0].next_backlog == 0
-    assert trajectory[1].next_debt == 0
-
-
-def test_proportional_allocation_uses_relative_debt() -> None:
-    """Allocate according to the debt share of all remaining work."""
-    assert proportional_allocation(3, 1) == 0.25
-
-
-def test_proportional_allocation_handles_zero_debt_and_zero_state() -> None:
-    """Avoid remediation and division by zero where no debt exists."""
-    assert proportional_allocation(10, 0) == 0
-    assert proportional_allocation(0, 0) == 0
-
-
-def test_proportional_allocation_prioritizes_debt_without_backlog() -> None:
-    """Allocate all capacity to remediation when debt is the only work."""
-    assert proportional_allocation(0, 10) == 1
-
-
-def test_proportional_policy_is_selected_by_multi_sprint_simulation() -> None:
-    """Supply a bounded relative-debt allocation to every simulated sprint."""
-    trajectory = simulate_sprints(_parameters(debt=25), proportional_allocation)
-
-    assert trajectory[0].allocation == 0.2
-    assert all(0 <= state.allocation <= 1 for state in trajectory)

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 008] - 2026-10-21
+
+### Changed
+
+- Las políticas B1-B3 implementan el protocolo intercambiable `Policy` con
+  `decide_u(state, params)`; `simulate_sprints()` acepta cualquier política.
+
 ## [1.0 build 007] - 2026-10-21
 
 ### Added

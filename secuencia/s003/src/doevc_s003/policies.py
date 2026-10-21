@@ -1,37 +1,45 @@
-"""Allocation policies for deterministic simulations."""
+"""Interchangeable allocation policies for deterministic simulations."""
 
-from numbers import Real
+from typing import Protocol, runtime_checkable
 
-
-def _require_non_negative(name: str, value: object) -> float:
-    """Return a valid non-negative real value."""
-    if isinstance(value, bool) or not isinstance(value, Real):
-        raise TypeError(f"{name} must be a real number.")
-    numeric_value = float(value)
-    if numeric_value < 0:
-        raise ValueError(f"{name} must not be negative.")
-    return numeric_value
+from .models import ModelParameters
+from .sprint import SprintState
 
 
-def debt_first_allocation(backlog: object, debt: object) -> float:
+@runtime_checkable
+class Policy(Protocol):  # pylint: disable=too-few-public-methods
+    """Select the remediation fraction for the current simulation state."""
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Return a remediation allocation in the closed interval [0, 1]."""
+        ...
+
+
+class DebtFirstPolicy:  # pylint: disable=too-few-public-methods
     """Allocate all capacity to remediation while technical debt remains."""
-    _require_non_negative("backlog", backlog)
-    debt_value = _require_non_negative("debt", debt)
-    return 1.0 if debt_value > 0 else 0.0
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Select remediation when the current state has technical debt."""
+        del params
+        return 1.0 if state.debt > 0 else 0.0
 
 
-def backlog_first_allocation(backlog: object, debt: object) -> float:
+class BacklogFirstPolicy:  # pylint: disable=too-few-public-methods
     """Allocate capacity to delivery until functional backlog is cleared."""
-    backlog_value = _require_non_negative("backlog", backlog)
-    debt_value = _require_non_negative("debt", debt)
-    if backlog_value > 0:
-        return 0.0
-    return 1.0 if debt_value > 0 else 0.0
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Select delivery while backlog remains, then remediation for debt."""
+        del params
+        if state.backlog > 0:
+            return 0.0
+        return 1.0 if state.debt > 0 else 0.0
 
 
-def proportional_allocation(backlog: object, debt: object) -> float:
+class ProportionalPolicy:  # pylint: disable=too-few-public-methods
     """Allocate remediation capacity according to the relative debt level."""
-    backlog_value = _require_non_negative("backlog", backlog)
-    debt_value = _require_non_negative("debt", debt)
-    total_work = backlog_value + debt_value
-    return debt_value / total_work if total_work > 0 else 0.0
+
+    def decide_u(self, state: SprintState, params: ModelParameters) -> float:
+        """Select the debt fraction of the current total work."""
+        del params
+        total_work = state.backlog + state.debt
+        return state.debt / total_work if total_work > 0 else 0.0
