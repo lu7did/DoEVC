@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:04:34.914-03:00 - Desarrollar la épica A, historia A3 de
+  `secuencia/s003`: simular un sprint con asignación fija de remediación.
+
 - 2026-10-21T10:01:09.047-03:00 - Desarrollar la épica A, historia A2 de
   `secuencia/s003`: calcular la velocidad efectiva afectada por deuda.
 
