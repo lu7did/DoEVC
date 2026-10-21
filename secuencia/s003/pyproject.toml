@@ -9,7 +9,7 @@ description = "Independent third DoEVC sequence."
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
 license = { text = "CC0-1.0" }
-dependencies = []
+dependencies = ["matplotlib>=3.9.0"]
 
 [project.optional-dependencies]
 dev = ["black>=24.10.0", "hypothesis>=6.112.1", "mypy>=1.11.2", "pdoc>=15.0.0", "pre-commit>=4.0.0", "pylint>=3.3.0", "pyright>=1.1.390", "pytest>=8.3.3", "pytest-cov>=5.0.0", "ruff>=0.6.9"]

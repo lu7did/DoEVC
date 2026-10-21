@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 019] - 2026-10-21
+
+### Added
+
+- `plot_simulation()` para exportar la trayectoria determinística a PNG en F1.
+
 ## [1.0 build 018] - 2026-10-21
 
 ### Added

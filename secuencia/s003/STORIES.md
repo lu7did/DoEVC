@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:32:12.742-03:00 - Desarrollar la épica F, historia F1 de
+  `secuencia/s003`: generar PNG con backlog y deuda por sprint.
+
 - 2026-10-21T17:27:10.946-03:00 - Desarrollar la épica E, historia E3 de
   `secuencia/s003`: cargar y reproducir escenarios desde JSON.
 
