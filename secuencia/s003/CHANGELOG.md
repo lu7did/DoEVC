@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 005] - 2026-10-21
+
+### Added
+
+- `debt_first_allocation()` como política B1 e integración de políticas
+  seleccionables en `simulate_sprints()`.
+
 ## [1.0 build 004] - 2026-10-21
 
 ### Added

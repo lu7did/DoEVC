@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:15:34.326-03:00 - Desarrollar la épica B, historia B1 de
+  `secuencia/s003`: incorporar la política baseline de deuda primero.
+
 - 2026-10-21T10:09:03.773-03:00 - Desarrollar la épica A, historia A4 de
   `secuencia/s003`: simular K sprints determinísticos encadenados.
 
