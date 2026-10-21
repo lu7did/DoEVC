@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:41:56.168-03:00 - Desarrollar la épica F, historia F3 de
+  `secuencia/s003`: generar heatmap de sensibilidad de asignación promedio.
+
 - 2026-10-21T17:38:50.334-03:00 - Desarrollar la épica F, historia F2 de
   `secuencia/s003`: generar boxplot de asignaciones óptimas Monte Carlo.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 021] - 2026-10-21
+
+### Added
+
+- `plot_sensitivity_heatmap()` para analizar sensibilidad de `u_k` frente a
+  dos parámetros configurables en F3.
+
 ## [1.0 build 020] - 2026-10-21
 
 ### Added

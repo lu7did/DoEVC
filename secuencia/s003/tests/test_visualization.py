@@ -3,9 +3,12 @@
 from pathlib import Path
 
 from doevc_s003 import (
+    ModelParameters,
+    ProportionalPolicy,
     RunMetrics,
     SprintState,
     plot_optimal_u_distribution,
+    plot_sensitivity_heatmap,
     plot_simulation,
 )
 
@@ -20,6 +23,27 @@ def test_simulation_plot_creates_a_non_empty_png(tmp_path: Path) -> None:
 
     plot_simulation(states, path)
 
+    assert path.is_file()
+    assert path.stat().st_size > 0
+
+
+def test_sensitivity_heatmap_creates_png_with_expected_matrix_dimensions(
+    tmp_path: Path,
+) -> None:
+    """Produce one average-allocation value for each parameter combination."""
+    path = tmp_path / "sensitivity.png"
+    parameters = ModelParameters(10, 5, 10, 0, 0, 0, 0, 0, 0, 1)
+
+    matrix = plot_sensitivity_heatmap(
+        ("B0", [10, 20]),
+        ("D0", [5, 15, 25]),
+        parameters,
+        ProportionalPolicy(),
+        path,
+    )
+
+    assert len(matrix) == 3
+    assert all(len(row) == 2 for row in matrix)
     assert path.is_file()
     assert path.stat().st_size > 0
 

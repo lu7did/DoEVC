@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 020
+- Build: 021
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -52,3 +52,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   sprint.
 - `plot_optimal_u_distribution()`: genera un boxplot PNG de la asignación
   promedio por corrida Monte Carlo.
+- `plot_sensitivity_heatmap()`: genera un heatmap PNG y una matriz de
+  asignación promedio para dos parámetros configurables.

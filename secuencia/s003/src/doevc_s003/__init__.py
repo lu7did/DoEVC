@@ -28,7 +28,12 @@ from .simulation import simulate_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, VERSION, get_version_label
-from .visualization import plot_optimal_u_distribution, plot_simulation
+from .visualization import (
+    ParameterRange,
+    plot_optimal_u_distribution,
+    plot_sensitivity_heatmap,
+    plot_simulation,
+)
 
 __all__ = [
     "BUILD",
@@ -43,6 +48,7 @@ __all__ = [
     "MonteCarloRun",
     "Objective",
     "OptimalLocalPolicy",
+    "ParameterRange",
     "Policy",
     "PolicyComparison",
     "PolicyComparisonTable",
@@ -60,6 +66,7 @@ __all__ = [
     "load_and_run",
     "plot_simulation",
     "plot_optimal_u_distribution",
+    "plot_sensitivity_heatmap",
     "run_monte_carlo",
     "sample_model_parameters",
     "save_scenario",
