@@ -1,6 +1,7 @@
 """Public API for s003."""
 
 from .comparison import PolicyComparison, PolicyComparisonTable, compare_policies
+from .export import export_metrics_csv, export_sprint_states_csv
 from .local_policy import OptimalLocalPolicy
 from .models import ModelParameters
 from .monte_carlo import (
@@ -49,6 +50,8 @@ __all__ = [
     "VERSION",
     "calculate_effective_velocity",
     "compare_policies",
+    "export_metrics_csv",
+    "export_sprint_states_csv",
     "aggregate_metrics",
     "get_version_label",
     "find_optimal_allocation",

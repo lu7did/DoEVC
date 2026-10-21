@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:20:36.862-03:00 - Desarrollar la épica E, historia E1 de
+  `secuencia/s003`: exportar estados y métricas agregadas a CSV.
+
 - 2026-10-21T15:54:00.632-03:00 - Desarrollar la épica D, historia D4 de
   `secuencia/s003`: comparar las políticas bajo escenarios equivalentes.
 

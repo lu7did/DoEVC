@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 015
+- Build: 016
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -42,3 +42,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   objetivo económico seleccionado.
 - `compare_policies()`: genera una tabla de métricas C3 y objetivo para
   políticas equivalentes, en modo determinístico o Monte Carlo.
+- `export_sprint_states_csv()` y `export_metrics_csv()`: exportan
+  trayectorias y métricas C3 a archivos CSV interoperables.

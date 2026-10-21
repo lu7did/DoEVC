@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 016] - 2026-10-21
+
+### Added
+
+- Exportadores CSV de estados de sprint y métricas agregadas para E1.
+
 ## [1.0 build 015] - 2026-10-21
 
 ### Added
