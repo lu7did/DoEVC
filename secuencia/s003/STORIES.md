@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T15:35:19.241-03:00 - Desarrollar la épica D, historia D1 de
+  `secuencia/s003`: buscar por grilla la asignación fija óptima.
+
 - 2026-10-21T10:34:35.021-03:00 - Desarrollar la épica C, historia C3 de
   `secuencia/s003`: agregar métricas individuales y agregadas Monte Carlo.
 

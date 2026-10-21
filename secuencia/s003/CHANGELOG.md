@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 012] - 2026-10-21
+
+### Added
+
+- `find_optimal_allocation()` para búsqueda por grilla de una asignación fija
+  óptima en D1.
+
 ## [1.0 build 011] - 2026-10-21
 
 ### Added

@@ -11,6 +11,7 @@ from .monte_carlo import (
     aggregate_metrics,
     run_monte_carlo,
 )
+from .optimization import Objective, find_optimal_allocation
 from .policies import (
     BacklogFirstPolicy,
     DebtFirstPolicy,
@@ -33,6 +34,7 @@ __all__ = [
     "MetricSummary",
     "MonteCarloResult",
     "MonteCarloRun",
+    "Objective",
     "Policy",
     "ProportionalPolicy",
     "RunMetrics",
@@ -41,6 +43,7 @@ __all__ = [
     "calculate_effective_velocity",
     "aggregate_metrics",
     "get_version_label",
+    "find_optimal_allocation",
     "run_monte_carlo",
     "sample_model_parameters",
     "simulate_sprint",

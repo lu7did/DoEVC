@@ -3,6 +3,6 @@
 from doevc_s003 import get_version_label
 
 
-def test_build_tracks_the_eleventh_story() -> None:
-    """Expose the build prepared for the eleventh successful push."""
-    assert get_version_label() == "1.0 build 011"
+def test_build_tracks_the_twelfth_story() -> None:
+    """Expose the build prepared for the twelfth successful push."""
+    assert get_version_label() == "1.0 build 012"
