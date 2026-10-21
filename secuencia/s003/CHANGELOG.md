@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 006] - 2026-10-21
+
+### Added
+
+- `backlog_first_allocation()` como política B2, seleccionable por
+  `simulate_sprints()` usando backlog y deuda del sprint.
+
 ## [1.0 build 005] - 2026-10-21
 
 ### Added

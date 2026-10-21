@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 005
+- Build: 006
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -23,3 +23,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   asignación fija o política y detención temprana al completar backlog y deuda.
 - `debt_first_allocation()`: asigna toda la capacidad a remediación mientras
   exista deuda técnica.
+- `backlog_first_allocation()`: asigna toda la capacidad a entrega mientras
+  exista backlog funcional.

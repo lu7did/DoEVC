@@ -15,7 +15,9 @@ def simulate_sprints(
     for _ in range(parameters.K):
         if backlog == 0 and debt == 0:
             break
-        current_allocation = allocation(debt) if callable(allocation) else allocation
+        current_allocation = (
+            allocation(backlog, debt) if callable(allocation) else allocation
+        )
         state = simulate_sprint(parameters, backlog, debt, current_allocation)
         trajectory.append(state)
         backlog = state.next_backlog
