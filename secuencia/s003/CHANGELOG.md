@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 011] - 2026-10-21
+
+### Added
+
+- Métricas por corrida y `aggregate_metrics()` para resumir resultados Monte
+  Carlo de C3.
+
 ## [1.0 build 010] - 2026-10-21
 
 ### Added

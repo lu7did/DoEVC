@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 010
+- Build: 011
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -32,3 +32,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   uniformes reproducibles mediante semilla.
 - `run_monte_carlo()`: ejecuta múltiples simulaciones con parámetros
   muestreados, una `Policy` seleccionable y resultados agregados.
+- `aggregate_metrics()`: resume las métricas por corrida mediante media,
+  desvío estándar, mínimo y máximo.

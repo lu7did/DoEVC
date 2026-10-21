@@ -3,8 +3,12 @@
 from .models import ModelParameters
 from .monte_carlo import (
     DEFAULT_PARAMETERS,
+    AggregateMetrics,
+    MetricSummary,
     MonteCarloResult,
     MonteCarloRun,
+    RunMetrics,
+    aggregate_metrics,
     run_monte_carlo,
 )
 from .policies import (
@@ -21,17 +25,21 @@ from .version import BUILD, VERSION, get_version_label
 
 __all__ = [
     "BUILD",
+    "AggregateMetrics",
     "BacklogFirstPolicy",
     "DEFAULT_PARAMETERS",
     "DebtFirstPolicy",
     "ModelParameters",
+    "MetricSummary",
     "MonteCarloResult",
     "MonteCarloRun",
     "Policy",
     "ProportionalPolicy",
+    "RunMetrics",
     "SprintState",
     "VERSION",
     "calculate_effective_velocity",
+    "aggregate_metrics",
     "get_version_label",
     "run_monte_carlo",
     "sample_model_parameters",
