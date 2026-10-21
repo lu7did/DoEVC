@@ -1,5 +1,6 @@
 """Public API for s003."""
 
+from .local_policy import OptimalLocalPolicy
 from .models import ModelParameters
 from .monte_carlo import (
     DEFAULT_PARAMETERS,
@@ -37,6 +38,7 @@ __all__ = [
     "MonteCarloResult",
     "MonteCarloRun",
     "Objective",
+    "OptimalLocalPolicy",
     "Policy",
     "ProportionalPolicy",
     "RunMetrics",

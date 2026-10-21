@@ -1,7 +1,15 @@
 """Regression tests for fixed-allocation grid search in s003."""
 
-from doevc_s003 import EconomicObjective, ModelParameters, find_optimal_allocation
-from doevc_s003.sprint import SprintState
+from doevc_s003 import (
+    BacklogFirstPolicy,
+    EconomicObjective,
+    ModelParameters,
+    OptimalLocalPolicy,
+    Policy,
+    SprintState,
+    find_optimal_allocation,
+    simulate_sprints,
+)
 
 
 def _parameters() -> ModelParameters:
@@ -74,3 +82,34 @@ def test_economic_weights_produce_distinct_optimal_allocations() -> None:
 
     assert delivery_optimum == 0
     assert debt_optimum == 1
+
+
+def test_optimal_local_policy_evaluates_the_grid_for_each_decision() -> None:
+    """Use D1's full candidate grid from the state supplied by the engine."""
+    evaluations: list[float] = []
+
+    def record_allocation(trajectory: list[SprintState]) -> float:
+        """Record each allocation evaluated by the local policy."""
+        evaluations.append(trajectory[0].allocation)
+        return trajectory[0].allocation
+
+    policy = OptimalLocalPolicy(record_allocation, step=0.25)
+
+    allocation = policy.decide_u(SprintState.current(10, 0), _parameters())
+
+    assert allocation == 1
+    assert evaluations == [0, 0.25, 0.5, 0.75, 1]
+
+
+def test_optimal_local_policy_beats_a_heuristic_in_a_known_scenario() -> None:
+    """Exchange the local policy in the engine and improve the debt-weighted value."""
+    parameters = ModelParameters(10, 10, 10, 0, 0, 0, 0, 0, 0, 1)
+    objective = EconomicObjective(delivery_weight=1, debt_weight=2)
+    policy = OptimalLocalPolicy(objective, step=0.25)
+
+    optimized_trajectory = simulate_sprints(parameters, policy)
+    heuristic_trajectory = simulate_sprints(parameters, BacklogFirstPolicy())
+
+    assert isinstance(policy, Policy)
+    assert optimized_trajectory[0].allocation == 1
+    assert objective(optimized_trajectory) > objective(heuristic_trajectory)

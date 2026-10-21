@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 013
+- Build: 014
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -38,3 +38,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   fijas y optimiza un objetivo de simulación recibido.
 - `EconomicObjective`: valora funcionalidad entregada y penaliza deuda final y
   sprints consumidos con ponderaciones configurables.
+- `OptimalLocalPolicy`: evalúa la grilla de D1 desde cada estado y maximiza el
+  objetivo económico seleccionado.

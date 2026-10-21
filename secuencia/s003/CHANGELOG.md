@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 014] - 2026-10-21
+
+### Added
+
+- `OptimalLocalPolicy` intercambiable, que optimiza localmente cada decisión
+  con D1 y D2.
+
 ## [1.0 build 013] - 2026-10-21
 
 ### Added

@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T15:48:06.089-03:00 - Desarrollar la épica D, historia D3 de
+  `secuencia/s003`: incorporar una política óptima local intercambiable.
+
 - 2026-10-21T15:42:52.627-03:00 - Desarrollar la épica D, historia D2 de
   `secuencia/s003`: definir un objetivo económico configurable.
 
