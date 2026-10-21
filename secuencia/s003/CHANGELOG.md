@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 004] - 2026-10-21
+
+### Added
+
+- `simulate_sprints()` para trayectorias determinísticas de hasta `K` sprints
+  en la historia A4.
+
 ## [1.0 build 003] - 2026-10-21
 
 ### Added

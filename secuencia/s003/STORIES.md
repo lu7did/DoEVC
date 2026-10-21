@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:09:03.773-03:00 - Desarrollar la épica A, historia A4 de
+  `secuencia/s003`: simular K sprints determinísticos encadenados.
+
 - 2026-10-21T10:04:34.914-03:00 - Desarrollar la épica A, historia A3 de
   `secuencia/s003`: simular un sprint con asignación fija de remediación.
 
