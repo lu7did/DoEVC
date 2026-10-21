@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:38:50.334-03:00 - Desarrollar la épica F, historia F2 de
+  `secuencia/s003`: generar boxplot de asignaciones óptimas Monte Carlo.
+
 - 2026-10-21T17:32:12.742-03:00 - Desarrollar la épica F, historia F1 de
   `secuencia/s003`: generar PNG con backlog y deuda por sprint.
 

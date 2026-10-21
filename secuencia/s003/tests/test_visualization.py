@@ -2,7 +2,12 @@
 
 from pathlib import Path
 
-from doevc_s003 import SprintState, plot_simulation
+from doevc_s003 import (
+    RunMetrics,
+    SprintState,
+    plot_optimal_u_distribution,
+    plot_simulation,
+)
 
 
 def test_simulation_plot_creates_a_non_empty_png(tmp_path: Path) -> None:
@@ -14,6 +19,21 @@ def test_simulation_plot_creates_a_non_empty_png(tmp_path: Path) -> None:
     ]
 
     plot_simulation(states, path)
+
+    assert path.is_file()
+    assert path.stat().st_size > 0
+
+
+def test_optimal_allocation_boxplot_creates_a_non_empty_png(tmp_path: Path) -> None:
+    """Write a PNG boxplot from the per-run C3 allocation metrics."""
+    path = tmp_path / "allocation-distribution.png"
+    metrics = [
+        RunMetrics(2, 3, 0.2, 4),
+        RunMetrics(2, 2, 0.5, 3),
+        RunMetrics(2, 1, 0.8, 2),
+    ]
+
+    plot_optimal_u_distribution(metrics, path)
 
     assert path.is_file()
     assert path.stat().st_size > 0

@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 019
+- Build: 020
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -50,3 +50,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   y reproduce su trayectoria determinística.
 - `plot_simulation()`: genera un PNG no interactivo con `B_k` y `D_k` por
   sprint.
+- `plot_optimal_u_distribution()`: genera un boxplot PNG de la asignación
+  promedio por corrida Monte Carlo.

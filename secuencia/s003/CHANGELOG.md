@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 020] - 2026-10-21
+
+### Added
+
+- `plot_optimal_u_distribution()` para visualizar la distribución Monte Carlo
+  de asignaciones de remediación en F2.
+
 ## [1.0 build 019] - 2026-10-21
 
 ### Added
