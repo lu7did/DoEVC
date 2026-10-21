@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T15:54:00.632-03:00 - Desarrollar la épica D, historia D4 de
+  `secuencia/s003`: comparar las políticas bajo escenarios equivalentes.
+
 - 2026-10-21T15:48:06.089-03:00 - Desarrollar la épica D, historia D3 de
   `secuencia/s003`: incorporar una política óptima local intercambiable.
 

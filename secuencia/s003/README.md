@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 014
+- Build: 015
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -40,3 +40,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   sprints consumidos con ponderaciones configurables.
 - `OptimalLocalPolicy`: evalúa la grilla de D1 desde cada estado y maximiza el
   objetivo económico seleccionado.
+- `compare_policies()`: genera una tabla de métricas C3 y objetivo para
+  políticas equivalentes, en modo determinístico o Monte Carlo.

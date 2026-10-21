@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 015] - 2026-10-21
+
+### Added
+
+- `compare_policies()` y tabla comparativa para evaluar políticas bajo
+  escenarios determinísticos o Monte Carlo equivalentes en D4.
+
 ## [1.0 build 014] - 2026-10-21
 
 ### Added

@@ -1,5 +1,6 @@
 """Public API for s003."""
 
+from .comparison import PolicyComparison, PolicyComparisonTable, compare_policies
 from .local_policy import OptimalLocalPolicy
 from .models import ModelParameters
 from .monte_carlo import (
@@ -40,11 +41,14 @@ __all__ = [
     "Objective",
     "OptimalLocalPolicy",
     "Policy",
+    "PolicyComparison",
+    "PolicyComparisonTable",
     "ProportionalPolicy",
     "RunMetrics",
     "SprintState",
     "VERSION",
     "calculate_effective_velocity",
+    "compare_policies",
     "aggregate_metrics",
     "get_version_label",
     "find_optimal_allocation",
