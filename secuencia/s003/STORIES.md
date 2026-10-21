@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:24:05.430-03:00 - Desarrollar la épica E, historia E2 de
+  `secuencia/s003`: guardar escenarios reproducibles en JSON.
+
 - 2026-10-21T17:20:36.862-03:00 - Desarrollar la épica E, historia E1 de
   `secuencia/s003`: exportar estados y métricas agregadas a CSV.
 

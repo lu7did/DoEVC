@@ -23,6 +23,7 @@ from .policies import (
     ProportionalPolicy,
 )
 from .sampling import sample_model_parameters
+from .scenario import save_scenario
 from .simulation import simulate_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -57,6 +58,7 @@ __all__ = [
     "find_optimal_allocation",
     "run_monte_carlo",
     "sample_model_parameters",
+    "save_scenario",
     "simulate_sprint",
     "simulate_sprints",
 ]

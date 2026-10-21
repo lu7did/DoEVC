@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 016
+- Build: 017
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -44,3 +44,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   políticas equivalentes, en modo determinístico o Monte Carlo.
 - `export_sprint_states_csv()` y `export_metrics_csv()`: exportan
   trayectorias y métricas C3 a archivos CSV interoperables.
+- `save_scenario()`: guarda parámetros, política y semilla en un escenario
+  JSON reproducible.

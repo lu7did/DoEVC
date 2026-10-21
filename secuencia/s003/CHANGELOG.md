@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 017] - 2026-10-21
+
+### Added
+
+- `save_scenario()` para serializar escenarios reproducibles en JSON para E2.
+
 ## [1.0 build 016] - 2026-10-21
 
 ### Added
