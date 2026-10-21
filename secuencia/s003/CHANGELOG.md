@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 018] - 2026-10-21
+
+### Added
+
+- `load_and_run()` para reconstruir y ejecutar escenarios JSON de E2 en E3.
+
 ## [1.0 build 017] - 2026-10-21
 
 ### Added

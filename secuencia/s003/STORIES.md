@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T17:27:10.946-03:00 - Desarrollar la épica E, historia E3 de
+  `secuencia/s003`: cargar y reproducir escenarios desde JSON.
+
 - 2026-10-21T17:24:05.430-03:00 - Desarrollar la épica E, historia E2 de
   `secuencia/s003`: guardar escenarios reproducibles en JSON.
 
