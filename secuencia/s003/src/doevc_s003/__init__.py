@@ -7,6 +7,7 @@ from .policies import (
     Policy,
     ProportionalPolicy,
 )
+from .sampling import sample_model_parameters
 from .simulation import simulate_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -23,6 +24,7 @@ __all__ = [
     "VERSION",
     "calculate_effective_velocity",
     "get_version_label",
+    "sample_model_parameters",
     "simulate_sprint",
     "simulate_sprints",
 ]

@@ -1,7 +1,7 @@
 """Version metadata for s003."""
 
 VERSION = "1.0"
-BUILD = "008"
+BUILD = "009"
 
 
 def get_version_label() -> str:

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 009] - 2026-10-21
+
+### Added
+
+- `sample_model_parameters()` para muestreo uniforme reproducible de los
+  parámetros de incertidumbre de C1.
+
 ## [1.0 build 008] - 2026-10-21
 
 ### Changed
