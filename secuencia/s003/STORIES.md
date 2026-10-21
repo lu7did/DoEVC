@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T15:42:52.627-03:00 - Desarrollar la épica D, historia D2 de
+  `secuencia/s003`: definir un objetivo económico configurable.
+
 - 2026-10-21T15:35:19.241-03:00 - Desarrollar la épica D, historia D1 de
   `secuencia/s003`: buscar por grilla la asignación fija óptima.
 

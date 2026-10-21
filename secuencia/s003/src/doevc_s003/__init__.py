@@ -11,6 +11,7 @@ from .monte_carlo import (
     aggregate_metrics,
     run_monte_carlo,
 )
+from .objectives import EconomicObjective
 from .optimization import Objective, find_optimal_allocation
 from .policies import (
     BacklogFirstPolicy,
@@ -30,6 +31,7 @@ __all__ = [
     "BacklogFirstPolicy",
     "DEFAULT_PARAMETERS",
     "DebtFirstPolicy",
+    "EconomicObjective",
     "ModelParameters",
     "MetricSummary",
     "MonteCarloResult",

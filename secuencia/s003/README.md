@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 012
+- Build: 013
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -36,3 +36,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   desvío estándar, mínimo y máximo.
 - `find_optimal_allocation()`: explora una grilla configurable de asignaciones
   fijas y optimiza un objetivo de simulación recibido.
+- `EconomicObjective`: valora funcionalidad entregada y penaliza deuda final y
+  sprints consumidos con ponderaciones configurables.

@@ -1,6 +1,6 @@
 """Regression tests for fixed-allocation grid search in s003."""
 
-from doevc_s003 import ModelParameters, find_optimal_allocation
+from doevc_s003 import EconomicObjective, ModelParameters, find_optimal_allocation
 from doevc_s003.sprint import SprintState
 
 
@@ -44,3 +44,33 @@ def test_grid_search_evaluates_every_inclusive_grid_value() -> None:
     find_optimal_allocation(_parameters(), record_allocation, step=0.25)
 
     assert evaluated_allocations == [0, 0.25, 0.5, 0.75, 1]
+
+
+def test_economic_objective_calculates_weighted_trajectory_value() -> None:
+    """Combine delivered work, final debt, and consumed sprints into one score."""
+    trajectory = [SprintState(10, 5, 0.2, 5, 1, 4, 7, 3)]
+
+    value = EconomicObjective(2, 4, 0.5)(trajectory)
+
+    assert value == -6.5
+
+
+def test_economic_weights_produce_distinct_optimal_allocations() -> None:
+    """Change the selected allocation when debt becomes more valuable than delivery."""
+    parameters = ModelParameters(10, 10, 10, 0, 0, 0, 0, 0, 0, 1)
+
+    delivery_optimum = find_optimal_allocation(
+        parameters,
+        EconomicObjective(delivery_weight=2, debt_weight=0.5),
+        step=0.25,
+        maximize=True,
+    )
+    debt_optimum = find_optimal_allocation(
+        parameters,
+        EconomicObjective(delivery_weight=1, debt_weight=2),
+        step=0.25,
+        maximize=True,
+    )
+
+    assert delivery_optimum == 0
+    assert debt_optimum == 1

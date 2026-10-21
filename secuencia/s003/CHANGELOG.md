@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 013] - 2026-10-21
+
+### Added
+
+- `EconomicObjective` configurable para valorar trayectorias y guiar D1.
+
 ## [1.0 build 012] - 2026-10-21
 
 ### Added
