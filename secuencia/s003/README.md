@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 009
+- Build: 010
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -30,3 +30,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   el trabajo total restante.
 - `sample_model_parameters()`: genera parámetros completos con distribuciones
   uniformes reproducibles mediante semilla.
+- `run_monte_carlo()`: ejecuta múltiples simulaciones con parámetros
+  muestreados, una `Policy` seleccionable y resultados agregados.

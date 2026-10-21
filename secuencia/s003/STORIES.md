@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:30:31.368-03:00 - Desarrollar la épica C, historia C2 de
+  `secuencia/s003`: ejecutar corridas Monte Carlo reproducibles.
+
 - 2026-10-21T10:27:23.865-03:00 - Desarrollar la épica C, historia C1 de
   `secuencia/s003`: muestrear parámetros uniformes reproducibles por semilla.
 

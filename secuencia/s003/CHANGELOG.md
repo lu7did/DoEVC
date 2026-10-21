@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0 build 010] - 2026-10-21
+
+### Added
+
+- `run_monte_carlo()` y resultados por corrida y agregados para experimentos
+  reproducibles de C2.
+
 ## [1.0 build 009] - 2026-10-21
 
 ### Added
