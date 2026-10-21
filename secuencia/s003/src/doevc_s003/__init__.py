@@ -1,7 +1,11 @@
 """Public API for s003."""
 
 from .models import ModelParameters
-from .policies import backlog_first_allocation, debt_first_allocation
+from .policies import (
+    backlog_first_allocation,
+    debt_first_allocation,
+    proportional_allocation,
+)
 from .simulation import simulate_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
@@ -16,6 +20,7 @@ __all__ = [
     "calculate_effective_velocity",
     "debt_first_allocation",
     "get_version_label",
+    "proportional_allocation",
     "simulate_sprint",
     "simulate_sprints",
 ]

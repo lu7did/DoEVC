@@ -27,3 +27,11 @@ def backlog_first_allocation(backlog: object, debt: object) -> float:
     if backlog_value > 0:
         return 0.0
     return 1.0 if debt_value > 0 else 0.0
+
+
+def proportional_allocation(backlog: object, debt: object) -> float:
+    """Allocate remediation capacity according to the relative debt level."""
+    backlog_value = _require_non_negative("backlog", backlog)
+    debt_value = _require_non_negative("debt", debt)
+    total_work = backlog_value + debt_value
+    return debt_value / total_work if total_work > 0 else 0.0

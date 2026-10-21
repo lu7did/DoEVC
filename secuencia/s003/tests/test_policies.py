@@ -6,6 +6,7 @@ from doevc_s003 import (
     ModelParameters,
     backlog_first_allocation,
     debt_first_allocation,
+    proportional_allocation,
     simulate_sprints,
 )
 
@@ -60,3 +61,27 @@ def test_backlog_first_policy_is_selected_by_multi_sprint_simulation() -> None:
     assert [state.allocation for state in trajectory] == [0, 1]
     assert trajectory[0].next_backlog == 0
     assert trajectory[1].next_debt == 0
+
+
+def test_proportional_allocation_uses_relative_debt() -> None:
+    """Allocate according to the debt share of all remaining work."""
+    assert proportional_allocation(3, 1) == 0.25
+
+
+def test_proportional_allocation_handles_zero_debt_and_zero_state() -> None:
+    """Avoid remediation and division by zero where no debt exists."""
+    assert proportional_allocation(10, 0) == 0
+    assert proportional_allocation(0, 0) == 0
+
+
+def test_proportional_allocation_prioritizes_debt_without_backlog() -> None:
+    """Allocate all capacity to remediation when debt is the only work."""
+    assert proportional_allocation(0, 10) == 1
+
+
+def test_proportional_policy_is_selected_by_multi_sprint_simulation() -> None:
+    """Supply a bounded relative-debt allocation to every simulated sprint."""
+    trajectory = simulate_sprints(_parameters(debt=25), proportional_allocation)
+
+    assert trajectory[0].allocation == 0.2
+    assert all(0 <= state.allocation <= 1 for state in trajectory)

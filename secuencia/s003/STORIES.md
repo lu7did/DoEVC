@@ -1,5 +1,8 @@
 # STORIES
 
+- 2026-10-21T10:20:36.944-03:00 - Desarrollar la épica B, historia B3 de
+  `secuencia/s003`: incorporar la política proporcional a la deuda relativa.
+
 - 2026-10-21T10:17:48.183-03:00 - Desarrollar la épica B, historia B2 de
   `secuencia/s003`: incorporar la política baseline de backlog primero.
 

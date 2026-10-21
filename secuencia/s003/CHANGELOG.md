@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0 build 007] - 2026-10-21
+
+### Added
+
+- `proportional_allocation()` como política B3 basada en la deuda relativa.
+
 ## [1.0 build 006] - 2026-10-21
 
 ### Added

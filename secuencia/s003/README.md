@@ -5,7 +5,7 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
 ## Estado
 
 - Versión: 1.0
-- Build: 006
+- Build: 007
 - Python: 3.13
 - Licencia: Creative Commons CC0 1.0
 
@@ -25,3 +25,5 @@ Secuencia independiente, preparada para recibir sus propias épicas e historias.
   exista deuda técnica.
 - `backlog_first_allocation()`: asigna toda la capacidad a entrega mientras
   exista backlog funcional.
+- `proportional_allocation()`: asigna remediación según la proporción de
+  deuda sobre el trabajo total restante.
