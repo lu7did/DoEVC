@@ -1,0 +1,7 @@
+# STORIES
+
+- 2026-10-21T09:52:59.446-03:00 - Desarrollar la épica A, historia A1 de
+  `secuencia/s003`: crear parámetros reproducibles, validados y serializables.
+
+- 2026-10-21T09:42:16.235-03:00 - Crear `secuencia/s003` como proyecto
+  independiente, sin reutilizar desarrollo de secuencias anteriores.

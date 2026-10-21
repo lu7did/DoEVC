@@ -1,0 +1,23 @@
+repos:
+  - repo: local
+    hooks:
+      - id: s003-ruff
+        name: s003 ruff
+        entry: python -m ruff check secuencia/s003/src secuencia/s003/tests
+        language: system
+        pass_filenames: false
+      - id: s003-black
+        name: s003 black
+        entry: python -m black --check secuencia/s003/src secuencia/s003/tests
+        language: system
+        pass_filenames: false
+      - id: s003-pylint
+        name: s003 pylint
+        entry: python -m pylint secuencia/s003/src/doevc_s003
+        language: system
+        pass_filenames: false
+      - id: s003-mypy
+        name: s003 mypy
+        entry: python -m mypy secuencia/s003/src/doevc_s003
+        language: system
+        pass_filenames: false
