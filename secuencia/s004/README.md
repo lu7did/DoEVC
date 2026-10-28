@@ -32,6 +32,8 @@ S004.
   sprint.
 - `s004.compare_policies()`: compara políticas determinísticas o Monte Carlo
   bajo el mismo escenario.
+- `s004.export_sprint_states_csv()` y `s004.export_metrics_csv()`: exportan
+  estados y métricas a CSV.
 
 ## Desarrollo
 
