@@ -33,6 +33,7 @@ class ModelParameters:  # pylint: disable=too-many-instance-attributes
     lambda_: float
     rho: float
     K: int  # pylint: disable=invalid-name
+    s: float = 1.0
 
     def __post_init__(self) -> None:
         """Reject invalid parameter values after initialization."""
@@ -45,6 +46,7 @@ class ModelParameters:  # pylint: disable=too-many-instance-attributes
             "theta",
             "lambda_",
             "rho",
+            "s",
         ):
             _require_non_negative(field_name, getattr(self, field_name))
         _require_positive("V0", self.V0)

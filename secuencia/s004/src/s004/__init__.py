@@ -3,6 +3,7 @@
 from .models import ModelParameters
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .project import ProjectInfo, get_project_info
+from .sampling import sample_model_parameters
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, VERSION, display_version
@@ -20,5 +21,6 @@ __all__ = [
     "calculate_effective_velocity",
     "display_version",
     "get_project_info",
+    "sample_model_parameters",
     "simulate_sprint",
 ]

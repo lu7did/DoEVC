@@ -31,6 +31,7 @@ def test_model_parameters_create_and_serialize() -> None:
         "lambda_": 0.5,
         "rho": 0.6,
         "K": 10,
+        "s": 1.0,
     }
 
 

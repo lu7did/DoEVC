@@ -18,6 +18,8 @@ S004.
   deuda técnica.
 - `s004.ProportionalPolicy`: asigna remediación proporcional a la deuda
   relativa.
+- `s004.sample_model_parameters()`: muestrea parámetros inciertos con semilla
+  reproducible.
 
 ## Desarrollo
 
