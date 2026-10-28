@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from math import isclose
 
 from .models import ModelParameters
+from .policies import Policy
 from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState
 
@@ -48,6 +49,26 @@ class GridSearchResult:
     best_remediation_fraction: float
     best_objective_value: float
     evaluations: tuple[GridSearchEvaluation, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class OptimalLocalPolicy(Policy):  # pylint: disable=too-few-public-methods
+    """Select the locally optimal remediation fraction at every sprint."""
+
+    objective: Callable[[tuple[SprintState, ...]], float]
+    step: float = 0.01
+
+    def decide_u(self, state: SprintState, parameters: ModelParameters) -> float:
+        """Optimize the current state and return its best remediation fraction."""
+        result = grid_search_remediation(
+            parameters,
+            self.objective,
+            step=self.step,
+            maximize=True,
+            backlog=state.backlog,
+            technical_debt=state.technical_debt,
+        )
+        return result.best_remediation_fraction
 
 
 def grid_search_remediation(

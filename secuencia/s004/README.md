@@ -28,6 +28,8 @@ S004.
   sobre una grilla uniforme.
 - `s004.ObjectiveFunction`: valora funcionalidad entregada, deuda y duración
   de una trayectoria.
+- `s004.OptimalLocalPolicy`: selecciona el valor de remediación óptimo en cada
+  sprint.
 
 ## Desarrollo
 

@@ -2,7 +2,15 @@
 
 import pytest
 
-from s004 import ModelParameters, ObjectiveFunction, grid_search_remediation
+from s004 import (
+    DebtFirstPolicy,
+    ModelParameters,
+    ObjectiveFunction,
+    OptimalLocalPolicy,
+    Policy,
+    grid_search_remediation,
+    simulate_deterministic_sprints,
+)
 
 
 def create_backlog_only_parameters() -> ModelParameters:
@@ -104,3 +112,33 @@ def test_economic_objective_weights_produce_distinct_optima() -> None:
 
     assert feature_focused.best_remediation_fraction == 0.0
     assert debt_focused.best_remediation_fraction == 1.0
+
+
+def test_optimal_local_policy_outperforms_debt_first_for_feature_value() -> None:
+    """The locally optimized allocation improves the selected objective."""
+    parameters = ModelParameters(
+        B0=10.0,
+        D0=10.0,
+        V0=10.0,
+        alpha=0.0,
+        beta=0.0,
+        gamma=0.0,
+        theta=0.0,
+        lambda_=0.0,
+        rho=0.0,
+        K=1,
+    )
+    objective = ObjectiveFunction(
+        delivered_functionality_weight=2.0,
+        remaining_debt_penalty=1.0,
+    )
+    policy = OptimalLocalPolicy(objective, step=1.0)
+    optimal_trajectory = simulate_deterministic_sprints(parameters, policy)
+    debt_first_trajectory = simulate_deterministic_sprints(
+        parameters,
+        DebtFirstPolicy(),
+    )
+
+    assert isinstance(policy, Policy)
+    assert optimal_trajectory[0].remediation_fraction == 0.0
+    assert objective(optimal_trajectory) > objective(debt_first_trajectory)
