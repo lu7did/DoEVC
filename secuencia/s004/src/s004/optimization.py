@@ -10,6 +10,29 @@ from .sprint import SprintState
 
 
 @dataclass(frozen=True, slots=True)
+class ObjectiveFunction:
+    """Evaluate trajectories using configurable economic value weights."""
+
+    delivered_functionality_weight: float = 1.0
+    remaining_debt_penalty: float = 1.0
+    sprint_penalty: float = 0.0
+
+    def __call__(self, trajectory: tuple[SprintState, ...]) -> float:
+        """Return the weighted economic value of a complete trajectory."""
+        if not trajectory:
+            return 0.0
+
+        delivered_functionality = sum(
+            state.backlog - state.next_backlog for state in trajectory
+        )
+        return (
+            self.delivered_functionality_weight * delivered_functionality
+            - self.remaining_debt_penalty * trajectory[-1].next_technical_debt
+            - self.sprint_penalty * len(trajectory)
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class GridSearchEvaluation:
     """Store one remediation fraction evaluated by a grid search."""
 

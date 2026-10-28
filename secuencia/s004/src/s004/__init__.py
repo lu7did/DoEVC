@@ -14,6 +14,7 @@ from .monte_carlo import (
 from .optimization import (
     GridSearchEvaluation,
     GridSearchResult,
+    ObjectiveFunction,
     grid_search_remediation,
 )
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
@@ -37,6 +38,7 @@ __all__ = [
     "MonteCarloRun",
     "MonteCarloSimulation",
     "MonteCarloSummary",
+    "ObjectiveFunction",
     "Policy",
     "ProportionalPolicy",
     "ProjectInfo",

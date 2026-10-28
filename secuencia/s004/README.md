@@ -26,6 +26,8 @@ S004.
   poblacionales.
 - `s004.grid_search_remediation()`: optimiza una fracción fija de remediación
   sobre una grilla uniforme.
+- `s004.ObjectiveFunction`: valora funcionalidad entregada, deuda y duración
+  de una trayectoria.
 
 ## Desarrollo
 

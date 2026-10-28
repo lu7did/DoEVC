@@ -2,7 +2,7 @@
 
 import pytest
 
-from s004 import ModelParameters, grid_search_remediation
+from s004 import ModelParameters, ObjectiveFunction, grid_search_remediation
 
 
 def create_backlog_only_parameters() -> ModelParameters:
@@ -67,3 +67,40 @@ def test_grid_search_rejects_steps_that_do_not_divide_unit_interval() -> None:
             lambda trajectory: trajectory[-1].next_backlog,
             step=0.3,
         )
+
+
+def test_economic_objective_weights_produce_distinct_optima() -> None:
+    """Feature- and debt-focused objectives select different allocations."""
+    parameters = ModelParameters(
+        B0=10.0,
+        D0=10.0,
+        V0=10.0,
+        alpha=0.0,
+        beta=0.0,
+        gamma=0.0,
+        theta=0.0,
+        lambda_=0.0,
+        rho=0.0,
+        K=1,
+    )
+    feature_focused = grid_search_remediation(
+        parameters,
+        ObjectiveFunction(
+            delivered_functionality_weight=2.0,
+            remaining_debt_penalty=1.0,
+        ),
+        step=1.0,
+        maximize=True,
+    )
+    debt_focused = grid_search_remediation(
+        parameters,
+        ObjectiveFunction(
+            delivered_functionality_weight=1.0,
+            remaining_debt_penalty=2.0,
+        ),
+        step=1.0,
+        maximize=True,
+    )
+
+    assert feature_focused.best_remediation_fraction == 0.0
+    assert debt_focused.best_remediation_fraction == 1.0
