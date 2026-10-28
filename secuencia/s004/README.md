@@ -20,6 +20,8 @@ S004.
   relativa.
 - `s004.sample_model_parameters()`: muestrea parámetros inciertos con semilla
   reproducible.
+- `s004.run_monte_carlo()`: ejecuta corridas reproducibles y agrega sus
+  resultados.
 
 ## Desarrollo
 
