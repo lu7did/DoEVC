@@ -70,3 +70,20 @@ def test_model_parameters_reject_negative_iteration_count() -> None:
             rho=0.6,
             K=-1,
         )
+
+
+def test_model_parameters_require_positive_base_velocity() -> None:
+    """The base velocity must keep effective velocity strictly positive."""
+    with pytest.raises(ValueError, match="V0 must be greater than zero"):
+        ModelParameters(
+            B0=1.0,
+            D0=0.0,
+            V0=0.0,
+            alpha=0.1,
+            beta=0.2,
+            gamma=0.3,
+            theta=0.4,
+            lambda_=0.5,
+            rho=0.6,
+            K=10,
+        )

@@ -12,6 +12,13 @@ def _require_non_negative(name: str, value: object) -> None:
         raise ValueError(f"{name} must not be negative.")
 
 
+def _require_positive(name: str, value: object) -> None:
+    """Validate that a model parameter is a strictly positive real number."""
+    _require_non_negative(name, value)
+    if value == 0:
+        raise ValueError(f"{name} must be greater than zero.")
+
+
 @dataclass(frozen=True, slots=True)
 class ModelParameters:  # pylint: disable=too-many-instance-attributes
     """Immutable inputs used to reproduce model simulations."""
@@ -32,7 +39,6 @@ class ModelParameters:  # pylint: disable=too-many-instance-attributes
         for field_name in (
             "B0",
             "D0",
-            "V0",
             "alpha",
             "beta",
             "gamma",
@@ -41,6 +47,7 @@ class ModelParameters:  # pylint: disable=too-many-instance-attributes
             "rho",
         ):
             _require_non_negative(field_name, getattr(self, field_name))
+        _require_positive("V0", self.V0)
 
         if isinstance(self.K, bool) or not isinstance(self.K, int):
             raise TypeError("K must be an integer.")
