@@ -1,0 +1,33 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: python -m ruff check src tests
+        language: system
+        pass_filenames: false
+      - id: black
+        name: black
+        entry: python -m black --check src tests
+        language: system
+        pass_filenames: false
+      - id: pylint
+        name: pylint
+        entry: python -m pylint src/s004
+        language: system
+        pass_filenames: false
+      - id: mypy
+        name: mypy
+        entry: python -m mypy src
+        language: system
+        pass_filenames: false
+      - id: pyright
+        name: pyright
+        entry: python -m pyright
+        language: system
+        pass_filenames: false
+      - id: bandit
+        name: bandit
+        entry: python -m bandit -q -r src
+        language: system
+        pass_filenames: false

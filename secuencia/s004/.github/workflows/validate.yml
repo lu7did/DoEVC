@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check formatting
+        run: python -m black --check src tests
+      - name: Lint
+        run: python -m ruff check src tests
+      - name: Static analysis
+        run: |
+          python -m pylint src/s004
+          python -m mypy src
+          python -m pyright
+          python -m bandit -q -r src
+      - name: Test and measure coverage
+        run: python -m pytest
+      - name: Build documentation
+        run: python -m pdoc s004 -o site

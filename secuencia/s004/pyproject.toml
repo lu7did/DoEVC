@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=75.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s004"
+version = "1.0.0"
+description = "Python package for the S004 sequence."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = { file = "LICENSE" }
+authors = [{ name = "S004 contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "bandit>=1.8.0",
+    "black>=25.0.0",
+    "hypothesis>=6.0.0",
+    "mypy>=1.15.0",
+    "pdoc>=15.0.0",
+    "pre-commit>=4.0.0",
+    "pylint>=3.3.0",
+    "pyright>=1.1.390",
+    "pytest>=8.0.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.11.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=s004 --cov-report=term-missing --cov-fail-under=80"
+
+[tool.coverage.run]
+source = ["s004"]
+branch = true
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+extend-exclude = "^(script|ejemplos|site)/"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+exclude = ["script", "ejemplos", "site"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+files = ["src"]
+exclude = ["script", "ejemplos", "site"]
+
+[tool.pylint.main]
+py-version = "3.13"
+ignore-paths = ["^script/", "^ejemplos/", "^site/"]
+
+[tool.pylint.basic]
+good-names = ["id"]
+
+[tool.pylint.design]
+max-args = 7
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.pylint."messages control"]
+disable = ["fixme"]
