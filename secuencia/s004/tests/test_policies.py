@@ -1,13 +1,13 @@
 """Tests for remediation decision policies."""
 
-from s004 import DebtFirstPolicy, SprintState
+from s004 import BacklogFirstPolicy, DebtFirstPolicy, SprintState
 from tests.support import create_parameters
 
 
-def create_state(technical_debt: float) -> SprintState:
+def create_state(technical_debt: float, backlog: float = 100.0) -> SprintState:
     """Return a valid state with the requested technical debt."""
     return SprintState(
-        backlog=100.0,
+        backlog=backlog,
         technical_debt=technical_debt,
         effective_velocity=10.0,
         remediation_fraction=0.0,
@@ -30,3 +30,28 @@ def test_debt_first_policy_skips_remediation_without_debt() -> None:
     policy = DebtFirstPolicy()
 
     assert policy.decide_u(create_state(technical_debt=0.0), create_parameters()) == 0.0
+
+
+def test_backlog_first_policy_prioritizes_existing_backlog() -> None:
+    """Functional backlog receives capacity before technical debt."""
+    policy = BacklogFirstPolicy()
+
+    assert (
+        policy.decide_u(
+            create_state(technical_debt=1.0, backlog=100.0), create_parameters()
+        )
+        == 0.0
+    )
+
+
+def test_backlog_first_policy_remediates_debt_after_backlog_is_complete() -> None:
+    """Debt receives all capacity when the functional backlog is empty."""
+    policy = BacklogFirstPolicy()
+
+    assert (
+        policy.decide_u(
+            create_state(technical_debt=1.0, backlog=0.0),
+            create_parameters(),
+        )
+        == 1.0
+    )

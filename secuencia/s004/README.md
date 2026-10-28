@@ -14,6 +14,8 @@ S004.
   remediación.
 - `s004.DebtFirstPolicy`: asigna toda la capacidad a remediar deuda mientras
   exista deuda técnica.
+- `s004.BacklogFirstPolicy`: prioriza el backlog funcional antes de remediar
+  deuda técnica.
 
 ## Desarrollo
 
