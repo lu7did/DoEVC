@@ -4,29 +4,13 @@ import pytest
 
 from s004 import (
     DebtFirstPolicy,
-    ModelParameters,
     ObjectiveFunction,
     OptimalLocalPolicy,
     Policy,
     grid_search_remediation,
     simulate_deterministic_sprints,
 )
-
-
-def create_backlog_only_parameters() -> ModelParameters:
-    """Return a one-sprint model with known fixed-fraction outcomes."""
-    return ModelParameters(
-        B0=10.0,
-        D0=0.0,
-        V0=10.0,
-        alpha=0.0,
-        beta=0.0,
-        gamma=0.0,
-        theta=0.0,
-        lambda_=0.0,
-        rho=0.0,
-        K=1,
-    )
+from tests.support import create_backlog_only_parameters, create_competing_parameters
 
 
 def test_grid_search_finds_fraction_that_minimizes_objective() -> None:
@@ -79,18 +63,7 @@ def test_grid_search_rejects_steps_that_do_not_divide_unit_interval() -> None:
 
 def test_economic_objective_weights_produce_distinct_optima() -> None:
     """Feature- and debt-focused objectives select different allocations."""
-    parameters = ModelParameters(
-        B0=10.0,
-        D0=10.0,
-        V0=10.0,
-        alpha=0.0,
-        beta=0.0,
-        gamma=0.0,
-        theta=0.0,
-        lambda_=0.0,
-        rho=0.0,
-        K=1,
-    )
+    parameters = create_competing_parameters()
     feature_focused = grid_search_remediation(
         parameters,
         ObjectiveFunction(
@@ -116,18 +89,7 @@ def test_economic_objective_weights_produce_distinct_optima() -> None:
 
 def test_optimal_local_policy_outperforms_debt_first_for_feature_value() -> None:
     """The locally optimized allocation improves the selected objective."""
-    parameters = ModelParameters(
-        B0=10.0,
-        D0=10.0,
-        V0=10.0,
-        alpha=0.0,
-        beta=0.0,
-        gamma=0.0,
-        theta=0.0,
-        lambda_=0.0,
-        rho=0.0,
-        K=1,
-    )
+    parameters = create_competing_parameters()
     objective = ObjectiveFunction(
         delivered_functionality_weight=2.0,
         remaining_debt_penalty=1.0,

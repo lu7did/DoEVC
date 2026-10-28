@@ -30,6 +30,8 @@ S004.
   de una trayectoria.
 - `s004.OptimalLocalPolicy`: selecciona el valor de remediación óptimo en cada
   sprint.
+- `s004.compare_policies()`: compara políticas determinísticas o Monte Carlo
+  bajo el mismo escenario.
 
 ## Desarrollo
 

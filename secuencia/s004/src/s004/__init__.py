@@ -1,5 +1,10 @@
 """Public API for S004."""
 
+from .comparison import (
+    MonteCarloComparisonConfig,
+    PolicyComparison,
+    compare_policies,
+)
 from .models import ModelParameters
 from .monte_carlo import (
     MetricSummary,
@@ -37,17 +42,20 @@ __all__ = [
     "ModelParameters",
     "MonteCarloResult",
     "MonteCarloRun",
+    "MonteCarloComparisonConfig",
     "MonteCarloSimulation",
     "MonteCarloSummary",
     "ObjectiveFunction",
     "OptimalLocalPolicy",
     "Policy",
+    "PolicyComparison",
     "ProportionalPolicy",
     "ProjectInfo",
     "SprintState",
     "aggregate_metrics",
     "calculate_run_metrics",
     "calculate_effective_velocity",
+    "compare_policies",
     "display_version",
     "get_project_info",
     "grid_search_remediation",
