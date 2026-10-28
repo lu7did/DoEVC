@@ -1,6 +1,6 @@
 """Tests for remediation decision policies."""
 
-from s004 import BacklogFirstPolicy, DebtFirstPolicy, SprintState
+from s004 import BacklogFirstPolicy, DebtFirstPolicy, ProportionalPolicy, SprintState
 from tests.support import create_parameters
 
 
@@ -54,4 +54,50 @@ def test_backlog_first_policy_remediates_debt_after_backlog_is_complete() -> Non
             create_parameters(),
         )
         == 1.0
+    )
+
+
+def test_proportional_policy_returns_debt_share_of_total_work() -> None:
+    """The remediation fraction equals the relative technical debt."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            create_state(technical_debt=1.0, backlog=3.0),
+            create_parameters(),
+        )
+        == 0.25
+    )
+
+
+def test_proportional_policy_returns_zero_without_debt() -> None:
+    """No debt requires no remediation."""
+    policy = ProportionalPolicy()
+
+    assert policy.decide_u(create_state(technical_debt=0.0), create_parameters()) == 0.0
+
+
+def test_proportional_policy_returns_one_when_only_debt_remains() -> None:
+    """All capacity remediates debt after the backlog is complete."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            create_state(technical_debt=1.0, backlog=0.0),
+            create_parameters(),
+        )
+        == 1.0
+    )
+
+
+def test_proportional_policy_handles_empty_state_without_division_by_zero() -> None:
+    """An empty state has no remediation allocation."""
+    policy = ProportionalPolicy()
+
+    assert (
+        policy.decide_u(
+            create_state(technical_debt=0.0, backlog=0.0),
+            create_parameters(),
+        )
+        == 0.0
     )

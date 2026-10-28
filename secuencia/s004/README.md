@@ -16,6 +16,8 @@ S004.
   exista deuda técnica.
 - `s004.BacklogFirstPolicy`: prioriza el backlog funcional antes de remediar
   deuda técnica.
+- `s004.ProportionalPolicy`: asigna remediación proporcional a la deuda
+  relativa.
 
 ## Desarrollo
 

@@ -33,3 +33,15 @@ class BacklogFirstPolicy:  # pylint: disable=too-few-public-methods
         if state.backlog > 0:
             return 0.0
         return 1.0 if state.technical_debt > 0 else 0.0
+
+
+class ProportionalPolicy:  # pylint: disable=too-few-public-methods
+    """Allocate remediation in proportion to the relative technical debt."""
+
+    def decide_u(self, state: SprintState, parameters: ModelParameters) -> float:
+        """Return the debt share of all current work."""
+        del parameters
+        total_work = state.backlog + state.technical_debt
+        if total_work == 0:
+            return 0.0
+        return state.technical_debt / total_work
