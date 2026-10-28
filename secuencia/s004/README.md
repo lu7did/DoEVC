@@ -12,6 +12,8 @@ S004.
   degradada por deuda técnica.
 - `s004.simulate_sprint()`: simula un sprint con una fracción fija de
   remediación.
+- `s004.DebtFirstPolicy`: asigna toda la capacidad a remediar deuda mientras
+  exista deuda técnica.
 
 ## Desarrollo
 
