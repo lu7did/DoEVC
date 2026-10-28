@@ -2,23 +2,8 @@
 
 import pytest
 
-from s004 import ModelParameters, calculate_effective_velocity
-
-
-def create_parameters() -> ModelParameters:
-    """Return a representative valid parameter set."""
-    return ModelParameters(
-        B0=100.0,
-        D0=20.0,
-        V0=12.0,
-        alpha=0.3,
-        beta=0.1,
-        gamma=0.05,
-        theta=0.2,
-        lambda_=0.8,
-        rho=0.4,
-        K=16,
-    )
+from s004 import calculate_effective_velocity
+from tests.support import create_parameters
 
 
 def test_effective_velocity_equals_base_velocity_without_debt() -> None:
