@@ -1,7 +1,16 @@
 """Public API for S004."""
 
 from .models import ModelParameters
-from .monte_carlo import MonteCarloSimulation, run_monte_carlo
+from .monte_carlo import (
+    MetricSummary,
+    MonteCarloResult,
+    MonteCarloRun,
+    MonteCarloSimulation,
+    MonteCarloSummary,
+    aggregate_metrics,
+    calculate_run_metrics,
+    run_monte_carlo,
+)
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .project import ProjectInfo, get_project_info
 from .sampling import sample_model_parameters
@@ -15,12 +24,18 @@ __all__ = [
     "VERSION",
     "BacklogFirstPolicy",
     "DebtFirstPolicy",
+    "MetricSummary",
     "ModelParameters",
+    "MonteCarloResult",
+    "MonteCarloRun",
     "MonteCarloSimulation",
+    "MonteCarloSummary",
     "Policy",
     "ProportionalPolicy",
     "ProjectInfo",
     "SprintState",
+    "aggregate_metrics",
+    "calculate_run_metrics",
     "calculate_effective_velocity",
     "display_version",
     "get_project_info",

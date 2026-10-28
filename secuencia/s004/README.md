@@ -22,6 +22,8 @@ S004.
   reproducible.
 - `s004.run_monte_carlo()`: ejecuta corridas reproducibles y agrega sus
   resultados.
+- `s004.aggregate_metrics()`: resume métricas por corrida con estadísticos
+  poblacionales.
 
 ## Desarrollo
 
