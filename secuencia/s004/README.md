@@ -24,6 +24,8 @@ S004.
   resultados.
 - `s004.aggregate_metrics()`: resume métricas por corrida con estadísticos
   poblacionales.
+- `s004.grid_search_remediation()`: optimiza una fracción fija de remediación
+  sobre una grilla uniforme.
 
 ## Desarrollo
 

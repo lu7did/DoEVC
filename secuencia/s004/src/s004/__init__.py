@@ -11,6 +11,11 @@ from .monte_carlo import (
     calculate_run_metrics,
     run_monte_carlo,
 )
+from .optimization import (
+    GridSearchEvaluation,
+    GridSearchResult,
+    grid_search_remediation,
+)
 from .policies import BacklogFirstPolicy, DebtFirstPolicy, Policy, ProportionalPolicy
 from .project import ProjectInfo, get_project_info
 from .sampling import sample_model_parameters
@@ -24,6 +29,8 @@ __all__ = [
     "VERSION",
     "BacklogFirstPolicy",
     "DebtFirstPolicy",
+    "GridSearchEvaluation",
+    "GridSearchResult",
     "MetricSummary",
     "ModelParameters",
     "MonteCarloResult",
@@ -39,6 +46,7 @@ __all__ = [
     "calculate_effective_velocity",
     "display_version",
     "get_project_info",
+    "grid_search_remediation",
     "run_monte_carlo",
     "sample_model_parameters",
     "simulate_deterministic_sprints",
