@@ -39,6 +39,8 @@ S004.
 - `s004.plot_simulation()`: genera un PNG de backlog y deuda por sprint.
 - `s004.plot_optimal_u_distribution()`: grafica la distribución de `u_k`
   promedio de Monte Carlo.
+- `s004.plot_sensitivity_heatmap()`: grafica la sensibilidad de `u_k` frente
+  a dos parámetros.
 
 ## Desarrollo
 

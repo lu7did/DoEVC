@@ -32,7 +32,11 @@ from .simulation import simulate_deterministic_sprints
 from .sprint import SprintState, simulate_sprint
 from .velocity import calculate_effective_velocity
 from .version import BUILD, VERSION, display_version
-from .visualization import plot_optimal_u_distribution, plot_simulation
+from .visualization import (
+    plot_optimal_u_distribution,
+    plot_sensitivity_heatmap,
+    plot_simulation,
+)
 
 __all__ = [
     "BUILD",
@@ -53,6 +57,7 @@ __all__ = [
     "Policy",
     "PolicyComparison",
     "plot_optimal_u_distribution",
+    "plot_sensitivity_heatmap",
     "plot_simulation",
     "ProportionalPolicy",
     "ProjectInfo",
