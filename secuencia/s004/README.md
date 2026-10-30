@@ -37,6 +37,8 @@ S004.
 - `s004.save_scenario()`: guarda parámetros, política y semilla en JSON.
 - `s004.load_and_run()`: reconstruye y ejecuta un escenario guardado.
 - `s004.plot_simulation()`: genera un PNG de backlog y deuda por sprint.
+- `s004.plot_optimal_u_distribution()`: grafica la distribución de `u_k`
+  promedio de Monte Carlo.
 
 ## Desarrollo
 
