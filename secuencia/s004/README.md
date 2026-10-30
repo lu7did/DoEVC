@@ -34,6 +34,7 @@ S004.
   bajo el mismo escenario.
 - `s004.export_sprint_states_csv()` y `s004.export_metrics_csv()`: exportan
   estados y métricas a CSV.
+- `s004.save_scenario()`: guarda parámetros, política y semilla en JSON.
 
 ## Desarrollo
 
