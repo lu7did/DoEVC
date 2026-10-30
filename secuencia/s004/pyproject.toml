@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.13,<3.14"
 license = { file = "LICENSE" }
 authors = [{ name = "S004 contributors" }]
-dependencies = []
+dependencies = ["matplotlib>=3.9"]
 
 [project.optional-dependencies]
 dev = [
